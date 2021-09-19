@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/kfu/informatics/3_semester/straight_line/StraightLine.h
+utility
+-
+iostream
+-
+exception
+-
+
+D:/kfu/informatics/3_semester/straight_line/main.cpp
+iostream
+-
+StraightLine.h
+D:/kfu/informatics/3_semester/straight_line/StraightLine.h
+
