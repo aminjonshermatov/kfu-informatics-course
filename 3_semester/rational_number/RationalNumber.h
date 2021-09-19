@@ -8,7 +8,7 @@
 #include <iostream>
 #include <exception>
 
-// x = a + i*b
+// x = a/b
 class RationalNumber {
 public:
     RationalNumber();
