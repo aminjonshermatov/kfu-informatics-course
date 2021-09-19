@@ -126,6 +126,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="D:/kfu/informatics/3_semester/rational_number/RationalNumber.cpp">
+			<Option target="rational_number"/>
+		</Unit>
+		<Unit filename="D:/kfu/informatics/3_semester/rational_number/RationalNumber.h">
+			<Option target="rational_number"/>
+		</Unit>
 		<Unit filename="D:/kfu/informatics/3_semester/rational_number/main.cpp">
 			<Option target="rational_number"/>
 		</Unit>

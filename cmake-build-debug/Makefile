@@ -131,6 +131,30 @@ rational_number\fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\rational_number.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\rational_number.dir\build
 .PHONY : rational_number\fast
 
+3_semester\rational_number\RationalNumber.obj: 3_semester\rational_number\RationalNumber.cpp.obj
+.PHONY : 3_semester\rational_number\RationalNumber.obj
+
+# target to build an object file
+3_semester\rational_number\RationalNumber.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\rational_number.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\rational_number.dir\3_semester\rational_number\RationalNumber.cpp.obj
+.PHONY : 3_semester\rational_number\RationalNumber.cpp.obj
+
+3_semester\rational_number\RationalNumber.i: 3_semester\rational_number\RationalNumber.cpp.i
+.PHONY : 3_semester\rational_number\RationalNumber.i
+
+# target to preprocess a source file
+3_semester\rational_number\RationalNumber.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\rational_number.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\rational_number.dir\3_semester\rational_number\RationalNumber.cpp.i
+.PHONY : 3_semester\rational_number\RationalNumber.cpp.i
+
+3_semester\rational_number\RationalNumber.s: 3_semester\rational_number\RationalNumber.cpp.s
+.PHONY : 3_semester\rational_number\RationalNumber.s
+
+# target to generate assembly for a file
+3_semester\rational_number\RationalNumber.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\rational_number.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\rational_number.dir\3_semester\rational_number\RationalNumber.cpp.s
+.PHONY : 3_semester\rational_number\RationalNumber.cpp.s
+
 3_semester\rational_number\main.obj: 3_semester\rational_number\main.cpp.obj
 .PHONY : 3_semester\rational_number\main.obj
 
@@ -213,6 +237,9 @@ help:
 	@echo ... rebuild_cache
 	@echo ... rational_number
 	@echo ... straight_line
+	@echo ... 3_semester/rational_number/RationalNumber.obj
+	@echo ... 3_semester/rational_number/RationalNumber.i
+	@echo ... 3_semester/rational_number/RationalNumber.s
 	@echo ... 3_semester/rational_number/main.obj
 	@echo ... 3_semester/rational_number/main.i
 	@echo ... 3_semester/rational_number/main.s

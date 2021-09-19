@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "D:/kfu/informatics/3_semester/rational_number/RationalNumber.cpp" "D:/kfu/informatics/cmake-build-debug/CMakeFiles/rational_number.dir/3_semester/rational_number/RationalNumber.cpp.obj"
   "D:/kfu/informatics/3_semester/rational_number/main.cpp" "D:/kfu/informatics/cmake-build-debug/CMakeFiles/rational_number.dir/3_semester/rational_number/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "MSVC")

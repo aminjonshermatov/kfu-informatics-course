@@ -6,7 +6,17 @@
 
 #IncludeRegexTransform: 
 
+D:/kfu/informatics/3_semester/rational_number/RationalNumber.h
+iostream
+-
+exception
+-
+
 D:/kfu/informatics/3_semester/rational_number/main.cpp
 iostream
 -
+vector
+-
+RationalNumber.h
+D:/kfu/informatics/3_semester/rational_number/RationalNumber.h
 

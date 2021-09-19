@@ -72,7 +72,7 @@ clean: CMakeFiles\rational_number.dir\clean
 CMakeFiles\straight_line.dir\all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\straight_line.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\straight_line.dir\depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\straight_line.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\straight_line.dir\build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\kfu\informatics\cmake-build-debug\CMakeFiles --progress-num=3,4,5 "Built target straight_line"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\kfu\informatics\cmake-build-debug\CMakeFiles --progress-num=4,5,6 "Built target straight_line"
 .PHONY : CMakeFiles\straight_line.dir\all
 
 # Build rule for subdir invocation for target.
@@ -98,12 +98,12 @@ CMakeFiles\straight_line.dir\clean:
 CMakeFiles\rational_number.dir\all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\rational_number.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\rational_number.dir\depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\rational_number.dir\build.make /nologo -$(MAKEFLAGS) CMakeFiles\rational_number.dir\build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\kfu\informatics\cmake-build-debug\CMakeFiles --progress-num=1,2 "Built target rational_number"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\kfu\informatics\cmake-build-debug\CMakeFiles --progress-num=1,2,3 "Built target rational_number"
 .PHONY : CMakeFiles\rational_number.dir\all
 
 # Build rule for subdir invocation for target.
 CMakeFiles\rational_number.dir\rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\kfu\informatics\cmake-build-debug\CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\kfu\informatics\cmake-build-debug\CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 /nologo -$(MAKEFLAGS) CMakeFiles\rational_number.dir\all
 	$(CMAKE_COMMAND) -E cmake_progress_start D:\kfu\informatics\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles\rational_number.dir\rule
