@@ -10,3 +10,4 @@ add_executable(complex_number 3_semester/complex_number/main.cpp 3_semester/comp
 add_executable(parabola 3_semester/parabola/main.cpp 3_semester/parabola/Parabola.cpp 3_semester/parabola/Parabola.h)
 add_executable(resistor 3_semester/resistor/main.cpp 3_semester/resistor/Resistor.cpp 3_semester/resistor/Resistor.h)
 add_executable(vector3D 3_semester/vector3D/main.cpp 3_semester/vector3D/Vector3D.cpp 3_semester/vector3D/Vector3D.h 3_semester/vector3D/Point3D.cpp 3_semester/vector3D/Point3D.h)
+add_executable(boolean 3_semester/boolean/main.cpp 3_semester/boolean/Boolean.cpp 3_semester/boolean/Boolean.h)
