@@ -11,4 +11,18 @@ add_executable(parabola 3_semester/parabola/main.cpp 3_semester/parabola/Parabol
 add_executable(resistor 3_semester/resistor/main.cpp 3_semester/resistor/Resistor.cpp 3_semester/resistor/Resistor.h)
 add_executable(vector3D 3_semester/vector3D/main.cpp 3_semester/vector3D/Vector3D.cpp 3_semester/vector3D/Vector3D.h 3_semester/vector3D/Point3D.cpp 3_semester/vector3D/Point3D.h)
 add_executable(boolean 3_semester/boolean/main.cpp 3_semester/boolean/Boolean.cpp 3_semester/boolean/Boolean.h)
-add_executable(university_grades_control 3_semester/university_grades_control/main.cpp 3_semester/university_grades_control/Person.cpp 3_semester/university_grades_control/Person.h 3_semester/university_grades_control/Teacher.cpp 3_semester/university_grades_control/Teacher.h 3_semester/university_grades_control/Student.cpp 3_semester/university_grades_control/Student.h)
+add_executable(
+        university_grades_control
+        3_semester/university_grades_control/main.cpp
+        3_semester/university_grades_control/sharedModule.h
+        3_semester/university_grades_control/Person.cpp
+        3_semester/university_grades_control/Person.h
+        3_semester/university_grades_control/Teacher.cpp
+        3_semester/university_grades_control/Teacher.h
+        3_semester/university_grades_control/Student.cpp
+        3_semester/university_grades_control/Student.h
+        3_semester/university_grades_control/utils.h
+        3_semester/university_grades_control/utils.cpp
+        3_semester/university_grades_control/GradeBook.h
+        3_semester/university_grades_control/GradeBook.cpp
+)
