@@ -6,12 +6,13 @@
 #define INFORMATICS_SYNTACTICANALYZER_H
 
 #include "sharedModule.h"
+#include "utils.h"
 
 class SyntacticAnalyzer {
 public:
     SyntacticAnalyzer(int identifierLen);
 
-    bool analyse(const str&);
+    bool analyse(const str& code);
 private:
     const int identifierLen;
     int state;

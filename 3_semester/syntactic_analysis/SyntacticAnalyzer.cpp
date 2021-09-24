@@ -10,7 +10,8 @@ SyntacticAnalyzer::SyntacticAnalyzer(int identifierLen)
 bool SyntacticAnalyzer::analyse(const str& code) {
     bool result;
 
-
+    for (auto& ch : code) {
+    }
 
     return result;
 }

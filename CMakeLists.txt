@@ -69,4 +69,6 @@ add_executable(
         3_semester/syntactic_analysis/SyntacticAnalyzer.h
         3_semester/syntactic_analysis/SyntacticAnalyzer.cpp
         3_semester/syntactic_analysis/sharedModule.h
+        3_semester/syntactic_analysis/utils.h
+        3_semester/syntactic_analysis/utils.cpp
 )
