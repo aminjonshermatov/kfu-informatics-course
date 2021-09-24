@@ -5,9 +5,8 @@
 #include "GradeBook.h"
 
 GradeBook::GradeBook(const v<>& subjects) {
-    for (auto& sub : subjects) {
+    for (auto& sub : subjects)
         this->store.insert({sub, {}});
-    }
 }
 
 void GradeBook::setGrade(ss tFullName, const str& subject, Student *stud) {
@@ -23,9 +22,8 @@ void GradeBook::setGrade(ss tFullName, const str& subject, Student *stud) {
 
     auto findStud = this->store[subject].find(stud->getId());
 
-    if (findStud == this->store[subject].end()) {
+    if (findStud == this->store[subject].end())
         this->store[subject].insert({stud->getId(), {}});
-    }
 
     this->store[subject][stud->getId()].push_back(utils::random(stud->getPreparation()));
 

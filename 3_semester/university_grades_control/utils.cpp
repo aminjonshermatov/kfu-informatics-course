@@ -5,11 +5,11 @@
 #include "utils.h"
 
 int utils::random(pii p) {
-    static bool first = true;
+    static bool isFirst = true;
 
-    if (first) {
+    if (isFirst) {
         srand(std::time(nullptr) );
-        first = false;
+        isFirst = false;
     }
 
     return p.first + rand() % (p.second - p.first + 1);
