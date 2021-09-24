@@ -4,10 +4,8 @@
 
 #include "Student.h"
 #include "Teacher.h"
-#include "utils.h"
-#include "GradeBook.h"
 
-int main() {
+int main() try {
     v<> subjects = {"math", "physics", "chemistry"};
 
     auto* gb = new GradeBook(subjects);
@@ -43,4 +41,6 @@ int main() {
     std::cout << *gb;
 
     return 0;
+} catch (std::exception& ex) {
+    std::cout << ex.what() << "\n";
 };
