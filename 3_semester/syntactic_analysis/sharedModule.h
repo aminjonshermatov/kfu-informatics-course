@@ -11,5 +11,8 @@
 
 using str = std::string;
 using mapVar = std::map<str, int&>;
+using li = long int;
+using ld = long double;
+using ui = unsigned int;
 
 #endif //INFORMATICS_SHAREDMODULE_H

@@ -71,4 +71,8 @@ add_executable(
         3_semester/syntactic_analysis/sharedModule.h
         3_semester/syntactic_analysis/utils.h
         3_semester/syntactic_analysis/utils.cpp
+        3_semester/syntactic_analysis/Stack.h
+        3_semester/syntactic_analysis/Stack.cpp
+        3_semester/syntactic_analysis/List.h
+        3_semester/syntactic_analysis/List.cpp
 )
