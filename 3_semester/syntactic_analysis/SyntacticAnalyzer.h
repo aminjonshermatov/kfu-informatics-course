@@ -5,9 +5,11 @@
 #ifndef INFORMATICS_SYNTACTICANALYZER_H
 #define INFORMATICS_SYNTACTICANALYZER_H
 
+#include "Stack.h"
 #include "sharedModule.h"
 #include "utils.h"
 
+template<class T>
 class SyntacticAnalyzer {
 public:
     SyntacticAnalyzer(int identifierLen);

@@ -5,10 +5,10 @@
 #ifndef INFORMATICS_LIST_H
 #define INFORMATICS_LIST_H
 
-template<typename T>
+template<class T>
 class List {
 public:
-    List(T data, List* next = nullptr);
+    List(T data, List* next = nullptr, List* prev = nullptr);
     void setData(T data);
     T getData() const;
     bool hasNext();

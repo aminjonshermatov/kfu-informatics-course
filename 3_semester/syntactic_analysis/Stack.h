@@ -13,8 +13,9 @@ class Stack {
 public:
     Stack();
     ui getSize() const;
-    void push_back(ui);
+    void push_back(ui data);
     ui pop_back();
+    ui top();
 private:
     ui size;
     List<T>* head;

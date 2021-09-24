@@ -4,10 +4,12 @@
 
 #include "SyntacticAnalyzer.h"
 
-SyntacticAnalyzer::SyntacticAnalyzer(int identifierLen)
+template<class T>
+SyntacticAnalyzer<T>::SyntacticAnalyzer(int identifierLen)
     : identifierLen(identifierLen), state(0) { }
 
-bool SyntacticAnalyzer::analyse(const str& code) {
+template<class T>
+bool SyntacticAnalyzer<T>::analyse(const str& code) {
     bool result;
 
     for (auto& ch : code) {
