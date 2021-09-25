@@ -14,8 +14,10 @@ public:
     Stack();
     ui getSize() const;
     void push_back(ui data);
-    ui pop_back();
+    ui pop();
     ui top();
+    void clear();
+
 private:
     ui size;
     List<T>* head;

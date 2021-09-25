@@ -30,7 +30,7 @@ void Stack<T>::push_back(ui data) {
 }
 
 template<class T>
-ui Stack<T>::pop_back() {
+ui Stack<T>::pop() {
     auto* last = this->tail;
 
     auto* prev = last->getPrev();
@@ -45,4 +45,20 @@ ui Stack<T>::pop_back() {
 template<class T>
 ui Stack<T>::top() {
     return this->top();
+}
+
+template<class T>
+void Stack<T>::clear() {
+    while (this->head != nullptr) {
+        auto* temp = this->tail->getPrev();
+
+        if (temp == nullptr)
+            delete this->head;
+        else {
+            delete this->tail;
+            this->tail = temp;
+        }
+
+        this->size--;
+    }
 }

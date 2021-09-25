@@ -75,4 +75,6 @@ add_executable(
         3_semester/syntactic_analysis/Stack.cpp
         3_semester/syntactic_analysis/List.h
         3_semester/syntactic_analysis/List.cpp
+        3_semester/syntactic_analysis/Logger.h
+        3_semester/syntactic_analysis/Logger.cpp
 )
