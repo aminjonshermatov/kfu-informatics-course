@@ -75,3 +75,10 @@ add_executable(
         3_semester/syntactic_analysis/Logger.h
         3_semester/syntactic_analysis/Logger.cpp
 )
+
+add_executable(
+        big_int
+        3_semester/big_int/main.cpp
+        3_semester/big_int/BigInt.h
+        3_semester/big_int/BigInt.cpp
+)
