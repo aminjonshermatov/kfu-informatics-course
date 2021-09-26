@@ -32,10 +32,10 @@ ui utils::stoi(const str& s) {
     return res;
 }
 
-bool utils::isArithOperation(const char ch) {
+bool utils::isArithOperation(char ch) {
     return utils::arithOperations.find(ch) != utils::arithOperations.end();
 }
 
-bool utils::isNumberSign(const char ch) {
+bool utils::isNumberSign(char ch) {
     return ch == '+' || ch == '-';
 }

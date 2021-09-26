@@ -13,8 +13,8 @@ namespace utils {
     ui fromCharToInt(const char& ch);
     ui stoi(const str& s);
     static sCh arithOperations = {'+', '-', '*', '/'};
-    bool isArithOperation(const char ch);
-    bool isNumberSign(const char ch);
+    bool isArithOperation(char ch);
+    bool isNumberSign(char ch);
 };
 
 

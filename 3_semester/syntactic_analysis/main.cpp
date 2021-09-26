@@ -19,7 +19,7 @@ int main() try {
      * */
 
     for (auto& var : vars1)
-        std::cout << var.first << " : " << var.second << "\n";
+        *logger << var.first << " : " << var.second << "\n";
 
     auto vars2 = sa->analyse("x:=1+2*3+4-5*6+7");
     /*
@@ -28,7 +28,7 @@ int main() try {
      * */
 
     for (auto& var : vars2)
-        std::cout << var.first << " : " << var.second << "\n";
+        *logger << var.first << " : " << var.second << "\n";
 
     auto vars3 = sa->analyse("x:=1+2*(2*(3-1*2)+4)*3+7");
     /*
@@ -37,7 +37,7 @@ int main() try {
      * */
 
     for (auto& var : vars3)
-        std::cout << var.first << " : " << var.second << "\n";
+        *logger << var.first << " : " << var.second << "\n";
 
     auto vars4 = sa->analyse("x:=1+2*(2*3+4)*3+7;y:=2*x-(x+2*3)");
     /*
@@ -47,7 +47,7 @@ int main() try {
      * */
 
     for (auto& var : vars4)
-        std::cout << var.first << " : " << var.second << "\n";
+        *logger << var.first << " : " << var.second << "\n";
 } catch (std::exception& ex) {
     std::cout << "Exception occurred:\t" << ex.what() << "\n";
 };

@@ -26,7 +26,6 @@ Logger Logger::operator<<(const char &ch) {
     return *this;
 }
 
-
 str Logger::getLabel(Logger::LogType logType) {
     switch (logType) {
         case LogType::WARNING:
