@@ -83,9 +83,6 @@ uMapVar<T> SyntacticAnalyzer<T>::analyse(std::istream* in) {
         charAt++;
         const char ch = removedWs[i];
 
-        if (ch == ' ')
-            continue;
-
         if (isBeforeAssigning) {
             if (utils::isString(ch)) {
                 if (cur.size() == this->_identifierLen)

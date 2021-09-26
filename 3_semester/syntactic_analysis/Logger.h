@@ -13,12 +13,16 @@ public:
 
     enum LogType { WARNING, ERROR };
 
+    Logger operator()(LogType logType);
+    Logger operator()(LogType logType, int line);
     Logger operator()(LogType logType, int line, int charAt);
     Logger operator<<(int msg);
     Logger operator<<(const str& msg);
     Logger operator<<(const char& ch);
+
+    void setOStream(std::ostream* out);
 private:
-    std::ostream* out;
+    std::ostream* _out;
 
     inline str getLabel(LogType logType);
 };
