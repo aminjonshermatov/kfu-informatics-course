@@ -30,7 +30,10 @@ private:
     Stack<char> operationsStack;
 
     void computeLast();
+    void computeStack();
+    void computeStack(const char ch);
     str removeWhiteSpaces(const str* givenStr);
+    void clearData();
 };
 
 
@@ -50,8 +53,7 @@ SyntacticAnalyzer<T>::SyntacticAnalyzer(int identifierLen, Logger* logger, const
 
 template<class T>
 SyntacticAnalyzer<T>::~SyntacticAnalyzer() {
-    this->computationStack.clear();
-    this->operationsStack.clear();
+    this->clearData();
 }
 
 template<class T>
@@ -59,15 +61,17 @@ uMapChI SyntacticAnalyzer<T>::operationsPriority = { {'+', 1}, {'-', 1}, {'*', 2
 
 template<class T>
 uMapVar<T> SyntacticAnalyzer<T>::analyse(const str& code) {
+    this->clearData();
     // var1 := 1 + -3 + 4; => var1 = 2
     // var2 := 3 * 2 + var1; => var2 = 8;
 
-    (*this->logger) << "Given expression:\t" << code << "\n";
+    (*this->logger) << "\nGiven expression:\t" << code << "\n";
 
     ui line = 1, charAt = 0;
     short int curNumberSign = 1;
     str cur;
     bool isBeforeAssigning = true;
+    int openBrackenCount = 0;
 
     str removedWs = this->removeWhiteSpaces(&code);
 
@@ -122,19 +126,49 @@ uMapVar<T> SyntacticAnalyzer<T>::analyse(const str& code) {
                     }
                 }
 
-                if (this->valueStack.getSize() == this->operationsStack.getSize()) {
+                if (this->valueStack.getSize() == this->operationsStack.getSize() - openBrackenCount) {
                     if (utils::isNumberSign(ch))
                         curNumberSign = ch == '+' ? 1 : -1;
                     else
                         (*this->logger)(Logger::WARNING, line, charAt) << "Unexpected character " << ch << "\n";
                 } else {
-                    while (this->operationsStack.getSize() > 0 && SyntacticAnalyzer<T>::operationsPriority[ch] >= SyntacticAnalyzer<T>::operationsPriority[this->operationsStack.top()])
-                        this->computeLast();
-
+                    this->computeStack(ch);
                     this->operationsStack.push_back(ch);
                 }
             } else if (utils::isNumber(ch) || utils::isString(ch))
                 cur.push_back(ch);
+            else if (ch == '(') {
+                this->operationsStack.push_back('(');
+                ++openBrackenCount;
+            }
+            else if (ch == ')') {
+                if (!cur.empty()) {
+                    if (utils::isNumber(cur.front())) {
+                        this->valueStack.push_back(curNumberSign * utils::stoi(cur));
+                        cur.clear();
+                        curNumberSign = 1;
+                    }
+                    else {
+                        auto find = this->vars.find(cur);
+
+                        if (find == this->vars.end())
+                            (*this->logger)(Logger::ERROR, line, charAt) << "Undefined identifier\n";
+                        else {
+                            this->valueStack.push_back(curNumberSign * find->second);
+                            cur.clear();
+                            curNumberSign = 1;
+                        }
+                    }
+                }
+
+                while (this-operationsStack.getSize() > 0 && this->operationsStack.top() != '(')
+                    this->computeLast();
+
+                if (this->operationsStack.top() == '(')
+                    this->operationsStack.pop();
+                else
+                    (*this->logger)(Logger::ERROR, line, charAt) << "Occurred close bracket without open\n";
+            }
 
             if (ch == ';' || ch == '\n') {
                 if (!cur.empty()) {
@@ -156,7 +190,7 @@ uMapVar<T> SyntacticAnalyzer<T>::analyse(const str& code) {
                     }
                 }
 
-                this->computeLast();
+                this->computeStack();
                 this->vars[this->lastInsertedKeyVar] = this->valueStack.pop();
                 line++;
                 charAt = 0;
@@ -203,6 +237,18 @@ void SyntacticAnalyzer<T>::computeLast() {
 }
 
 template<class T>
+void SyntacticAnalyzer<T>::computeStack() {
+    while (this->operationsStack.getSize() > 0)
+        this->computeLast();
+}
+
+template<class T>
+void SyntacticAnalyzer<T>::computeStack(const char ch) {
+    while (this->operationsStack.getSize() > 0 && SyntacticAnalyzer<T>::operationsPriority[ch] <= SyntacticAnalyzer<T>::operationsPriority[this->operationsStack.top()])
+        this->computeLast();
+}
+
+template<class T>
 str SyntacticAnalyzer<T>::removeWhiteSpaces(const str* givenStr) {
     str removedWhiteSpace;
 
@@ -219,5 +265,11 @@ str SyntacticAnalyzer<T>::removeWhiteSpaces(const str* givenStr) {
     return removedWhiteSpace;
 }
 
+template<typename T>
+void SyntacticAnalyzer<T>::clearData() {
+    this->valueStack.clear();
+    this->operationsStack.clear();
+    this->vars.clear();
+}
 
 #endif //INFORMATICS_SYNTACTICANALYZER_H
