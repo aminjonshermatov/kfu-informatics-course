@@ -20,7 +20,7 @@ public:
 
     static uMapChI operationsPriority;
 
-    uMapVar<T> analyse(const str& code);
+    uMapVar<T> analyse(std::istream* in);
     void setLogger(Logger* logger);
 private:
     const int _identifierLen;
@@ -33,7 +33,7 @@ private:
     void computeLast();
     void computeStack();
     void computeStack(char ch);
-    str removeWhiteSpaces(const str* givenStr);
+    str removeWhiteSpaces(std::istream* in);
     void clearData();
 };
 
@@ -64,12 +64,10 @@ template<class T>
 uMapChI SyntacticAnalyzer<T>::operationsPriority = { {'+', 1}, {'-', 1}, {'*', 2}, {'/', 2} };
 
 template<class T>
-uMapVar<T> SyntacticAnalyzer<T>::analyse(const str& code) {
+uMapVar<T> SyntacticAnalyzer<T>::analyse(std::istream* in) {
     this->clearData();
     // var1 := 1 + -3 + 4; => var1 = 2
     // var2 := 3 * 2 + var1; => var2 = 8;
-
-    (*this->_logger) << "\nGiven expression:\t" << code << "\n";
 
     ui line = 1, charAt = 0;
     short int curNumberSign = 1;
@@ -77,7 +75,9 @@ uMapVar<T> SyntacticAnalyzer<T>::analyse(const str& code) {
     bool isBeforeAssigning = true;
     int openBrackenCount = 0;
 
-    str removedWs = this->removeWhiteSpaces(&code);
+    str removedWs = this->removeWhiteSpaces(in);
+
+    (*this->_logger) << "\nGiven expression:\t" << removedWs << "\n";
 
     for (int i = 0; i < removedWs.size(); ++i) {
         charAt++;
@@ -253,14 +253,15 @@ void SyntacticAnalyzer<T>::computeStack(char ch) {
 }
 
 template<class T>
-str SyntacticAnalyzer<T>::removeWhiteSpaces(const str* givenStr) {
+str SyntacticAnalyzer<T>::removeWhiteSpaces(std::istream* in) {
     str removedWhiteSpace;
 
-    for (char i : *givenStr) {
-        if (i == ' ')
+    char ch;
+    while (*in >> ch) {
+        if (ch == ' ')
             continue;
 
-        removedWhiteSpace.push_back(i);
+        removedWhiteSpace.push_back(ch);
     }
 
     if (removedWhiteSpace.back() != ';' && removedWhiteSpace.back() != '\n')
