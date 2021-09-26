@@ -21,9 +21,10 @@ int main() try {
     for (auto& var : vars1)
         *logger << var.first << " : " << var.second << "\n";
 
-    auto vars2 = sa->analyse("x:=1+2*3+4-5*6+7");
+    auto vars2 = sa->analyse("x:=1+2*3)+4-5*6+7");
     /*
-     * Given expression:       x:=1+2*3+4-5*6+7
+     * Given expression:       x:=1+2*3)+4-5*6+7
+     * [ERROR] line 1, character at 9: Occurred close bracket without open
      * x : -12
      * */
 

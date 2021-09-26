@@ -21,17 +21,18 @@ public:
     static uMapChI operationsPriority;
 
     uMapVar<T> analyse(const str& code);
+    void setLogger(Logger* logger);
 private:
-    const int identifierLen;
-    Logger* logger;
-    uMapVar<T> vars;
-    str lastInsertedKeyVar;
-    Stack<T> valueStack;
-    Stack<char> operationsStack;
+    const int _identifierLen;
+    Logger* _logger;
+    uMapVar<T> _vars;
+    str _lastInsertedKeyVar;
+    Stack<T> _valueStack;
+    Stack<char> _operationsStack;
 
     void computeLast();
     void computeStack();
-    void computeStack(const char ch);
+    void computeStack(char ch);
     str removeWhiteSpaces(const str* givenStr);
     void clearData();
 };
@@ -39,15 +40,18 @@ private:
 
 template<class T>
 SyntacticAnalyzer<T>::SyntacticAnalyzer(int identifierLen)
-        : identifierLen(identifierLen), logger(new Logger(&std::cout)) { }
+        : _identifierLen(identifierLen),
+        _logger(new Logger(&std::cout)) { }
 
 template<class T>
 SyntacticAnalyzer<T>::SyntacticAnalyzer(int identifierLen, Logger *logger)
-        : identifierLen(identifierLen), logger(logger) { }
+        : _identifierLen(identifierLen),
+        _logger(logger) { }
 
 template<class T>
 SyntacticAnalyzer<T>::SyntacticAnalyzer(int identifierLen, Logger* logger, const uMapChI& customPriority)
-        : identifierLen(identifierLen), logger(new Logger(&std::cout)) {
+        : _identifierLen(identifierLen),
+        _logger(new Logger(&std::cout)) {
     SyntacticAnalyzer<T>::operationsPriority = customPriority;
 }
 
@@ -65,7 +69,7 @@ uMapVar<T> SyntacticAnalyzer<T>::analyse(const str& code) {
     // var1 := 1 + -3 + 4; => var1 = 2
     // var2 := 3 * 2 + var1; => var2 = 8;
 
-    (*this->logger) << "\nGiven expression:\t" << code << "\n";
+    (*this->_logger) << "\nGiven expression:\t" << code << "\n";
 
     ui line = 1, charAt = 0;
     short int curNumberSign = 1;
@@ -84,106 +88,106 @@ uMapVar<T> SyntacticAnalyzer<T>::analyse(const str& code) {
 
         if (isBeforeAssigning) {
             if (utils::isString(ch)) {
-                if (cur.size() == this->identifierLen)
-                    (*this->logger)(Logger::ERROR, line, charAt) << "Identifier length is great than limit expected " << this->identifierLen << "\n";
+                if (cur.size() == this->_identifierLen)
+                    (*this->_logger)(Logger::ERROR, line, charAt) << "Identifier length is great than limit expected " << this->_identifierLen << "\n";
 
                 cur.push_back(ch);
             }
             else if (utils::isNumber(ch)) {
                 cur.push_back(ch);
-                (*this->logger)(Logger::ERROR, line, charAt) << "Identifier should not contain number\n";
+                (*this->_logger)(Logger::ERROR, line, charAt) << "Identifier should not contain number\n";
             }
             else if (i + 1 < removedWs.size() && removedWs[i] == ':' && removedWs[i + 1] == '=') {
                 if (!cur.empty()) {
-                    this->vars.insert({cur, NULL});
-                    this->lastInsertedKeyVar = cur;
+                    this->_vars.insert({cur, NULL});
+                    this->_lastInsertedKeyVar = cur;
                     cur.clear();
                     isBeforeAssigning = false;
                     ++i;
                     ++charAt;
                 } else
-                    (*this->logger)(Logger::ERROR, line, charAt) << "Identifier must be non-empty string\n";
+                    (*this->_logger)(Logger::ERROR, line, charAt) << "Identifier must be non-empty string\n";
             } else
-                (*this->logger)(Logger::ERROR, line, charAt) << "Unexpected character '" << ch << "' before equal symbol\n";
+                (*this->_logger)(Logger::ERROR, line, charAt) << "Unexpected character '" << ch << "' before equal symbol\n";
         } else {
             if (utils::isArithOperation(ch)) {
                 if (!cur.empty()) {
                     if (utils::isNumber(cur.front())) {
-                        this->valueStack.push_back(curNumberSign * utils::stoi(cur));
+                        this->_valueStack.push_back(curNumberSign * utils::stoi(cur));
                         cur.clear();
                         curNumberSign = 1;
                     }
                     else {
-                        auto find = this->vars.find(cur);
+                        auto find = this->_vars.find(cur);
 
-                        if (find == this->vars.end())
-                            (*this->logger)(Logger::ERROR, line, charAt) << "Undefined identifier\n";
+                        if (find == this->_vars.end())
+                            (*this->_logger)(Logger::ERROR, line, charAt) << "Undefined identifier\n";
                         else {
-                            this->valueStack.push_back(curNumberSign * find->second);
+                            this->_valueStack.push_back(curNumberSign * find->second);
                             cur.clear();
                             curNumberSign = 1;
                         }
                     }
                 }
 
-                if (this->valueStack.getSize() == this->operationsStack.getSize() - openBrackenCount) {
+                if (this->_valueStack.getSize() == this->_operationsStack.getSize() - openBrackenCount) {
                     if (utils::isNumberSign(ch))
                         curNumberSign = ch == '+' ? 1 : -1;
                     else
-                        (*this->logger)(Logger::WARNING, line, charAt) << "Unexpected character " << ch << "\n";
+                        (*this->_logger)(Logger::WARNING, line, charAt) << "Unexpected character " << ch << "\n";
                 } else {
                     this->computeStack(ch);
-                    this->operationsStack.push_back(ch);
+                    this->_operationsStack.push_back(ch);
                 }
             } else if (utils::isNumber(ch) || utils::isString(ch))
                 cur.push_back(ch);
             else if (ch == '(') {
-                this->operationsStack.push_back('(');
+                this->_operationsStack.push_back('(');
                 ++openBrackenCount;
             }
             else if (ch == ')') {
                 if (!cur.empty()) {
                     if (utils::isNumber(cur.front())) {
-                        this->valueStack.push_back(curNumberSign * utils::stoi(cur));
+                        this->_valueStack.push_back(curNumberSign * utils::stoi(cur));
                         cur.clear();
                         curNumberSign = 1;
                     }
                     else {
-                        auto find = this->vars.find(cur);
+                        auto find = this->_vars.find(cur);
 
-                        if (find == this->vars.end())
-                            (*this->logger)(Logger::ERROR, line, charAt) << "Undefined identifier\n";
+                        if (find == this->_vars.end())
+                            (*this->_logger)(Logger::ERROR, line, charAt) << "Undefined identifier\n";
                         else {
-                            this->valueStack.push_back(curNumberSign * find->second);
+                            this->_valueStack.push_back(curNumberSign * find->second);
                             cur.clear();
                             curNumberSign = 1;
                         }
                     }
                 }
 
-                while (this-operationsStack.getSize() > 0 && this->operationsStack.top() != '(')
+                while (this->_operationsStack.getSize() > 0 && this->_operationsStack.top() != '(')
                     this->computeLast();
 
-                if (this->operationsStack.top() == '(')
-                    this->operationsStack.pop();
+                if (this->_operationsStack.top() == '(')
+                    this->_operationsStack.pop();
                 else
-                    (*this->logger)(Logger::ERROR, line, charAt) << "Occurred close bracket without open\n";
+                    (*this->_logger)(Logger::ERROR, line, charAt) << "Occurred close bracket without open\n";
             }
 
             if (ch == ';' || ch == '\n') {
                 if (!cur.empty()) {
                     if (utils::isNumber(cur.front())) {
-                        this->valueStack.push_back(curNumberSign * utils::stoi(cur));
+                        this->_valueStack.push_back(curNumberSign * utils::stoi(cur));
                         cur.clear();
                         curNumberSign = 1;
                     }
                     else {
-                        auto find = this->vars.find(cur);
+                        auto find = this->_vars.find(cur);
 
-                        if (find == this->vars.end())
-                            (*this->logger)(Logger::ERROR, line, charAt) << "Undefined identifier\n";
+                        if (find == this->_vars.end())
+                            (*this->_logger)(Logger::ERROR, line, charAt) << "Undefined identifier\n";
                         else {
-                            this->valueStack.push_back(curNumberSign * this->vars[cur]);
+                            this->_valueStack.push_back(curNumberSign * this->_vars[cur]);
                             cur.clear();
                             curNumberSign = 1;
                         }
@@ -191,7 +195,7 @@ uMapVar<T> SyntacticAnalyzer<T>::analyse(const str& code) {
                 }
 
                 this->computeStack();
-                this->vars[this->lastInsertedKeyVar] = this->valueStack.pop();
+                this->_vars[this->_lastInsertedKeyVar] = this->_valueStack.pop();
                 line++;
                 charAt = 0;
                 cur.clear();
@@ -200,15 +204,15 @@ uMapVar<T> SyntacticAnalyzer<T>::analyse(const str& code) {
         }
     }
 
-    return this->vars;
+    return this->_vars;
 }
 
 template<class T>
 void SyntacticAnalyzer<T>::computeLast() {
-    if (this->valueStack.getSize() >= 2 && this->operationsStack.getSize() >= 1) {
-        T last = this->valueStack.pop();
-        T preLast = this->valueStack.pop();
-        const char operation = this->operationsStack.pop();
+    if (this->_valueStack.getSize() >= 2 && this->_operationsStack.getSize() >= 1) {
+        T last = this->_valueStack.pop();
+        T preLast = this->_valueStack.pop();
+        const char operation = this->_operationsStack.pop();
 
         T result = 0;
 
@@ -232,19 +236,19 @@ void SyntacticAnalyzer<T>::computeLast() {
                 break;
         }
 
-        this->valueStack.push_back(result);
+        this->_valueStack.push_back(result);
     }
 }
 
 template<class T>
 void SyntacticAnalyzer<T>::computeStack() {
-    while (this->operationsStack.getSize() > 0)
+    while (this->_operationsStack.getSize() > 0)
         this->computeLast();
 }
 
 template<class T>
-void SyntacticAnalyzer<T>::computeStack(const char ch) {
-    while (this->operationsStack.getSize() > 0 && SyntacticAnalyzer<T>::operationsPriority[ch] <= SyntacticAnalyzer<T>::operationsPriority[this->operationsStack.top()])
+void SyntacticAnalyzer<T>::computeStack(char ch) {
+    while (this->_operationsStack.getSize() > 0 && SyntacticAnalyzer<T>::operationsPriority[ch] <= SyntacticAnalyzer<T>::operationsPriority[this->_operationsStack.top()])
         this->computeLast();
 }
 
@@ -267,9 +271,14 @@ str SyntacticAnalyzer<T>::removeWhiteSpaces(const str* givenStr) {
 
 template<typename T>
 void SyntacticAnalyzer<T>::clearData() {
-    this->valueStack.clear();
-    this->operationsStack.clear();
-    this->vars.clear();
+    this->_valueStack.clear();
+    this->_operationsStack.clear();
+    this->_vars.clear();
+}
+
+template<class T>
+void SyntacticAnalyzer<T>::setLogger(Logger* logger) {
+    this->_logger = logger;
 }
 
 #endif //INFORMATICS_SYNTACTICANALYZER_H
