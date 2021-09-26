@@ -16,6 +16,7 @@ public:
     Logger operator()(LogType logType, int line, int charAt);
     Logger operator<<(int msg);
     Logger operator<<(const str& msg);
+    Logger operator<<(const char& ch);
 private:
     std::ostream* out;
 

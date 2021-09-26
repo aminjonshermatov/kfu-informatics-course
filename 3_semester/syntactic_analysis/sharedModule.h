@@ -18,9 +18,9 @@
 using str = std::string;
 
 template<class T = int>
-using mapVar = std::map<str, T>;
+using uMapVar = std::unordered_map<str, T>;
 
-using mapChI = std::unordered_map<char, int>;
+using uMapChI = std::unordered_map<char, int>;
 using li = long int;
 using ld = long double;
 using ui = unsigned int;

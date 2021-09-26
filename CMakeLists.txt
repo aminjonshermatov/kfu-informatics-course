@@ -67,14 +67,11 @@ add_executable(
         syntactic_analysis
         3_semester/syntactic_analysis/main.cpp
         3_semester/syntactic_analysis/SyntacticAnalyzer.h
-        3_semester/syntactic_analysis/SyntacticAnalyzer.cpp
         3_semester/syntactic_analysis/sharedModule.h
         3_semester/syntactic_analysis/utils.h
         3_semester/syntactic_analysis/utils.cpp
         3_semester/syntactic_analysis/Stack.h
-        3_semester/syntactic_analysis/Stack.cpp
         3_semester/syntactic_analysis/List.h
-        3_semester/syntactic_analysis/List.cpp
         3_semester/syntactic_analysis/Logger.h
         3_semester/syntactic_analysis/Logger.cpp
 )

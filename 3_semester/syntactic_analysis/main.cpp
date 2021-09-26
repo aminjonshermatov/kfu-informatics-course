@@ -5,18 +5,21 @@
 #include "SyntacticAnalyzer.h"
 
 int main() try {
-    std::cout << "hello\n";
-
     auto* logger = new Logger(&std::cout);
 
     auto* sa = new SyntacticAnalyzer<int>(1, logger);
 
-//    auto vars = sa->analyse("x:=1+2;y=3*2");
-//
-//    for (auto& var : vars)
-//        std::cout << var.first << " : " << var.second << "\n";
+    auto vars = sa->analyse("X:=+109;Y:=X--15700;A1:=X/Y;X:=A1++14810;");
+    /*
+     * Given expression:       X:=+109;Y:=X--15700;A1:=X/Y;X:=A1++14810;
+     * [ERROR] line 3, character at 2: Identifier should not contain number
+     * X : 14810
+     * A1 : 0
+     * Y : 15809
+     * */
 
-    return 0;
+    for (auto& var : vars)
+        std::cout << var.first << " : " << var.second << "\n";
 } catch (std::exception& ex) {
-    std::cout << ex.what() << "\n";
+    std::cout << "Exception occurred:\t" << ex.what() << "\n";
 };
