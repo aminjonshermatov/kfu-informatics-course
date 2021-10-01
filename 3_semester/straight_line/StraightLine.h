@@ -15,26 +15,26 @@ using pDD = std::pair<double, double>;
 class StraightLine {
 public:
     StraightLine();
-    StraightLine(double k, double b);
-    StraightLine(const StraightLine &sl);
+    StraightLine(double, double);
+    StraightLine(const StraightLine&);
 
 
-    void rotate_line(double p);
-    void parallel_transfer(double d);
-    pDD lines_intersection(const StraightLine *sl);
-    bool isParallel(const StraightLine *sl);
-    bool operator==(const StraightLine &sl) const;
+    void rotate_line(double);
+    void parallel_transfer(double);
+    pDD lines_intersection(const StraightLine*) const;
+    bool isParallel(const StraightLine*) const;
+    bool operator==(const StraightLine&) const;
 
     double getK() const;
-    void setK(double k);
+    void setK(double);
 
     double getB() const;
-    void setB(double b);
+    void setB(double);
 
-    friend std::ostream &operator<<(std::ostream &os, const StraightLine &line);
+    friend std::ostream &operator<<(std::ostream&, const StraightLine&);
 
 private:
-    double k, b;
+    double _k{}, _b{};
 };
 
 

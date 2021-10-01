@@ -11,25 +11,25 @@
 class Point3D {
 public:
     Point3D();
-    Point3D(int x, int y, int z);
-    Point3D(const Point3D& p);
+    Point3D(int, int, int);
+    Point3D(const Point3D&);
 
     int getX() const;
-    void setX(int x);
+    void setX(int);
 
     int getY() const;
-    void setY(int y);
+    void setY(int);
 
     int getZ() const;
-    void setZ(int z);
+    void setZ(int);
 
-    bool operator==(const Point3D &p) const;
-    bool operator!=(const Point3D &p) const;
+    bool operator==(const Point3D&) const;
+    bool operator!=(const Point3D&) const;
 
-    friend std::ostream &operator<<(std::ostream &os, const Point3D &p);
+    friend std::ostream &operator<<(std::ostream&, const Point3D&);
 
 private:
-    int x{}, y{}, z{};
+    int _x{}, _y{}, _z{};
 };
 
 

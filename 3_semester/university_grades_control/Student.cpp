@@ -19,28 +19,28 @@ Student::Student(
 
 void Student::print() {
     std::cout << "I'm a "
-        << this->role
+        << this->_role
         << ", my name is "
         << this->getFullName().str()
         << ", "
-        << this->age
+        << this->_age
         << "years old.\n";
 }
 
 void Student::addSubject(const str& subject) {
-    this->subjects.push_back(subject);
+    this->_subjects.push_back(subject);
 }
 
 v<> Student::getSubjects() const {
-    return this->subjects;
+    return this->_subjects;
 }
 
 void Student::setPreparation(int min, int max) {
-    this->preparation = mk(min, max);
+    this->_preparation = mk(min, max);
 }
 
 pii Student::getPreparation() const {
-    return this->preparation;
+    return this->_preparation;
 }
 
 Student* Student::getById(int idx) {

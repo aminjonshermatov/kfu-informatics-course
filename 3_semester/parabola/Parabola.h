@@ -13,26 +13,26 @@ using IRoot = std::pair<double, double>;
 class Parabola {
 public:
     Parabola();
-    Parabola(double a, double b, double c);
-    Parabola(const Parabola& p);
+    Parabola(double, double, double);
+    Parabola(const Parabola&);
 
     double getA() const;
-    void setA(double a);
+    void setA(double);
 
     double getB() const;
-    void setB(double b);
+    void setB(double);
 
     double getC() const;
-    void setC(double c);
+    void setC(double);
 
-    bool operator==(const Parabola &rhs) const;
-    bool operator!=(const Parabola &rhs) const;
+    bool operator==(const Parabola&) const;
+    bool operator!=(const Parabola&) const;
 
-    friend std::ostream &operator<<(std::ostream &os, const Parabola &parabola);
+    friend std::ostream &operator<<(std::ostream&, const Parabola&);
 
     IRoot intersectionXAxis() const;
 private:
-    double a, b, c;
+    double _a, _b, _c;
 };
 
 

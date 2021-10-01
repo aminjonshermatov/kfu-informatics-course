@@ -10,24 +10,20 @@
 
 class Student : public Person {
 public:
-    Student(
-        const str& name,
-        const str& surname,
-        int age
-    );
+    Student(const str&, const str&, int);
 
-    void addSubject(const str& subject);
+    void addSubject(const str&);
     v<> getSubjects() const;
-    void setPreparation(int min, int max);
+    void setPreparation(int, int);
     pii getPreparation() const;
 
     void print() override;
 
-    static Student* getById(int idx);
+    static Student* getById(int);
     static mP<Student> studStore;
 private:
-    v<> subjects;
-    pii preparation;
+    v<> _subjects;
+    pii _preparation;
 };
 
 

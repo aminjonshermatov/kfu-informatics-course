@@ -20,23 +20,23 @@ Resistor::Resistor(const Resistor &r) {
 }
 
 double Resistor::getI() const {
-    return this->i;
+    return this->_i;
 }
 
 void Resistor::setI(double i) {
-    this->i = i;
+    this->_i = i;
 }
 
 double Resistor::getR() const {
-    return this->r;
+    return this->_r;
 }
 
 void Resistor::setR(double r) {
-    this->r = r;
+    this->_r = r;
 }
 
 bool Resistor::operator==(const Resistor &r) const {
-    return this->i == r.i && this->r == r.r;
+    return this->_i == r._i && this->_r == r._r;
 }
 
 bool Resistor::operator!=(const Resistor &r) const {

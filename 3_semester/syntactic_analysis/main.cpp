@@ -104,4 +104,4 @@ int main() try {
         *logger << var.first << " : " << var.second << "\n";
 } catch (std::exception& ex) {
     std::cout << "Exception occurred:\t" << ex.what() << "\n";
-};
+}

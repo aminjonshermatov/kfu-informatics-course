@@ -9,20 +9,20 @@ Person::Person(
         const str& surname,
         int age,
         const str& role
-) : uuid(Person::uuidSeries++),
-    name(name),
-    surname(surname),
-    age(age),
-    role(role) { }
+) : _uuid(Person::uuidSeries++),
+    _name(name),
+    _surname(surname),
+    _age(age),
+    _role(role) { }
 
 li Person::uuidSeries = 0;
 
 int Person::getId() const {
-    return this->uuid;
+    return this->_uuid;
 }
 
 ss Person::getFullName() const {
     ss s;
-    s << this->name << " " << this->surname;
+    s << this->_name << " " << this->_surname;
     return s;
 }

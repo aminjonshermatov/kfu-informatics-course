@@ -5,17 +5,11 @@
 #ifndef INFORMATICS_GLOBALS_H
 #define INFORMATICS_GLOBALS_H
 
-#include <vector>
-#include <iostream>
-#include <unordered_map>
-#include <map>
-#include <utility>
-#include <string>
-#include <sstream>
+#include <bits/stdc++.h>
 
 #define mk(a, b) std::make_pair(a, b)
 #define findAll(store, el) std::find((store).begin(), (store).end(), el)
-#define exp(msg) std::exception(msg)
+#define exp(msg) std::runtime_error(msg)
 
 using pii = std::pair<int, int>;
 using str = std::string;

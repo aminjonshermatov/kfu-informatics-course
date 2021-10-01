@@ -15,26 +15,26 @@ RationalNumber::RationalNumber(int a, int b) {
 }
 
 int RationalNumber::getA() const {
-    return this->a;
+    return this->_a;
 }
 
 void RationalNumber::setA(int a) {
-    this->a = a;
+    this->_a = a;
 }
 
 int RationalNumber::getB() const {
-    return this->b;
+    return this->_b;
 }
 
 void RationalNumber::setB(int b) {
     if (b == 0)
-        throw std::exception("The denominator must be nonzero");
+        throw std::runtime_error("The denominator must be nonzero");
 
-    this->b = b;
+    this->_b = b;
 }
 
 bool RationalNumber::operator==(const RationalNumber &rn) const {
-    return this->a == rn.a && this->b == rn.b;
+    return this->_a == rn.getA() && this->_b == rn.getB();
 }
 
 bool RationalNumber::operator!=(const RationalNumber &rn) const {

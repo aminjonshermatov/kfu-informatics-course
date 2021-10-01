@@ -12,23 +12,23 @@
 class Vector3D {
 public:
     Vector3D();
-    Vector3D(Point3D* startP, Point3D* endP);
-    Vector3D(Vector3D* v);
+    Vector3D(Point3D*, Point3D*);
+    Vector3D(Vector3D*);
 
     Point3D *getStart() const;
-    void setStart(Point3D *start);
+    void setStart(Point3D*);
 
     Point3D *getAnEnd() const;
-    void setAnEnd(Point3D *anEnd);
+    void setAnEnd(Point3D*);
 
-    bool operator==(const Vector3D &v) const;
-    bool operator!=(const Vector3D &v) const;
+    bool operator==(const Vector3D&) const;
+    bool operator!=(const Vector3D&) const;
 
-    friend std::ostream &operator<<(std::ostream &os, const Vector3D &d);
+    friend std::ostream &operator<<(std::ostream&, const Vector3D&);
 
     double getLen() const;
 private:
-    Point3D *start, *end;
+    Point3D *_start, *_end;
 };
 
 

@@ -20,23 +20,23 @@ ComplexNumber::ComplexNumber(const ComplexNumber &cn) {
 }
 
 double ComplexNumber::getA() const {
-    return this->a;
+    return this->_a;
 }
 
 void ComplexNumber::setA(double a) {
-    this->a = a;
+    this->_a = a;
 };
 
 double ComplexNumber::getB() const {
-    return this->b;
+    return this->_b;
 }
 
 void ComplexNumber::setB(double b) {
-    this->b = b;
+    this->_b = b;
 }
 
 bool ComplexNumber::operator==(const ComplexNumber &cn) const {
-    return this->a == cn.a && this->b == cn.b;
+    return this->_a == cn._a && this->_b == cn._b;
 }
 
 bool ComplexNumber::operator!=(const ComplexNumber &cn) const {
@@ -96,7 +96,7 @@ ComplexNumber *ComplexNumber::operator*(const ComplexNumber *cn) const {
 
 ComplexNumber *ComplexNumber::division(const ComplexNumber *cn) const {
     if (cn->getA() == 0 && cn->getB() == 0)
-        throw std::exception("Kofficients of denominator must be nonzero;");
+        throw std::runtime_error("Koefficients of denominator must be nonzero;");
 
     auto* div = new ComplexNumber();
 
@@ -112,5 +112,3 @@ ComplexNumber *ComplexNumber::division(const ComplexNumber *cn) const {
 ComplexNumber *ComplexNumber::operator/(const ComplexNumber *cn) const {
     return this->division(cn);
 };
-
-

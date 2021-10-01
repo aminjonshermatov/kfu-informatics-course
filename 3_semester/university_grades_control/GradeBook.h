@@ -14,11 +14,11 @@ class Teacher;
 
 class GradeBook {
 public:
-    GradeBook(const v<>& subjects);
+    GradeBook(const v<>&);
 
-    void setGrade(ss tFullName, const str& subject, Student *stud);
+    void setGrade(ss, const str&, Student*);
 
-    friend std::ostream &operator<<(std::ostream &os, const GradeBook &gBook);
+    friend std::ostream &operator<<(std::ostream&, const GradeBook&);
 
 private:
     /*
@@ -35,7 +35,7 @@ private:
      *      }
      * }
      * */
-    um_sii store;
+    um_sii _store;
 };
 
 

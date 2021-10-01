@@ -19,7 +19,7 @@ public:
     void clear();
 
 private:
-    ui _size;
+    ui _size{};
     List<T>* _head;
     List<T>* _tail;
 };

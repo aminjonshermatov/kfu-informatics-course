@@ -14,7 +14,7 @@
 #include <map>
 #include <unordered_map>
 
-#define excep(msg) std::exception(msg)
+#define excep(msg) std::runtime_error(msg)
 
 using str = std::string;
 

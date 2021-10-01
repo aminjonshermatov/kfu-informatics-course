@@ -12,29 +12,29 @@
 class RationalNumber {
 public:
     RationalNumber();
-    RationalNumber(int a, int b);
+    RationalNumber(int, int);
 
     int getA() const;
-    void setA(int a);
+    void setA(int);
 
     int getB() const;
-    void setB(int b);
+    void setB(int);
 
     // generator
-    RationalNumber* multiplication(const RationalNumber* rn);
+    RationalNumber* multiplication(const RationalNumber*);
 
     // modificator
-    void addition(const RationalNumber* rn);
+    void addition(const RationalNumber*);
 
-    bool operator==(const RationalNumber &rn) const;
-    bool operator!=(const RationalNumber &rn) const;
-    friend std::ostream &operator<<(std::ostream &os, const RationalNumber &rn);
+    bool operator==(const RationalNumber&) const;
+    bool operator!=(const RationalNumber&) const;
+    friend std::ostream &operator<<(std::ostream&, const RationalNumber&);
 
 private:
-    int a, b;
+    int _a, _b;
 
     void fraction();
-    int gcd(int a, int b);
+    int gcd(int, int);
 };
 
 

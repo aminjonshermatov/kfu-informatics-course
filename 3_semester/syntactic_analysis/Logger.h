@@ -9,22 +9,22 @@
 
 class Logger {
 public:
-    Logger(std::ostream* out);
+    Logger(std::ostream*);
 
     enum LogType { WARNING, ERROR };
 
-    Logger operator()(LogType logType);
-    Logger operator()(LogType logType, int line);
-    Logger operator()(LogType logType, int line, int charAt);
-    Logger operator<<(int msg);
-    Logger operator<<(const str& msg);
-    Logger operator<<(const char& ch);
+    Logger operator()(LogType);
+    Logger operator()(LogType, int);
+    Logger operator()(LogType, int, int);
+    Logger operator<<(int);
+    Logger operator<<(const str&);
+    Logger operator<<(const char&);
 
-    void setOStream(std::ostream* out);
+    void setOStream(std::ostream*);
 private:
     std::ostream* _out;
 
-    inline str getLabel(LogType logType);
+    inline str getLabel(LogType);
 };
 
 

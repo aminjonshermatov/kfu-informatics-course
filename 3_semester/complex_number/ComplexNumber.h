@@ -12,34 +12,34 @@
 class ComplexNumber {
 public:
     ComplexNumber();
-    ComplexNumber(double a, double b);
-    ComplexNumber(const ComplexNumber& cn);
+    ComplexNumber(double, double);
+    ComplexNumber(const ComplexNumber&);
 
     double getA() const;
-    void setA(double a);
+    void setA(double);
 
     double getB() const;
-    void setB(double b);
+    void setB(double);
 
-    ComplexNumber* addition(const ComplexNumber* cn) const;
-    ComplexNumber* operator+(const ComplexNumber* ch) const;
+    ComplexNumber* addition(const ComplexNumber*) const;
+    ComplexNumber* operator+(const ComplexNumber*) const;
 
-    ComplexNumber* subtraction(const ComplexNumber* cn) const;
-    ComplexNumber* operator-(const ComplexNumber* cn) const;
+    ComplexNumber* subtraction(const ComplexNumber*) const;
+    ComplexNumber* operator-(const ComplexNumber*) const;
 
-    ComplexNumber* multiplication(const ComplexNumber* cn) const;
-    ComplexNumber* operator*(const ComplexNumber* ch) const;
+    ComplexNumber* multiplication(const ComplexNumber*) const;
+    ComplexNumber* operator*(const ComplexNumber*) const;
 
-    ComplexNumber* division(const ComplexNumber* cn) const;
-    ComplexNumber* operator/(const ComplexNumber* cn) const;
+    ComplexNumber* division(const ComplexNumber*) const;
+    ComplexNumber* operator/(const ComplexNumber*) const;
 
-    bool operator==(const ComplexNumber &cn) const;
-    bool operator!=(const ComplexNumber &cn) const;
+    bool operator==(const ComplexNumber&) const;
+    bool operator!=(const ComplexNumber&) const;
 
-    friend std::ostream &operator<<(std::ostream &os, const ComplexNumber &cn);
+    friend std::ostream &operator<<(std::ostream&, const ComplexNumber&);
 
 private:
-    double a{}, b{};
+    double _a{}, _b{};
 };
 
 

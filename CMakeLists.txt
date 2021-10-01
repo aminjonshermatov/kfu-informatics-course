@@ -3,6 +3,10 @@ project(informatics)
 
 set(CMAKE_CXX_STANDARD 17)
 
+add_executable(
+        class_work
+        3_semester/class_work/main.cpp
+)
 
 add_executable(
         straight_line

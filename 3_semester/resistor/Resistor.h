@@ -11,28 +11,28 @@
 class Resistor {
 public:
     Resistor();
-    Resistor(double i, double r);
-    Resistor(const Resistor& r);
+    Resistor(double, double);
+    Resistor(const Resistor&);
 
     double getI() const;
-    void setI(double i);
+    void setI(double);
 
     double getR() const;
-    void setR(double r);
+    void setR(double);
 
-    bool operator==(const Resistor &rhs) const;
-    bool operator!=(const Resistor &rhs) const;
+    bool operator==(const Resistor&) const;
+    bool operator!=(const Resistor&) const;
 
-    friend std::ostream &operator<<(std::ostream &os, const Resistor &resistor);
+    friend std::ostream &operator<<(std::ostream&, const Resistor&);
 
-    Resistor* parallel(const Resistor* r);
-    Resistor* consistently(const Resistor* r);
+    Resistor* parallel(const Resistor*);
+    Resistor* consistently(const Resistor*);
 
     double getU() const;
     double getW() const;
 
 private:
-    double i{}, r{};
+    double _i{}, _r{};
 };
 
 

@@ -6,7 +6,7 @@
 
 GradeBook::GradeBook(const v<>& subjects) {
     for (auto& sub : subjects)
-        this->store.insert({sub, {}});
+        this->_store.insert({sub, {}});
 }
 
 void GradeBook::setGrade(ss tFullName, const str& subject, Student *stud) {
@@ -15,17 +15,17 @@ void GradeBook::setGrade(ss tFullName, const str& subject, Student *stud) {
     if (findAll(subjects, subject) == subjects.end())
         throw exp("Student does not learn this subject");
 
-    auto findSubject = this->store.find(subject);
+    auto findSubject = this->_store.find(subject);
 
-    if (findSubject == this->store.end())
+    if (findSubject == this->_store.end())
         throw exp("Invalid subject does not exist in grade-book");
 
-    auto findStud = this->store[subject].find(stud->getId());
+    auto findStud = this->_store[subject].find(stud->getId());
 
-    if (findStud == this->store[subject].end())
-        this->store[subject].insert({stud->getId(), {}});
+    if (findStud == this->_store[subject].end())
+        this->_store[subject].insert({stud->getId(), {}});
 
-    this->store[subject][stud->getId()].push_back(utils::random(stud->getPreparation()));
+    this->_store[subject][stud->getId()].push_back(utils::random(stud->getPreparation()));
 
     std::cout << "Teacher "
             << tFullName.str()
@@ -34,13 +34,13 @@ void GradeBook::setGrade(ss tFullName, const str& subject, Student *stud) {
             << " in "
             << subject
             << " subject "
-            << this->store[subject][stud->getId()].back()
+            << this->_store[subject][stud->getId()].back()
             << "\n";
 }
 
 std::ostream &operator<<(std::ostream &os, const GradeBook &gBook) {
     os << "\n";
-    for (auto& sub : gBook.store) {
+    for (auto& sub : gBook._store) {
         os << sub.first << ":\n";
         for (auto& stud: sub.second) {
             os << "\t" << Student::getById(stud.first)->getFullName().str() << ": [";

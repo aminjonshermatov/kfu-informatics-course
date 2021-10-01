@@ -20,22 +20,22 @@ StraightLine::StraightLine(const StraightLine& sl) {
 }
 
 void StraightLine::rotate_line(double p) {
-    this->k *= p;
+    this->_k *= p;
 }
 
 void StraightLine::parallel_transfer(double d) {
-    this->b += d;
+    this->_b += d;
 }
 
-pDD StraightLine::lines_intersection(const StraightLine* sl) {
+pDD StraightLine::lines_intersection(const StraightLine* sl) const {
     pDD point;
 
     if (this->getK() == sl->getK()) {
         if (this->getB() == sl->getB()) {
-            throw std::exception("Infinity solutions\n");
+            throw std::runtime_error("Infinity solutions");
         }
         else
-            throw std::exception("No solution\n");
+            throw std::runtime_error("No solution");
     }
     else {
         point.first = (sl->getB() - this->getB()) / (this->getK() - sl->getK());
@@ -45,7 +45,7 @@ pDD StraightLine::lines_intersection(const StraightLine* sl) {
     return point;
 }
 
-bool StraightLine::isParallel(const StraightLine* sl) {
+bool StraightLine::isParallel(const StraightLine* sl) const {
     return this->getK() == sl->getK();
 }
 
@@ -54,19 +54,19 @@ bool StraightLine::operator==(const StraightLine& sl) const {
 }
 
 double StraightLine::getK() const {
-    return this->k;
+    return this->_k;
 }
 
 void StraightLine::setK(double k) {
-    this->k = k;
+    this->_k = k;
 }
 
 double StraightLine::getB() const {
-    return this->b;
+    return this->_b;
 }
 
 void StraightLine::setB(double b) {
-    this->b = b;
+    this->_b = b;
 }
 
 std::ostream &operator<<(std::ostream &os, const StraightLine &line) {

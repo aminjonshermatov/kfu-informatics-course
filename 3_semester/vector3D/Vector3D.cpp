@@ -20,23 +20,23 @@ Vector3D::Vector3D(Vector3D *v) {
 }
 
 Point3D *Vector3D::getStart() const {
-    return this->start;
+    return this->_start;
 }
 
 void Vector3D::setStart(Point3D *start) {
-    this->start = start;
+    this->_start = start;
 }
 
 Point3D *Vector3D::getAnEnd() const {
-    return this->end;
+    return this->_end;
 }
 
 void Vector3D::setAnEnd(Point3D *anEnd) {
-    this->end = anEnd;
+    this->_end = anEnd;
 }
 
 bool Vector3D::operator==(const Vector3D &v) const {
-    return *this->start == *v.start && *this->end == *v.end;
+    return *this->_start == *v._start && *this->_end == *v._end;
 }
 
 bool Vector3D::operator!=(const Vector3D &v) const {
@@ -44,7 +44,7 @@ bool Vector3D::operator!=(const Vector3D &v) const {
 }
 
 std::ostream &operator<<(std::ostream &os, const Vector3D &v) {
-    return os << "start: " << *v.start << " end: " << *v.end;
+    return os << "start: " << *v._start << " end: " << *v._end;
 }
 
 double Vector3D::getLen() const {

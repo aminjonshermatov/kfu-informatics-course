@@ -116,7 +116,7 @@ void multiplyMatrix(const RationalArray2D& matrixA, const RationalArray2D& matri
 
     // check widthOfMatrixA != widthOfMatrixB
     if (widthA != heightB)
-        throw std::exception("Width of matrix A is not equal to height of matrix B");
+        throw std::runtime_error("Width of matrix A is not equal to height of matrix B");
 
     for (int i = 0; i < heightA; ++i) {
         RationalArray rowMatrixC;

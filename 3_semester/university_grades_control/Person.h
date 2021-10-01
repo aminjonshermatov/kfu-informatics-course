@@ -9,22 +9,17 @@
 
 class Person {
 public:
-    Person(
-        const str& name,
-        const str& surname,
-        int age,
-        const str& role
-    );
+    Person(const str&, const str&, int, const str&);
 
     virtual void print() = 0;
     virtual int getId() const;
     virtual ss getFullName() const;
 protected:
-    int uuid;
-    str name;
-    str surname;
-    int age;
-    str role;
+    int _uuid;
+    str _name;
+    str _surname;
+    int _age;
+    str _role;
 private:
     static li uuidSeries;
 };

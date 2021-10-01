@@ -23,31 +23,31 @@ Point3D::Point3D(const Point3D &p) {
 }
 
 int Point3D::getX() const {
-    return this->x;
+    return this->_x;
 }
 
 void Point3D::setX(int x) {
-    this->x = x;
+    this->_x = x;
 }
 
 int Point3D::getY() const {
-    return this->y;
+    return this->_y;
 }
 
 void Point3D::setY(int y) {
-    this->y = y;
+    this->_y = y;
 }
 
 int Point3D::getZ() const {
-    return this->z;
+    return this->_z;
 }
 
 void Point3D::setZ(int z) {
-    this->z = z;
+    this->_z = z;
 }
 
 bool Point3D::operator==(const Point3D &p) const {
-    return this->x == p.x && this->y == p.y && this->z == p.z;
+    return this->_x == p._x && this->_y == p._y && this->_z == p._z;
 }
 
 bool Point3D::operator!=(const Point3D &p) const {

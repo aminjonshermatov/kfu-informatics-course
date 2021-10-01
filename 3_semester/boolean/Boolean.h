@@ -10,18 +10,18 @@
 class Boolean {
 public:
     Boolean();
-    Boolean(bool arr[4]);
-    Boolean(const Boolean& b);
+    Boolean(bool[]);
+    Boolean(const Boolean&);
 
-    void setData(int idx, bool val);
-    bool getData(int idx) const;
+    void setData(int, bool);
+    bool getData(int) const;
 
-    Boolean* conjunction(const Boolean* b);
-    Boolean* disjunction(const Boolean* b);
+    Boolean* conjunction(const Boolean*);
+    Boolean* disjunction(const Boolean*);
 
-    friend std::ostream& operator<<(std::ostream& os, const Boolean& b);
+    friend std::ostream& operator<<(std::ostream&, const Boolean&);
 private:
-    bool data[4]{};
+    bool _data[4]{};
 };
 
 

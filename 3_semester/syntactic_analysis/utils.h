@@ -8,13 +8,13 @@
 #include "sharedModule.h"
 
 namespace utils {
-    bool isNumber(const char& ch);
-    bool isString(const char& ch);
-    ui fromCharToInt(const char& ch);
-    ui stoi(const str& s);
+    bool isNumber(const char&);
+    bool isString(const char&);
+    ui fromCharToInt(const char&);
+    ui stoi(const str&);
     static sCh arithOperations = {'+', '-', '*', '/'};
-    bool isArithOperation(char ch);
-    bool isNumberSign(char ch);
+    bool isArithOperation(char);
+    bool isNumberSign(char);
 };
 
 

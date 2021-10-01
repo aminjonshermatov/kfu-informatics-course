@@ -23,31 +23,31 @@ Parabola::Parabola(const Parabola &p) {
 }
 
 double Parabola::getA() const {
-    return this->a;
+    return this->_a;
 }
 
 void Parabola::setA(double a) {
-    this->a = a;
+    this->_a = a;
 }
 
 double Parabola::getB() const {
-    return this->b;
+    return this->_b;
 }
 
 void Parabola::setB(double b) {
-    this->b = b;
+    this->_b = b;
 }
 
 double Parabola::getC() const {
-    return this->c;
+    return this->_c;
 }
 
 void Parabola::setC(double c) {
-    this->c = c;
+    this->_c = c;
 }
 
 bool Parabola::operator==(const Parabola &p) const {
-    return this->a == p.a && this->b == p.b && this->c == p.c;
+    return this->_a == p._a && this->_b == p._b && this->_c == p._c;
 }
 
 bool Parabola::operator!=(const Parabola &p) const {
@@ -64,14 +64,14 @@ std::ostream &operator<<(std::ostream &os, const Parabola &parabola) {
         os << "+";
     else
         os << "-";
-    os << abs(parabola.getB()) << "x";
+    os << std::abs(parabola.getB()) << "x";
 
     if (parabola.getC() >= 0)
         os << "+";
     else
         os << "-";
 
-    os << abs(parabola.getC()) << "=0\n";
+    os << std::abs(parabola.getC()) << "=0\n";
 
     return os;
 }
@@ -80,23 +80,23 @@ IRoot Parabola::intersectionXAxis() const {
     IRoot root;
 
     if (this->getA() == 0) {
-        if (this->b == 0) {
-            if (this->c == 0)
-                throw std::exception("x_1 and x_2 cat take any numbers");
+        if (this->_b == 0) {
+            if (this->_c == 0)
+                throw std::runtime_error("x_1 and x_2 cat take any numbers");
             else
-                throw std::exception("Parabola haven't any root");
+                throw std::runtime_error("Parabola haven't any root");
         }
         else
-            root.first = root.second = (-1) * this->getC() / this->getB();
+            root.first = root.second = -this->getC() / this->getB();
     }
     else {
         double diskriminant = pow(this->getB(), 2) - 4 * this->getA() * this->getC();
 
         if (diskriminant < 0)
-            throw std::exception("Parabola function is over than x axis");
+            throw std::runtime_error("Parabola function is over than x axis");
         else {
-            root.first = ((-1) * this->getB() - sqrt(diskriminant)) / 2 / this->getA();
-            root.second= ((-1) * this->getB() + sqrt(diskriminant)) / 2 / this->getA();
+            root.first = (-this->getB() - sqrt(diskriminant)) / 2 / this->getA();
+            root.second= (-this->getB() + sqrt(diskriminant)) / 2 / this->getA();
         }
     }
 

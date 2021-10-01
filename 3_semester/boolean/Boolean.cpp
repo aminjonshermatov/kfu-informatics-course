@@ -6,7 +6,7 @@
 
 Boolean::Boolean() {
     for (int i = 0; i < 4; ++i)
-        this->setData(i, 0);
+        this->setData(i, false);
 }
 
 Boolean::Boolean(bool arr[4]) {
@@ -21,19 +21,19 @@ Boolean::Boolean(const Boolean &b) {
 
 void Boolean::setData(int idx, bool val) {
     if (idx > 3)
-        throw std::exception("Out of range");
+        throw std::runtime_error("Out of range");
 
     if (val != 0 && val != 1)
-        throw std::exception("Value can be either '0' or '1'");
+        throw std::runtime_error("Value can be either '0' or '1'");
 
-    this->data[idx] = val;
+    this->_data[idx] = val;
 };
 
 bool Boolean::getData(int idx) const {
     if (idx > 3)
-        throw std::exception("Out of range");
+        throw std::runtime_error("Out of range");
 
-    return this->data[idx];
+    return this->_data[idx];
 };
 
 Boolean* Boolean::conjunction(const Boolean* mb) {
@@ -41,9 +41,9 @@ Boolean* Boolean::conjunction(const Boolean* mb) {
 
     for (int i = 0; i < 4; ++i)
         if (this->getData(i) + mb->getData(i) == 2)
-            res->setData(i, 1);
+            res->setData(i, true);
         else
-            res->setData(i, 0);
+            res->setData(i, false);
 
     return res;
 };
@@ -53,9 +53,9 @@ Boolean* Boolean::disjunction(const Boolean* mb) {
 
     for (int i = 0; i < 4; ++i)
         if (this->getData(i) + mb->getData(i) == 0)
-            res->setData(i, 0);
+            res->setData(i, false);
         else
-            res->setData(i, 1);
+            res->setData(i, true);
 
     return res;
 };

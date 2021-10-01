@@ -15,8 +15,8 @@ Teacher::Teacher(
     surname,
     age,
     "teacher"
-), department(department), subject(subject) {
-    Teacher::teachStore.insert({this->uuid, this});
+), _department(department), _subject(subject) {
+    Teacher::teachStore.insert({this->_uuid, this});
 }
 
 void Teacher::setGrade(GradeBook *gb, Student* stud) {
@@ -24,11 +24,11 @@ void Teacher::setGrade(GradeBook *gb, Student* stud) {
 }
 
 str Teacher::getDepartment() const {
-    return this->department;
+    return this->_department;
 }
 
 str Teacher::getSubject() const {
-    return this->subject;
+    return this->_subject;
 }
 
 Teacher *Teacher::getById(int idx) {
@@ -44,11 +44,11 @@ mP<Teacher> Teacher::teachStore;
 
 void Teacher::print() {
     std::cout << "I'm a "
-        << this->role
+        << this->_role
         << ", my name is "
         << this->getFullName().str()
         << ", "
-        << this->age
+        << this->_age
         << "years old."
         << " I'm work in "
         << this->getDepartment()

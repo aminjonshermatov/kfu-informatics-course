@@ -11,25 +11,19 @@
 
 class Teacher : public Person {
 public:
-    Teacher(
-        const str& name,
-        const str& surname,
-        int age,
-        const str& department,
-        const str& subject
-    );
+    Teacher( const str&, const str&, int, const str&, const str&);
 
-    void setGrade(GradeBook* gb, Student* stud);
+    void setGrade(GradeBook*, Student*);
     str getDepartment() const;
     str getSubject() const;
 
     void print() override;
 
-    static Teacher* getById(int idx) ;
+    static Teacher* getById(int) ;
     static mP<Teacher> teachStore;
 private:
-    str department;
-    str subject;
+    str _department;
+    str _subject;
 };
 
 
