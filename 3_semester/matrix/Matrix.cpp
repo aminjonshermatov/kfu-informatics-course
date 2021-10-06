@@ -125,5 +125,75 @@ Matrix* Matrix::operator/(const Matrix* m) const {
         throw std::runtime_error("WidthNotEqualToHeightException");
     }
 
-    auto* temp = new Matrix()
+    // A*B=A*(B**-1)
+    return this->operator*(inversedM);
+}
+
+void Matrix::operator+=(const Matrix* m) const {
+    if (this->_height != m->getHeight() || this->_width != m->getHeight()) {
+        throw std::runtime_error("HeightOrWidthNotEqualException");
+    }
+
+    for (ll i = 0; i < this->_height; ++i) {
+        for (ll j = 0; j < this->_width; ++j) {
+            this->matrix[i][j] += *m[i][j];
+        }
+    }
+}
+
+void Matrix::operator-=(const Matrix* m) const {
+    if (this->_height != m->getHeight() || this->_width != m->getHeight()) {
+        throw std::runtime_error("HeightOrWidthNotEqualException");
+    }
+
+    for (ll i = 0; i < this->_height; ++i) {
+        for (ll j = 0; j < this->_width; ++j) {
+            this->matrix[i][j] -= *m[i][j];
+        }
+    }
+}
+
+void Matrix::operator*=(const Matrix* m) const {
+    if (this->_width != m->getHeight()) {
+        throw std::runtime_error("WidthNotEqualToHeightException");
+    }
+
+    for (ll i = 0; i < this->_height; ++i) {
+        for (ll j = 0; j < m->getWidth(); ++j) {
+            for (ll k = 0; k < m->getWidth(); ++k) {
+                this->matrix[i][j] += this->matrix[i][k] * *m[k][j];
+            }
+        }
+    }
+}
+
+void Matrix::operator/=(const Matrix* m) const {
+    auto* inversedM = m->inverse();
+
+    if (this->_width != inversedM->getHeight()) {
+        throw std::runtime_error("WidthNotEqualToHeightException");
+    }
+
+    // A*B=A*(B**-1)
+    this->operator*=(inversedM);
+}
+
+bool Matrix::operator==(const Matrix* m) const {
+    if (this->_height != m->getHeight() || this->_width != m->getWidth()) {
+        return false;
+    }
+
+    bool res = true;
+
+    for (ll i = 0; i < this->_height && res; ++i) {
+        for (ll j = 0; j < this->_width && res; ++j) {
+            if (this->matrix[i][j] != *m[i][j]) res = false;
+        }
+    }
+
+    return res;
+}
+
+bool Matrix::operator!=(const Matrix* m) const {
+    return !this->operator==(m);
 }

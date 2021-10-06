@@ -33,13 +33,13 @@ public:
     Matrix* operator*(const Matrix*) const;
     Matrix* operator/(const Matrix*) const;
 
-    Matrix& operator+=(const Matrix&);
-    Matrix& operator-=(const Matrix&);
-    Matrix& operator*=(const Matrix&);
-    Matrix& operator/=(const Matrix&);
+    void operator+=(const Matrix*) const;
+    void operator-=(const Matrix*) const;
+    void operator*=(const Matrix*) const;
+    void operator/=(const Matrix*) const;
 
-    bool operator==(const Matrix&);
-    bool operator!=(const Matrix&);
+    bool operator==(const Matrix*) const;
+    bool operator!=(const Matrix*) const;
 
     Matrix* inverse() const;
     Matrix* transpose() const;
