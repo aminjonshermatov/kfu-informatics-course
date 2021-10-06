@@ -86,3 +86,10 @@ add_executable(
         3_semester/big_int/BigInt.h
         3_semester/big_int/BigInt.cpp
 )
+
+add_executable(
+        matrix
+        3_semester/matrix/main.cpp
+        3_semester/matrix/Matrix.h
+        3_semester/matrix/Matrix.cpp
+)
