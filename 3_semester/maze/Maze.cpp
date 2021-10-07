@@ -65,5 +65,39 @@ void Maze::restore() {
         }
     }
 
-    this->_sol.clear();
+    this->_sol->clear();
+}
+
+std::ostream& Maze::solution(std::ostream& os) {
+    os << "Map:\n";
+
+    char** temp = new char*[this->_mapH];
+    for (size_t i = 0; i < this->_mapH; ++i) {
+        temp[i] = new char[this->_mapW];
+        for (size_t j = 0; j < this->_mapW; ++j) {
+            if (i == this->_s_y && j == this->_s_x) os << 'S';
+            else if (i == this->_f_y && j == this->_f_x) os << 'F';
+            else os << this->_map[i][j];
+            temp[i][j] = this->_map[i][j];
+        }
+
+        os << "\n";
+    }
+
+    auto tempPoint = this->_sol->pop();
+
+    while (!this->_sol->isEmpty()) {
+        temp[tempPoint.first][tempPoint.second] = '*';
+    }
+
+    os << "\nSolution/path:\n";
+    for (size_t i = 0; i < this->_mapH; ++i) {
+        for (size_t j = 0; j < this->_mapW; ++j) {
+            os << temp[i][j];
+        }
+
+        os << "\n";
+    }
+
+    return os;
 }

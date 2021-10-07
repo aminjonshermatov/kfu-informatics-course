@@ -17,12 +17,14 @@ public:
     void setMap(char**, size_t, size_t);
     void findPath();
     void restore();
+
+    std::ostream& solution(std::ostream&);
 private:
     char** _map;
     size_t _mapH, _mapW, _s_x, _s_y, _f_x, _f_y;
     bool** _visited;
 
-    Stack<pll> _sol;
+    Stack<pll>* _sol;
 };
 
 
