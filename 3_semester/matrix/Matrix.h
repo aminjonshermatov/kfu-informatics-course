@@ -9,6 +9,7 @@
 
 using ll = long long;
 using ld = long double;
+using shi = short int;
 
 class Matrix {
 public:
@@ -26,8 +27,6 @@ public:
     size_t getHeight() const;
     size_t getWidth() const;
 
-    ld* operator[](ll) const;
-
     Matrix* operator+(const Matrix*) const;
     Matrix* operator-(const Matrix*) const;
     Matrix* operator*(const Matrix*) const;
@@ -43,16 +42,22 @@ public:
 
     Matrix* inverse() const;
     Matrix* transpose() const;
-    Matrix* pow() const;
+    Matrix* pow(ll) const;
+    Matrix* adjoint() const;
+    void multiplyByNumber(ld) const;
 
     ld determinant() const;
-    ld norm() const;
+
+    static Matrix* identityMatrix(size_t);
 
     friend std::ostream& operator<<(std::ostream&, const Matrix&);
     friend std::istream& operator>>(std::istream&, const Matrix&);
 private:
     size_t _height;
     size_t _width;
+
+    ld determinant(const Matrix* , size_t) const;
+    static void cofactor(ld**, ld**, ll, ll, ll);
 };
 
 
