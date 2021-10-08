@@ -7,6 +7,8 @@
 
 #include "shared.h"
 
+class Maze;
+
 template <typename T>
 class Stack {
 public:
@@ -15,13 +17,14 @@ public:
     ~Stack();
 
     void push(T val);
-    T top();
+    T top() const;
     T pop();
     bool isEmpty();
     void clear();
 
     template <typename V>
     friend std::ostream& operator<<(std::ostream&, const Stack<V>&);
+    friend class Maze;
 private:
     class Node {
     public:
@@ -59,7 +62,7 @@ template <typename T>
 Stack<T>::Stack() : _size(0), _top(nullptr) {}
 
 template <typename T>
-Stack<T>::Stack(T val) {
+Stack<T>::Stack(T val) : _size(0), _top(nullptr) {
     this->push(val);
 }
 
@@ -80,7 +83,7 @@ void Stack<T>::push(T val) {
 }
 
 template <typename T>
-T Stack<T>::top() {
+T Stack<T>::top() const {
     if (this->_size == 0) {
         throw std::runtime_error("Stack is empty");
     }
@@ -126,7 +129,7 @@ std::ostream& operator<<(std::ostream& os, const Stack<T>& s) {
     auto* temp = s._top;
 
     while (temp != nullptr) {
-        os << temp->getValue() << " ";
+        os << "(" << temp->getValue().first << ", " << temp->getValue().second << ") ";
         temp = temp->next;
     }
 

@@ -10,6 +10,7 @@
 
 class Maze {
 public:
+    explicit Maze(std::istream&);
     Maze(char**, size_t, size_t);
 
     void setStartPoint(size_t, size_t);
@@ -18,7 +19,8 @@ public:
     void findPath();
     void restore();
 
-    std::ostream& solution(std::ostream&);
+    void showMap();
+    void showSol();
 private:
     char** _map;
     size_t _mapH, _mapW, _s_x, _s_y, _f_x, _f_y;

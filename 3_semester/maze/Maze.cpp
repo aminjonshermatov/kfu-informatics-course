@@ -4,8 +4,31 @@
 
 #include "Maze.h"
 
+Maze::Maze(std::istream& is) : _s_x(0), _s_y(0), _sol(new Stack<pll>()) {
+    size_t tempH, tempW;
+    is >> tempH >> tempW;
+
+    this->_f_y = tempH - 1;
+    this->_f_x = tempW - 1;
+    this->_mapH = tempH;
+    this->_mapW = tempW;
+
+    this->_map = new char*[tempH];
+    this->_visited = new bool*[tempH];
+
+    for (size_t i = 0; i < tempH; ++i) {
+        this->_map[i] = new char[tempW];
+        this->_visited[i] = new bool[tempW];
+
+        for (size_t j = 0; j < tempW; ++j) {
+            is >> this->_map[i][j];
+            this->_visited[i][j] = false;
+        }
+    }
+}
+
 Maze::Maze(char ** map, size_t h, size_t w)
-    : _mapH(h), _mapW(w), _s_x(0), _s_y(0), _f_x(w - 1), _f_y(h - 1) {
+    : _mapH(h), _mapW(w), _s_x(0), _s_y(0), _f_x(w - 1), _f_y(h - 1), _sol(new Stack<pll>()) {
     this->_map = new char*[this->_mapH];
     this->_visited = new bool*[this->_mapH];
 
@@ -55,7 +78,57 @@ void Maze::setMap(char** newMap, size_t h, size_t w) {
 }
 
 void Maze::findPath() {
+    this->_sol->push(mk(this->_s_x, this->_s_y));
 
+    // 0 -> can move
+    // 1 -> can't move
+    while (!this->_sol->isEmpty()) {
+        pll temp = this->_sol->top();
+
+        if (temp.first == this->_f_x && temp.second == this->_f_y) return;
+
+        // right
+        if (
+                temp.first + 1 < this->_mapW
+                && !this->_visited[temp.second][temp.first + 1]
+                && this->_map[temp.second][temp.first + 1] == '0'
+                ) {
+            this->_sol->push(mk(temp.first + 1, temp.second));
+            continue;
+        }
+
+        // down
+        if (
+                temp.second + 1 < this->_mapH
+                && !this->_visited[temp.second + 1][temp.first]
+                && this->_map[temp.second + 1][temp.first] == '0'
+                ) {
+            this->_sol->push(mk(temp.first, temp.second + 1));
+            continue;
+        }
+
+        // left
+        if (
+                temp.first - 1 >= 0
+                && !this->_visited[temp.second][temp.first - 1]
+                && this->_map[temp.second][temp.first - 1] == '0'
+                ) {
+            this->_sol->push(mk(temp.first - 1, temp.second));
+            continue;
+        }
+
+        // up
+        if (
+                temp.second - 1 >= 0
+                && !this->_visited[temp.second - 1][temp.first]
+                && this->_map[temp.second - 1][temp.first] == '0'
+                ) {
+            this->_sol->push(mk(temp.first, temp.second - 1));
+            continue;
+        }
+
+        this->_sol->pop();
+    }
 }
 
 void Maze::restore() {
@@ -68,36 +141,48 @@ void Maze::restore() {
     this->_sol->clear();
 }
 
-std::ostream& Maze::solution(std::ostream& os) {
-    os << "Map:\n";
+void Maze::showMap() {
+    std::cout << "Map:\n";
 
-    char** temp = new char*[this->_mapH];
-    for (size_t i = 0; i < this->_mapH; ++i) {
-        temp[i] = new char[this->_mapW];
-        for (size_t j = 0; j < this->_mapW; ++j) {
-            if (i == this->_s_y && j == this->_s_x) os << 'S';
-            else if (i == this->_f_y && j == this->_f_x) os << 'F';
-            else os << this->_map[i][j];
-            temp[i][j] = this->_map[i][j];
-        }
-
-        os << "\n";
-    }
-
-    auto tempPoint = this->_sol->pop();
-
-    while (!this->_sol->isEmpty()) {
-        temp[tempPoint.first][tempPoint.second] = '*';
-    }
-
-    os << "\nSolution/path:\n";
     for (size_t i = 0; i < this->_mapH; ++i) {
         for (size_t j = 0; j < this->_mapW; ++j) {
-            os << temp[i][j];
+            std::cout << this->_map[i][j];
         }
 
-        os << "\n";
+        std::cout << "\n";
+    }
+}
+
+void Maze::showSol() {
+    std::cout << "Solution:\n";
+
+    auto** tempMap = new char*[this->_mapH];
+
+    for (size_t i = 0; i < this->_mapH; ++i) {
+        tempMap[i] = new char[this->_mapW];
+
+        for (size_t j = 0; j < this->_mapW; ++j) {
+            tempMap[i][j] = this->_map[i][j];
+        }
     }
 
-    return os;
+    auto* temp = this->_sol->_top;
+
+    while (temp != nullptr) {
+        pll point = temp->getValue();
+
+        tempMap[point.second][point.first] = '*';
+        temp = temp->next;
+    }
+
+    tempMap[this->_s_y][this->_s_x] = 'S';
+    tempMap[this->_f_y][this->_f_x] = 'F';
+
+    for (size_t i = 0; i < this->_mapH; ++i) {
+        for (size_t j = 0; j < this->_mapW; ++j) {
+            std::cout << tempMap[i][j];
+        }
+
+        std::cout << "\n";
+    }
 }
