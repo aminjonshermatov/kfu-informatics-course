@@ -12,6 +12,7 @@ class Maze {
 public:
     explicit Maze(std::istream&);
     Maze(char**, size_t, size_t);
+    ~Maze();
 
     void setStartPoint(size_t, size_t);
     void setTargetPoint(size_t, size_t);

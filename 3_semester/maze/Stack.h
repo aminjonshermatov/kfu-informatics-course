@@ -110,7 +110,7 @@ T Stack<T>::pop() {
 
 template <typename T>
 bool Stack<T>::isEmpty() {
-    this->_size == 0;
+    return this->_size == 0;
 }
 
 template <typename T>

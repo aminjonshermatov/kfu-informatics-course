@@ -31,6 +31,7 @@ int main() try {
     auto* cubeOfMatrix = m_4->pow(3);
     std::cout << "Cube of m_4:\n" << *cubeOfMatrix;
     std::cout << "Transpose of cube:\n" << *cubeOfMatrix->transpose();
+
     return 0;
 } catch (std::runtime_error& re) {
     std::cout << "Exception occurred:\t" << re.what() << "\n";

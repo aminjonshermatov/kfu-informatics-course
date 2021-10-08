@@ -43,6 +43,18 @@ Maze::Maze(char ** map, size_t h, size_t w)
     }
 }
 
+Maze::~Maze() {
+    for (size_t i = 0; i < this->_mapH; ++i) {
+        delete[] this->_map[i];
+        delete[] this->_visited[i];
+    }
+
+    delete[] this->_map;
+    delete[] this->_visited;
+
+    this->_sol->clear();
+}
+
 void Maze::setStartPoint(size_t x_0, size_t y_0) {
     this->_s_x = x_0;
     this->_s_y = y_0;
@@ -81,7 +93,7 @@ void Maze::findPath() {
     this->_sol->push(mk(this->_s_x, this->_s_y));
 
     // 0 -> can move
-    // 1 -> can't move
+    // 1 -> can't move/wall
     while (!this->_sol->isEmpty()) {
         pll temp = this->_sol->top();
 
@@ -129,6 +141,8 @@ void Maze::findPath() {
 
         this->_sol->pop();
     }
+
+    throw std::runtime_error("Maze hasn't path to finish");
 }
 
 void Maze::restore() {
@@ -154,7 +168,7 @@ void Maze::showMap() {
 }
 
 void Maze::showSol() {
-    std::cout << "Solution:\n";
+    std::cout << "Start point: (" << this->_s_x << ", " << this->_s_y << "), finish point: (" << this->_f_x << ", " << this->_f_y << ") solution:\n";
 
     auto** tempMap = new char*[this->_mapH];
 
@@ -174,9 +188,6 @@ void Maze::showSol() {
         tempMap[point.second][point.first] = '*';
         temp = temp->next;
     }
-
-    tempMap[this->_s_y][this->_s_x] = 'S';
-    tempMap[this->_f_y][this->_f_x] = 'F';
 
     for (size_t i = 0; i < this->_mapH; ++i) {
         for (size_t j = 0; j < this->_mapW; ++j) {
