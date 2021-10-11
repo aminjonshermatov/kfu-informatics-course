@@ -27,24 +27,27 @@ public:
     size_t getHeight() const;
     size_t getWidth() const;
 
-    Matrix* operator+(const Matrix*) const;
-    Matrix* operator-(const Matrix*) const;
-    Matrix* operator*(const Matrix*) const;
-    Matrix* operator/(const Matrix*) const;
+    Matrix& operator+(const Matrix*) const;
+    Matrix& operator-(const Matrix*) const;
+    Matrix& operator*(const Matrix*) const;
+    Matrix& operator*(ll) const;
+    Matrix& operator*(ld) const;
+    Matrix& operator/(const Matrix*) const;
 
     void operator+=(const Matrix*) const;
     void operator-=(const Matrix*) const;
     void operator*=(const Matrix*) const;
+    void operator*=(ll) const;
+    void operator*=(ld) const;
     void operator/=(const Matrix*) const;
 
     bool operator==(const Matrix*) const;
     bool operator!=(const Matrix*) const;
 
-    Matrix* inverse() const;
-    Matrix* transpose() const;
-    Matrix* pow(ll) const;
-    Matrix* adjoint() const;
-    void multiplyByNumber(ld) const;
+    Matrix& inverse() const;
+    Matrix& transpose() const;
+    Matrix& pow(ll) const;
+    Matrix& adjoint() const;
 
     ld determinant() const;
 
