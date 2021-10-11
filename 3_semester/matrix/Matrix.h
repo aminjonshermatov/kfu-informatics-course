@@ -27,6 +27,7 @@ public:
     size_t getHeight() const;
     size_t getWidth() const;
 
+    // Matrix operator+(const Matrix&) const;
     Matrix& operator+(const Matrix*) const;
     Matrix& operator-(const Matrix*) const;
     Matrix& operator*(const Matrix*) const;
@@ -34,6 +35,7 @@ public:
     Matrix& operator*(ld) const;
     Matrix& operator/(const Matrix*) const;
 
+    // Matrix& operator+=(const Matrix&) const;
     void operator+=(const Matrix*) const;
     void operator-=(const Matrix*) const;
     void operator*=(const Matrix*) const;

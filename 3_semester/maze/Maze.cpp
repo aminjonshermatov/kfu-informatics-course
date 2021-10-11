@@ -28,7 +28,10 @@ Maze::Maze(std::istream& is) : _s_x(0), _s_y(0), _sol(new Stack<pll>()) {
 }
 
 Maze::Maze(char ** map, size_t h, size_t w)
-    : _mapH(h), _mapW(w), _s_x(0), _s_y(0), _f_x(w - 1), _f_y(h - 1), _sol(new Stack<pll>()) {
+    : _mapH(h), _mapW(w),
+    _s_x(0), _s_y(0),
+    _f_x(w - 1), _f_y(h - 1),
+    _sol(new Stack<pll>()) {
     this->_map = new char*[this->_mapH];
     this->_visited = new bool*[this->_mapH];
 

@@ -10,7 +10,7 @@ int main() try {
 
     auto* maze = new Maze(std::cin);
 
-    maze->setStartPoint(3, 1);
+    maze->setStartPoint(0, 0);
     maze->showMap();
     maze->findPath();
     maze->showSol();

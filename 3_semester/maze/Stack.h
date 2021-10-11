@@ -13,10 +13,10 @@ template <typename T>
 class Stack {
 public:
     Stack();
-    explicit Stack(T val);
+    explicit Stack(T);
     ~Stack();
 
-    void push(T val);
+    void push(T);
     T top() const;
     T pop();
     bool isEmpty();
@@ -135,6 +135,5 @@ std::ostream& operator<<(std::ostream& os, const Stack<T>& s) {
 
     return os << "\n";
 }
-
 
 #endif //INFORMATICS_STACK_H
