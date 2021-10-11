@@ -1,0 +1,13 @@
+Map:
+     0 1 1 1 
+     0 0 1 0 
+     1 0 1 0 
+     1 0 0 0 
+
+Start point:	(3, 1)
+Finish point:	(3, 3)
+Solution:
+     0 1 1 1 
+     0 0 1 * 
+     1 0 1 * 
+     1 0 0 * 

@@ -159,8 +159,9 @@ void Maze::showMap() {
     std::cout << "Map:\n";
 
     for (size_t i = 0; i < this->_mapH; ++i) {
+        std::cout.width(6);
         for (size_t j = 0; j < this->_mapW; ++j) {
-            std::cout << this->_map[i][j];
+            std::cout << this->_map[i][j] << " ";
         }
 
         std::cout << "\n";
@@ -168,7 +169,7 @@ void Maze::showMap() {
 }
 
 void Maze::showSol() {
-    std::cout << "Start point: (" << this->_s_x << ", " << this->_s_y << "), finish point: (" << this->_f_x << ", " << this->_f_y << ") solution:\n";
+    std::cout << "\nStart point:\t(" << this->_s_x << ", " << this->_s_y << ")\nFinish point:\t(" << this->_f_x << ", " << this->_f_y << ")\nSolution:\n";
 
     auto** tempMap = new char*[this->_mapH];
 
@@ -190,8 +191,9 @@ void Maze::showSol() {
     }
 
     for (size_t i = 0; i < this->_mapH; ++i) {
+        std::cout .width(6);
         for (size_t j = 0; j < this->_mapW; ++j) {
-            std::cout << tempMap[i][j];
+            std::cout << tempMap[i][j] << " ";
         }
 
         std::cout << "\n";
