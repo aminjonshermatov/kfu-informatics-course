@@ -64,8 +64,8 @@ size_t Matrix::getWidth() const {
     return this->_width;
 }
 
-Matrix& Matrix::operator+(const Matrix* m) const {
-    if (this->_height != m->getHeight() || this->_width != m->getHeight()) {
+Matrix Matrix::operator+(const Matrix& m) const {
+    if (this->_height != m.getHeight() || this->_width != m.getHeight()) {
         throw std::runtime_error("HeightOrWidthNotEqualException");
     }
 
@@ -73,15 +73,15 @@ Matrix& Matrix::operator+(const Matrix* m) const {
 
     for (size_t i = 0; i < this->_height; ++i) {
         for (size_t j = 0; j < this->_width; ++j) {
-            temp->matrix[i][j] = this->matrix[i][j] + m->matrix[i][j];
+            temp->matrix[i][j] = this->matrix[i][j] + m.matrix[i][j];
         }
     }
 
     return *temp;
 }
 
-Matrix& Matrix::operator-(const Matrix* m) const {
-    if (this->_height != m->getHeight() || this->_width != m->getHeight()) {
+Matrix Matrix::operator-(const Matrix& m) const {
+    if (this->_height != m.getHeight() || this->_width != m.getHeight()) {
         throw std::runtime_error("HeightOrWidthNotEqualException");
     }
 
@@ -89,24 +89,24 @@ Matrix& Matrix::operator-(const Matrix* m) const {
 
     for (size_t i = 0; i < this->_height; ++i) {
         for (size_t j = 0; j < this->_width; ++j) {
-            temp->matrix[i][j] = this->matrix[i][j] - m->matrix[i][j];
+            temp->matrix[i][j] = this->matrix[i][j] - m.matrix[i][j];
         }
     }
 
     return *temp;
 }
 
-Matrix& Matrix::operator*(const Matrix* m) const {
-    if (this->_width != m->getHeight()) {
+Matrix Matrix::operator*(const Matrix& m) const {
+    if (this->_width != m.getHeight()) {
         throw std::runtime_error("WidthNotEqualToHeightException");
     }
 
-    auto* temp = new Matrix(this->_height, m->getWidth());
+    auto* temp = new Matrix(this->_height, m.getWidth());
 
     for (size_t i = 0; i < this->_height; ++i) {
-        for (size_t j = 0; j < m->getWidth(); ++j) {
-            for (size_t k = 0; k < m->getWidth(); ++k) {
-                temp->matrix[i][j] += this->matrix[i][k] * m->matrix[k][j];
+        for (size_t j = 0; j < m.getWidth(); ++j) {
+            for (size_t k = 0; k < m.getWidth(); ++k) {
+                temp->matrix[i][j] += this->matrix[i][k] * m.matrix[k][j];
             }
         }
     }
@@ -114,7 +114,7 @@ Matrix& Matrix::operator*(const Matrix* m) const {
     return *temp;
 }
 
-Matrix& Matrix::operator*(ll k) const {
+Matrix Matrix::operator*(ll k) const {
     auto* temp = new Matrix(this->_height, this->getWidth());
 
     for (size_t i = 0; i < this->_height; ++i) {
@@ -126,7 +126,7 @@ Matrix& Matrix::operator*(ll k) const {
     return *temp;
 }
 
-Matrix& Matrix::operator*(ld k) const {
+Matrix Matrix::operator*(ld k) const {
     auto* temp = new Matrix(this->_height, this->getWidth());
 
     for (size_t i = 0; i < this->_height; ++i) {
@@ -138,87 +138,99 @@ Matrix& Matrix::operator*(ld k) const {
     return *temp;
 }
 
-Matrix& Matrix::operator/(const Matrix* m) const {
-    auto inversedM = m->inverse();
+Matrix Matrix::operator/(const Matrix& m) const {
+    auto inversedM = m.inverse();
 
     if (this->_width != inversedM.getHeight()) {
         throw std::runtime_error("WidthNotEqualToHeightException");
     }
 
     // A*B=A*(B**-1)
-    return this->operator*(&inversedM);
+    return this->operator*(inversedM);
 }
 
-void Matrix::operator+=(const Matrix* m) const {
-    if (this->_height != m->getHeight() || this->_width != m->getHeight()) {
+Matrix& Matrix::operator+=(const Matrix& m) {
+    if (this->_height != m.getHeight() || this->_width != m.getHeight()) {
         throw std::runtime_error("HeightOrWidthNotEqualException");
     }
 
     for (size_t i = 0; i < this->_height; ++i) {
         for (size_t j = 0; j < this->_width; ++j) {
-            this->matrix[i][j] += m->matrix[i][j];
+            this->matrix[i][j] += m.matrix[i][j];
         }
     }
+
+    return *this;
 }
 
-void Matrix::operator-=(const Matrix* m) const {
-    if (this->_height != m->getHeight() || this->_width != m->getHeight()) {
+Matrix& Matrix::operator-=(const Matrix& m) {
+    if (this->_height != m.getHeight() || this->_width != m.getHeight()) {
         throw std::runtime_error("HeightOrWidthNotEqualException");
     }
 
     for (size_t i = 0; i < this->_height; ++i) {
         for (size_t j = 0; j < this->_width; ++j) {
-            this->matrix[i][j] -= m->matrix[i][j];
+            this->matrix[i][j] -= m.matrix[i][j];
         }
     }
+
+    return *this;
 }
 
-void Matrix::operator*=(const Matrix* m) const {
-    if (this->_width != m->getHeight()) {
+Matrix& Matrix::operator*=(const Matrix& m) {
+    if (this->_width != m.getHeight()) {
         throw std::runtime_error("WidthNotEqualToHeightException");
     }
 
     auto* initialMatrix = new Matrix(*this);
 
     for (ll i = 0; i < this->_height; ++i) {
-        for (ll j = 0; j < m->getWidth(); ++j) {
+        for (ll j = 0; j < m.getWidth(); ++j) {
             this->matrix[i][j] = 0;
-            for (ll k = 0; k < m->getWidth(); ++k) {
-                this->matrix[i][j] += initialMatrix->matrix[i][k] * m->matrix[k][j];
+            for (ll k = 0; k < m.getWidth(); ++k) {
+                this->matrix[i][j] += initialMatrix->matrix[i][k] * m.matrix[k][j];
             }
         }
     }
+
+    return *this;
 }
 
-void Matrix::operator*=(ll k) const {
+Matrix& Matrix::operator*=(ll k) {
     for (size_t i = 0; i < this->_height; ++i) {
         for (size_t j = 0; j < this->_height; ++j) {
             this->matrix[i][j] *= k;
         }
     }
+
+    return *this;
 }
 
-void Matrix::operator*=(ld k) const {
+Matrix& Matrix::operator*=(ld k) {
     for (size_t i = 0; i < this->_height; ++i) {
         for (size_t j = 0; j < this->_height; ++j) {
             this->matrix[i][j] *= k;
         }
     }
+
+    return *this;
 }
 
-void Matrix::operator/=(const Matrix* m) const {
-    auto inversedM = m->inverse();
+Matrix& Matrix::operator/=(const Matrix& m) {
+    auto inversedM = m.inverse();
 
     if (this->_width != inversedM.getHeight()) {
         throw std::runtime_error("WidthNotEqualToHeightException");
     }
 
     // A*B=A*(B**-1)
-    this->operator*=(&inversedM);
+    this->operator*=(inversedM);
+
+    return *this;
 }
 
-bool Matrix::operator==(const Matrix* m) const {
-    if (this->_height != m->getHeight() || this->_width != m->getWidth()) {
+bool Matrix::operator==(const Matrix& m) const {
+    if (this->_height != m.getHeight() || this->_width != m.getWidth()) {
         return false;
     }
 
@@ -226,14 +238,14 @@ bool Matrix::operator==(const Matrix* m) const {
 
     for (size_t i = 0; i < this->_height && res; ++i) {
         for (size_t j = 0; j < this->_width && res; ++j) {
-            if (this->matrix[i][j] != m->matrix[i][j]) res = false;
+            if (this->matrix[i][j] != m.matrix[i][j]) res = false;
         }
     }
 
     return res;
 }
 
-bool Matrix::operator!=(const Matrix* m) const {
+bool Matrix::operator!=(const Matrix& m) const {
     return !this->operator==(m);
 }
 
@@ -269,7 +281,7 @@ Matrix& Matrix::pow(ll power) const {
         auto* temp = new Matrix(*this);
 
         for (size_t i = 0; i < power - 1; ++i) {
-            *temp *= this;
+            *temp *= *this;
             std::cout << *temp;
         }
 
@@ -281,7 +293,7 @@ Matrix& Matrix::pow(ll power) const {
         power *= -1;
 
         for (size_t i = 0; i < power; ++i) {
-            *temp /= iden;
+            *temp /= *iden;
         }
 
         return *temp;
