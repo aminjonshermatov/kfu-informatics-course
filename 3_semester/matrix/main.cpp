@@ -5,8 +5,8 @@
 #include "Matrix.h"
 
 int main() try {
-    freopen("D:/kfu/informatics/3_semester/matrix/input.txt", "r", stdin);
-    freopen("D:/kfu/informatics/3_semester/matrix/output.txt", "w", stdout);
+    freopen("../3_semester/matrix/input.txt", "r", stdin);
+    freopen("../3_semester/matrix/output.txt", "w", stdout);
 
     Matrix m_1(4, 4, std::cin);
     Matrix m_2(4, 4, std::cin);

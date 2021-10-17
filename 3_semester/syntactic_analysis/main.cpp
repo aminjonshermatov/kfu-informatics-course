@@ -9,7 +9,7 @@
 
 int main() try {
 #if (IS_INPUT_FROM_FILE || IS_LOG_TO_FILE)
-    const str baseUrl = "D:/kfu/informatics/3_semester/syntactic_analysis";
+    const str baseUrl = "../3_semester/syntactic_analysis";
 #endif
 
 #if IS_LOG_TO_FILE

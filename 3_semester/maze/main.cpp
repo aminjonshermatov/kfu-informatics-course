@@ -5,8 +5,8 @@
 #include "Maze.h"
 
 int main() try {
-    freopen("D:/kfu/informatics/3_semester/maze/input.txt", "r", stdin);
-    freopen("D:/kfu/informatics/3_semester/maze/output.txt", "w", stdout);
+    freopen("../3_semester/maze/input.txt", "r", stdin);
+    freopen("../3_semester/maze/output.txt", "w", stdout);
 
     auto* maze = new Maze(std::cin);
 
