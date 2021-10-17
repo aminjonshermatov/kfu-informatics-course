@@ -102,3 +102,9 @@ add_executable(
         3_semester/maze/Maze.cpp
         3_semester/maze/shared.h
 )
+
+add_executable(
+        vector
+        3_semester/vector/main.cpp
+        3_semester/vector/vector.h
+)
