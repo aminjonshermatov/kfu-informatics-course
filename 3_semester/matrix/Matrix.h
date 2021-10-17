@@ -27,6 +27,9 @@ public:
     size_t getHeight() const;
     size_t getWidth() const;
 
+    ld* operator[](size_t) const;
+    ld*& operator[](size_t);
+
     Matrix operator+(const Matrix&) const;
     Matrix operator-(const Matrix&) const;
     Matrix operator*(const Matrix&) const;
@@ -46,12 +49,12 @@ public:
 
     Matrix& inverse() const;
     Matrix& transpose() const;
-    Matrix& pow(ll) const;
+    Matrix pow(ll) const;
     Matrix& adjoint() const;
 
     ld determinant() const;
 
-    static Matrix* identityMatrix(size_t);
+    static Matrix identityMatrix(size_t);
 
     friend std::ostream& operator<<(std::ostream&, const Matrix&);
     friend std::istream& operator>>(std::istream&, const Matrix&);
@@ -59,7 +62,7 @@ private:
     size_t _height;
     size_t _width;
 
-    ld determinant(const Matrix* , size_t) const;
+    ld determinant(const Matrix&, size_t) const;
     static void cofactor(ld**, ld**, ll, ll, ll);
 };
 
