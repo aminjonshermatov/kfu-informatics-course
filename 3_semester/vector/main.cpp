@@ -11,7 +11,7 @@ void CustomPrintFunc(const Vector<T>& v) {
     std::cout << '\n';
 }
 
-int main() {
+int main() try {
     Vector<int> arr;
 
     for (auto& i : {1,2,3,4,5,6,7}) {
@@ -36,4 +36,6 @@ int main() {
     std::cout << arr2 << '\n';
 
     return 0;
+} catch (std::exception& ex) {
+    std::cout << "Exception occurred:\n" << ex.what() << '\n';
 }
