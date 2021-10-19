@@ -4,6 +4,13 @@
 
 #include "vector.h"
 
+template<typename T>
+void CustomPrintFunc(const Vector<T>& v) {
+    std::cout << "Address:\t" << &v << '\n';
+    for (const auto& el : v) std::cout << el << '|';
+    std::cout << '\n';
+}
+
 int main() {
     Vector<int> arr;
 
@@ -14,6 +21,7 @@ int main() {
     std::cout << arr << '\n';
     Vector<int> arr2 = arr;
     std::cout << arr2 << '\n';
+    CustomPrintFunc(arr);
 
     std::cout << (arr == arr2) << '\n';
     std::cout << (arr != arr2) << '\n';

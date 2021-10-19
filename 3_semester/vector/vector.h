@@ -71,6 +71,8 @@ private:
 
     T* _storage;
 
+    void _ensureOutOfRangeException(size_t) const;
+
     constexpr const static ld GOLDEN_RATIO = 1.618033988749L;
 
     void _allocateNew();
@@ -162,23 +164,13 @@ void Vector<T>::assign(size_t size, T&& value) {
 
 template<typename T>
 T Vector<T>::at(size_t pos) const {
-    if (pos < 0 || pos >= this->_SIZE) {
-        std::stringstream errorMsg;
-        errorMsg << "Size: " << this->_SIZE << ", but received: " << pos;
-        throw std::out_of_range(errorMsg.str());
-    }
-
+    this->_ensureOutOfRangeException(pos);
     return this->_storage[pos];
 }
 
 template<typename T>
 T& Vector<T>::at(size_t pos) {
-    if (pos < 0 || pos >= this->_SIZE) {
-        std::stringstream errorMsg;
-        errorMsg << "Size: " << this->_SIZE << ", but received: " << pos;
-        throw std::out_of_range(errorMsg.str());
-    }
-
+    this->_ensureOutOfRangeException(pos);
     return &this->_storage[pos];
 }
 
@@ -314,16 +306,19 @@ void Vector<T>::erase(size_t pos) {
     T* newStorage = new T[this->_CAPACITY];
 
     size_t i = 0, j = 0;
+    bool isFound = false;
 
     while (i < this->_SIZE) {
         if (i == pos) {
             ++i;
+            isFound = true;
         } else {
             newStorage[j++] = this->_storage[i++];
         }
     }
 
-    --this->_SIZE;
+    if (isFound) --this->_SIZE;
+
     this->_deallocate(this->_storage);
     this->_storage = newStorage;
 }
@@ -332,18 +327,20 @@ template<typename T>
 void Vector<T>::erase(const T& value) {
     T* newStorage = new T[this->_CAPACITY];
 
-    size_t i = 0, j = 0, deletedCount = 0;
+    size_t i = 0, j = 0;
+    bool isFound = false;
 
     while (i < this->_SIZE) {
-        if (this->_storage[i] == value) {
+        if (!isFound && this->_storage[i] == value) {
             ++i;
-            ++deletedCount;
+            isFound = true;
         } else {
             newStorage[j++] = this->_storage[i++];
         }
     }
 
-    this->_SIZE -= deletedCount;
+    if (isFound) --this->_SIZE;
+
     this->_deallocate(this->_storage);
     this->_storage = newStorage;
 }
@@ -352,18 +349,20 @@ template<typename T>
 void Vector<T>::erase(T&& value) {
     T* newStorage = new T[this->_CAPACITY];
 
-    size_t i = 0, j = 0, deletedCount = 0;
+    size_t i = 0, j = 0;
+    bool isFound = false;
 
     while (i < this->_SIZE) {
-        if (this->_storage[i] == value) {
+        if (!isFound && this->_storage[i] == value) {
             ++i;
-            ++deletedCount;
+            isFound = true;
         } else {
             newStorage[j++] = this->_storage[i++];
         }
     }
 
-    this->_SIZE -= deletedCount;
+    if (isFound) --this->_SIZE;
+
     this->_deallocate(this->_storage);
     this->_storage = newStorage;
 }
@@ -418,6 +417,15 @@ size_t Vector<T>::size() const {
 template<typename T>
 bool Vector<T>::empty() const {
     return this->_SIZE == 0;
+}
+
+template<typename T>
+void Vector<T>::_ensureOutOfRangeException(size_t pos) const {
+    if (pos < 0 || pos >= this->_SIZE) {
+        std::stringstream errorMsg;
+        errorMsg << "Size: " << this->_SIZE << ", but received: " << pos;
+        throw std::out_of_range(errorMsg.str());
+    }
 }
 
 template<typename T>
