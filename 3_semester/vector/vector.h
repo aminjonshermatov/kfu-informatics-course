@@ -11,7 +11,7 @@ typedef long double ld;
 typedef long long ll;
 
 template <typename T>
-class Vector {
+class Vector final {
 public:
     Vector();
     explicit Vector(size_t);

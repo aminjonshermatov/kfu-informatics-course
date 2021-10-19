@@ -11,6 +11,14 @@ void CustomPrintFunc(const Vector<T>& v) {
     std::cout << '\n';
 }
 
+//template<typename T, typename V>
+//class SuperVector_1 : public Vector<V> {};
+//
+//template<typename T>
+//class SuperVector_2 : public Vector<ll> {};
+//
+//class SuperVector_3 : public Vector<int> {};
+
 int main() try {
     Vector<int> arr;
 
