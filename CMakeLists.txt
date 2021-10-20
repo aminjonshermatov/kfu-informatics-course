@@ -108,3 +108,10 @@ add_executable(
         3_semester/vector/main.cpp
         3_semester/vector/vector.h
 )
+
+add_executable(
+        heap
+        3_semester/heap/main.cpp
+        3_semester/heap/IHeap.h
+        3_semester/heap/MinHeap.h
+)
