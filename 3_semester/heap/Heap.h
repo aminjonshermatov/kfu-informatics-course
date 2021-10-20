@@ -29,7 +29,8 @@ public:
     void insert(const T&);
     void insert(T&&);
 
-    T extract();
+    T extractTop();
+    size_t size() const;
 private:
     size_t _CAPACITY{},
            _SIZE{};
@@ -144,7 +145,7 @@ void Heap<T>::insert(T&& val) {
 }
 
 template<typename T>
-T Heap<T>::extract() {
+T Heap<T>::extractTop() {
     if (this->_SIZE == 0)
         throw std::runtime_error("Heap is empty");
 
@@ -152,6 +153,11 @@ T Heap<T>::extract() {
     this->_store[0] = this->_store[--this->_SIZE];
     this->siftDown(0);
     return minEl;
+}
+
+template<typename T>
+size_t Heap<T>::size() const {
+    return this->_SIZE;
 }
 
 template<typename T>
