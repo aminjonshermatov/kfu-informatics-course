@@ -11,16 +11,14 @@
 template<typename T>
 class MinHeap : public Heap<T> {
 public:
-    using Comparator = bool(const T&, const T&);
-
     MinHeap();
     explicit MinHeap(size_t);
-    explicit MinHeap(std::function<Comparator>);
-    MinHeap(size_t, std::function<Comparator>);
+    explicit MinHeap(std::function<bool(const T&, const T&)>);
+    MinHeap(size_t, std::function<bool(const T&, const T&)>);
     explicit MinHeap(const std::vector<T>&);
-    explicit MinHeap(const std::vector<T>&, std::function<Comparator>);
+    explicit MinHeap(const std::vector<T>&, std::function<bool(const T&, const T&)>);
     explicit MinHeap(std::vector<T>&&);
-    explicit MinHeap(std::vector<T>&&, std::function<Comparator>);
+    explicit MinHeap(std::vector<T>&&, std::function<bool(const T&, const T&)>);
     ~MinHeap();
 
     MinHeap<T>& operator=(const std::vector<T>&);
@@ -36,8 +34,7 @@ private:
            _SIZE{};
     T* _store;
 
-     // Comparator _comp = [&](T& lhs, T& rhs) -> bool { return lhs < rhs; };
-    Comparator _comp;
+    std::function<bool(const T&, const T&)> _comp;
 
     void _ensureRanges(size_t) const;
 };
@@ -46,7 +43,7 @@ template<typename T>
 MinHeap<T>::MinHeap() : MinHeap(1e5) {};
 
 template<typename T>
-MinHeap<T>::MinHeap(std::function<Comparator> comp) : MinHeap(1e5) {
+MinHeap<T>::MinHeap(std::function<bool(const T&, const T&)> comp) : MinHeap(1e5) {
     this->_comp = comp;
 };
 
@@ -56,7 +53,9 @@ MinHeap<T>::MinHeap(size_t size) : _SIZE(0), _CAPACITY(size) {
 };
 
 template<typename T>
-MinHeap<T>::MinHeap(size_t size, std::function<Comparator> comp) : MinHeap(size) {
+MinHeap<T>::MinHeap(
+        size_t size,
+        std::function<bool(const T&, const T&)> comp) : MinHeap(size) {
     this->_comp = comp;
 }
 
@@ -66,7 +65,10 @@ MinHeap<T>::MinHeap(const std::vector<T>& v) : MinHeap(v.size()) {
 }
 
 template<typename T>
-MinHeap<T>::MinHeap(const std::vector<T>& v, std::function<Comparator> comp) : MinHeap(v.size()) {
+MinHeap<T>::MinHeap(
+        const std::vector<T>& v,
+        std::function<bool(const T&, const T&)> comp
+        ) : MinHeap(v.size()) {
     this->_comp = comp;
     for (const auto& el : v) this->insert(el);
 };
@@ -77,8 +79,11 @@ MinHeap<T>::MinHeap(std::vector<T>&& v) : MinHeap(v.size()) {
 }
 
 template<typename T>
-MinHeap<T>::MinHeap(std::vector<T>&& v, std::function<Comparator> comp) : MinHeap(v.size()) {
-    this->_comp = &comp;
+MinHeap<T>::MinHeap(
+        std::vector<T>&& v,
+        std::function<bool(const T&, const T&)> comp
+        ) : MinHeap(v.size()) {
+    this->_comp = comp;
     for (const auto& el : v) this->insert(el);
 }
 
