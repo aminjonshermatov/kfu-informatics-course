@@ -36,7 +36,9 @@ private:
            _SIZE{};
     T* _store;
 
-    Comparator _comp;
+    Comparator _comp = [&](const T& lhs, const T& rhs) -> bool {
+        return lhs < rhs;
+    };
 
     void _ensureRanges(size_t) const;
 };
