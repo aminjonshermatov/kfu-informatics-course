@@ -17,9 +17,9 @@ public:
     explicit Heap(Comparator&&);
     Heap(size_t, Comparator&&);
     explicit Heap(const std::vector<T>&);
-    explicit Heap(const std::vector<T>&, Comparator&&);
+    Heap(const std::vector<T>&, Comparator&&);
     explicit Heap(std::vector<T>&&);
-    explicit Heap(std::vector<T>&&, Comparator&&);
+    Heap(std::vector<T>&&, Comparator&&);
     ~Heap();
 
     Heap<T>& operator=(const std::vector<T>&);
