@@ -8,8 +8,8 @@
 template<typename T>
 class Heap {
 public:
-    virtual void siftDown() = 0;
-    virtual void siftUp() = 0;
+    virtual void siftDown(size_t) = 0;
+    virtual void siftUp(size_t) = 0;
     virtual void insert(const T&) = 0;
     virtual void insert(T&&) = 0;
 };

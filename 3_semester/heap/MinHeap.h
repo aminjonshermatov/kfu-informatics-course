@@ -13,40 +13,108 @@ class MinHeap : public Heap<T> {
 public:
     MinHeap();
     explicit MinHeap(size_t);
+    explicit MinHeap(const std::vector<T>&);
+    explicit MinHeap(std::vector<T>&&);
+    ~MinHeap();
 
-    T& extractMin();
-
-    void siftDown() override;
-    void siftUp() override;
+    void siftDown(size_t) override;
+    void siftUp(size_t) override;
     void insert(const T&) override;
     void insert(T&&) override;
+
+    T& extractMin();
 private:
-    size_t _SIZE{};
+    size_t _CAPACITY{},
+           _SIZE{};
+    T* _store;
+
+    void _ensureRanges(size_t) const;
 };
 
 template<typename T>
 MinHeap<T>::MinHeap() : _SIZE(0) {};
 
 template<typename T>
-MinHeap<T>::MinHeap(size_t size) : _SIZE(0) {};
+MinHeap<T>::MinHeap(size_t size) : _SIZE(0) {
+    this->_store = new T[this->_SIZE];
+};
 
 template<typename T>
-T& MinHeap<T>::extractMin() {
-    return T{};
+MinHeap<T>::MinHeap(const std::vector<T>& v) {
+    for (const auto& el : v) this->insert(el);
 }
 
 template<typename T>
-void MinHeap<T>::siftDown() {}
+MinHeap<T>::MinHeap(std::vector<T>&& v) {
+    for (const auto& el : v) this->insert(el);
+}
 
 template<typename T>
-void MinHeap<T>::siftUp() {}
+MinHeap<T>::~MinHeap() {
+    delete[] this->_store;
+}
 
 template<typename T>
-void MinHeap<T>::insert(const T &) {}
+void MinHeap<T>::siftDown(size_t pos) {
+    while (2 * pos + 1 < this->_SIZE) {
+        size_t leftChildIdx = 2 * pos + 1;
+        size_t rightChildIdx = 2 * pos + 2;
+
+        size_t temp = leftChildIdx;
+
+        if (rightChildIdx < this->_SIZE && this->_store[rightChildIdx] < this->_store[leftChildIdx]) {
+            temp = rightChildIdx;
+        }
+
+        if (this->_store[temp] <= this->_store[pos])
+            break;
+
+        std::swap(this->_store[temp], this->_store[pos]);
+        pos = temp;
+    }
+}
 
 template<typename T>
-void MinHeap<T>::insert(T&&) {}
+void MinHeap<T>::siftUp(size_t pos) {
+    while (pos >= 0 && this->_store[pos] < this->_store[(pos - 1) / 2]) {
+        std::swap(this->_store[pos], this->_store[(pos - 1) / 2]);
+        pos = (pos - 1) / 2;
+    }
+}
 
+template<typename T>
+void MinHeap<T>::insert(const T& val) {
+    this->_ensureRanges(this->_SIZE + 1);
 
+    this->_store[this->_SIZE++] = val;
+    this->siftUp(this->_SIZE - 1);
+}
+
+template<typename T>
+void MinHeap<T>::insert(T&& val) {
+    this->_ensureRanges(this->_SIZE + 1);
+
+    this->_store[this->_SIZE++] = val;
+    this->siftUp(this->_SIZE - 1);
+}
+
+template<typename T>
+T& MinHeap<T>::extractMin() {
+    this->_ensureRanges(0);
+
+    T minEl = this->_store[0];
+    this->_store[0] = this->_store[--this->_SIZE];
+    this->siftDown(0);
+    return minEl;
+}
+
+template<typename T>
+void MinHeap<T>::_ensureRanges(size_t pos) const {
+    if (pos < 0 || pos >= this->_CAPACITY) {
+        std::stringstream ss;
+        ss << "Current capacity: " << this->_CAPACITY << ", requested position: " << pos;
+        throw std::out_of_range(ss.str());
+    }
+}
 
 #endif //INFORMATICS_MINHEAP_H
