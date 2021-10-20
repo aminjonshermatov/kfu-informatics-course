@@ -2,33 +2,32 @@
 // Created by aminjonshermatov on 10/20/2021.
 //
 
-#ifndef INFORMATICS_MINHEAP_H
-#define INFORMATICS_MINHEAP_H
+#ifndef INFORMATICS_HEAP_H
+#define INFORMATICS_HEAP_H
 
 #include <bits/stdc++.h>
-#include "IHeap.h"
 
 template<typename T>
-class MinHeap : public Heap<T> {
+class Heap {
 public:
     using Comparator = std::function<bool(const T&, const T&)>;
 
-    MinHeap();
-    explicit MinHeap(size_t);
-    explicit MinHeap(Comparator&&);
-    MinHeap(size_t, Comparator&&);
-    explicit MinHeap(const std::vector<T>&);
-    explicit MinHeap(const std::vector<T>&, Comparator&&);
-    explicit MinHeap(std::vector<T>&&);
-    explicit MinHeap(std::vector<T>&&, Comparator&&);
-    ~MinHeap();
+    Heap();
+    explicit Heap(size_t);
+    explicit Heap(Comparator&&);
+    Heap(size_t, Comparator&&);
+    explicit Heap(const std::vector<T>&);
+    explicit Heap(const std::vector<T>&, Comparator&&);
+    explicit Heap(std::vector<T>&&);
+    explicit Heap(std::vector<T>&&, Comparator&&);
+    ~Heap();
 
-    MinHeap<T>& operator=(const std::vector<T>&);
-    MinHeap<T>& operator=(std::vector<T>&&);
-    void siftDown(size_t) override;
-    void siftUp(size_t) override;
-    void insert(const T&) override;
-    void insert(T&&) override;
+    Heap<T>& operator=(const std::vector<T>&);
+    Heap<T>& operator=(std::vector<T>&&);
+    void siftDown(size_t);
+    void siftUp(size_t);
+    void insert(const T&);
+    void insert(T&&);
 
     T extract();
 private:
@@ -44,75 +43,73 @@ private:
 };
 
 template<typename T>
-MinHeap<T>::MinHeap() : MinHeap(1e5) {};
+Heap<T>::Heap() : Heap(1e5) {};
 
 template<typename T>
-MinHeap<T>::MinHeap(Comparator&& comp) : MinHeap(1e5) {
+Heap<T>::Heap(Comparator&& comp) : Heap(1e5) {
     this->_comp = comp;
 };
 
 template<typename T>
-MinHeap<T>::MinHeap(size_t size) : _SIZE(0), _CAPACITY(size) {
+Heap<T>::Heap(size_t size) : _SIZE(0), _CAPACITY(size) {
     this->_store = new T[this->_CAPACITY];
 };
 
 template<typename T>
-MinHeap<T>::MinHeap(size_t size, Comparator&& comp) : MinHeap(size) {
+Heap<T>::Heap(size_t size, Comparator&& comp) : Heap(size) {
     this->_comp = comp;
 }
 
 template<typename T>
-MinHeap<T>::MinHeap(const std::vector<T>& v) : MinHeap(v.size()) {
+Heap<T>::Heap(const std::vector<T>& v) : Heap(v.size()) {
     for (const auto& el : v) this->insert(el);
 }
 
 template<typename T>
-MinHeap<T>::MinHeap(const std::vector<T>& v, Comparator&& comp) : MinHeap(v.size()) {
+Heap<T>::Heap(const std::vector<T>& v, Comparator&& comp) : Heap(v.size()) {
     this->_comp = comp;
     for (const auto& el : v) this->insert(el);
 };
 
 template<typename T>
-MinHeap<T>::MinHeap(std::vector<T>&& v) : MinHeap(v.size()) {
+Heap<T>::Heap(std::vector<T>&& v) : Heap(v.size()) {
     for (const auto& el : v) this->insert(el);
 }
 
 template<typename T>
-MinHeap<T>::MinHeap(std::vector<T>&& v, Comparator&& comp) : MinHeap(v.size()) {
+Heap<T>::Heap(std::vector<T>&& v, Comparator&& comp) : Heap(v.size()) {
     this->_comp = comp;
     for (const auto& el : v) this->insert(el);
 }
 
 template<typename T>
-MinHeap<T>::~MinHeap() {
+Heap<T>::~Heap() {
      delete[] this->_store;
 }
 
 template<typename T>
-MinHeap<T>& MinHeap<T>::operator=(const std::vector<T>& v) {
+Heap<T>& Heap<T>::operator=(const std::vector<T>& v) {
     for (const auto& el : v) this->insert(el);
 }
 
 template<typename T>
-MinHeap<T>& MinHeap<T>::operator=(std::vector<T>&& v) {
+Heap<T>& Heap<T>::operator=(std::vector<T>&& v) {
     for (const auto& el : v) this->insert(el);
 }
 
 template<typename T>
-void MinHeap<T>::siftDown(size_t pos) {
+void Heap<T>::siftDown(size_t pos) {
     while (2 * pos + 1 < this->_SIZE) {
         size_t leftChildIdx = 2 * pos + 1;
         size_t rightChildIdx = 2 * pos + 2;
 
         size_t temp = leftChildIdx;
 
-        // if (rightChildIdx < this->_SIZE && this->_store[rightChildIdx] < this->_store[leftChildIdx]) {
         if (rightChildIdx < this->_SIZE
             && this->_comp(this->_store[rightChildIdx], this->_store[leftChildIdx])) {
             temp = rightChildIdx;
         }
 
-        // if (this->_store[pos] <= this->_store[temp])
         if (this->_store[pos] == this->_store[temp] || this->_comp(this->_store[pos], this->_store[temp]))
             break;
 
@@ -122,8 +119,7 @@ void MinHeap<T>::siftDown(size_t pos) {
 }
 
 template<typename T>
-void MinHeap<T>::siftUp(size_t pos) {
-    // while (pos > 0 && this->_store[pos] < this->_store[(pos - 1) / 2]) {
+void Heap<T>::siftUp(size_t pos) {
     while (pos > 0
             && this->_comp(this->_store[pos], this->_store[(pos - 1) / 2])) {
         std::swap(this->_store[pos], this->_store[(pos - 1) / 2]);
@@ -132,7 +128,7 @@ void MinHeap<T>::siftUp(size_t pos) {
 }
 
 template<typename T>
-void MinHeap<T>::insert(const T& val) {
+void Heap<T>::insert(const T& val) {
     this->_ensureRanges(this->_SIZE);
 
     this->_store[this->_SIZE++] = val;
@@ -140,7 +136,7 @@ void MinHeap<T>::insert(const T& val) {
 }
 
 template<typename T>
-void MinHeap<T>::insert(T&& val) {
+void Heap<T>::insert(T&& val) {
     this->_ensureRanges(this->_SIZE);
 
     this->_store[this->_SIZE++] = val;
@@ -148,7 +144,7 @@ void MinHeap<T>::insert(T&& val) {
 }
 
 template<typename T>
-T MinHeap<T>::extract() {
+T Heap<T>::extract() {
     if (this->_SIZE == 0)
         throw std::runtime_error("Heap is empty");
 
@@ -159,7 +155,7 @@ T MinHeap<T>::extract() {
 }
 
 template<typename T>
-void MinHeap<T>::_ensureRanges(size_t pos) const {
+void Heap<T>::_ensureRanges(size_t pos) const {
     if (pos < 0 || pos >= this->_CAPACITY) {
         std::stringstream ss;
         ss << "Current size: " << this->_SIZE << ", requested position: " << pos;
@@ -167,4 +163,4 @@ void MinHeap<T>::_ensureRanges(size_t pos) const {
     }
 }
 
-#endif //INFORMATICS_MINHEAP_H
+#endif //INFORMATICS_HEAP_H

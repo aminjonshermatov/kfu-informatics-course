@@ -2,7 +2,7 @@
 // Created by aminjonshermatov on 10/20/2021.
 //
 
-#include "MinHeap.h"
+#include "Heap.h"
 
 #define all(x) begin(x), end(x)
 
@@ -19,7 +19,7 @@ int main() try {
         return a < b;
     });
 
-    MinHeap<ll> h_1;
+    Heap<ll> h_1;
 
     for (const auto& el : {7,1,90,7,3})
         h_1.insert(el);
@@ -34,7 +34,7 @@ int main() try {
         return lhs < rhs;
     };
 
-    MinHeap<int> h_2({4, 3, 1, 6, 8, 90}, left);
+    Heap<int> h_2({4, 3, 1, 6, 8, 90}, left);
 
     cout << "Heap 2, min:\n";
     for (ll i = 0; i < 6; ++i) {
@@ -42,7 +42,7 @@ int main() try {
     }
     cout << '\n';
 
-    MinHeap<int> h_3({4, 3, 1, 6, 8, 90}, [&](int lhs, int rhs) -> bool {
+    Heap<int> h_3({4, 3, 1, 6, 8, 90}, [&](int lhs, int rhs) -> bool {
         return lhs > rhs;
     });
     cout << "Heap 3, max:\n";

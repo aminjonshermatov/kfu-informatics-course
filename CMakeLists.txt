@@ -112,6 +112,5 @@ add_executable(
 add_executable(
         heap
         3_semester/heap/main.cpp
-        3_semester/heap/IHeap.h
-        3_semester/heap/MinHeap.h
+        3_semester/heap/Heap.h
 )
