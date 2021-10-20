@@ -29,7 +29,12 @@ int main() try {
     }
     cout << '\n';
 
-    MinHeap<int> h_2({4, 3, 1, 6, 8, 90}, [&](int lhs, int rhs) -> bool {
+    auto left = [&](int lhs, int rhs) -> bool {
+        return lhs < rhs;
+    };
+
+    MinHeap<int> h_2({4, 3, 1, 6, 8, 90}, left);
+    MinHeap<int> h_3({4, 3, 1, 6, 8, 90}, [&](int lhs, int rhs) -> bool {
         return lhs < rhs;
     });
 
