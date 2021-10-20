@@ -106,11 +106,14 @@ void MinHeap<T>::siftDown(size_t pos) {
 
         size_t temp = leftChildIdx;
 
-        if (rightChildIdx < this->_SIZE && this->_store[rightChildIdx] < this->_store[leftChildIdx]) {
+        // if (rightChildIdx < this->_SIZE && this->_store[rightChildIdx] < this->_store[leftChildIdx]) {
+        if (rightChildIdx < this->_SIZE
+            && this->_comp(this->_store[rightChildIdx], this->_store[leftChildIdx])) {
             temp = rightChildIdx;
         }
 
-        if (this->_store[pos] <= this->_store[temp])
+        // if (this->_store[pos] <= this->_store[temp])
+        if (this->_store[pos] == this->_store[temp] || this->_comp(this->_store[pos], this->_store[temp]))
             break;
 
         std::swap(this->_store[temp], this->_store[pos]);
@@ -120,7 +123,9 @@ void MinHeap<T>::siftDown(size_t pos) {
 
 template<typename T>
 void MinHeap<T>::siftUp(size_t pos) {
-    while (pos > 0 && this->_store[pos] < this->_store[(pos - 1) / 2]) {
+    // while (pos > 0 && this->_store[pos] < this->_store[(pos - 1) / 2]) {
+    while (pos > 0
+            && this->_comp(this->_store[pos], this->_store[(pos - 1) / 2])) {
         std::swap(this->_store[pos], this->_store[(pos - 1) / 2]);
         pos = (pos - 1) / 2;
     }

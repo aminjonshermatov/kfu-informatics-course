@@ -24,6 +24,7 @@ int main() try {
     for (const auto& el : {7,1,90,7,3})
         h_1.insert(el);
 
+    cout << "Heap 1, min:\n";
     for (ll i = 0; i < 5; ++i) {
          cout << h_1.extract() << ' ';
     }
@@ -34,13 +35,21 @@ int main() try {
     };
 
     MinHeap<int> h_2({4, 3, 1, 6, 8, 90}, left);
-    MinHeap<int> h_3({4, 3, 1, 6, 8, 90}, [&](int lhs, int rhs) -> bool {
-        return lhs < rhs;
-    });
 
+    cout << "Heap 2, min:\n";
     for (ll i = 0; i < 6; ++i) {
         cout << h_2.extract() << ' ';
     }
+    cout << '\n';
+
+    MinHeap<int> h_3({4, 3, 1, 6, 8, 90}, [&](int lhs, int rhs) -> bool {
+        return lhs > rhs;
+    });
+    cout << "Heap 3, max:\n";
+    for (ll i = 0; i < 6; ++i) {
+        cout << h_3.extract() << ' ';
+    }
+    cout << '\n';
 
     return 0;
 } catch(exception& ex) {
