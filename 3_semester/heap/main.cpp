@@ -31,11 +31,11 @@ int main() try {
 
     ExtractAndPrintHeap(h_1, HeapTypes::MIN);
 
-    auto left = [&](int lhs, int rhs) -> bool {
+    auto minHeapLambda = [&](int lhs, int rhs) -> bool {
         return lhs < rhs;
     };
 
-    Heap<int> h_2({4, 3, 1, 6, 8}, left);
+    Heap<int> h_2({4, 3, 1, 6, 8}, minHeapLambda);
     ExtractAndPrintHeap(h_2, HeapTypes::MIN);
 
     Heap<int> h_3({4, 3, 1, 6, 8, 90}, [&](int lhs, int rhs) -> bool {
@@ -44,6 +44,6 @@ int main() try {
     ExtractAndPrintHeap(h_3, HeapTypes::MAX);
 
     return 0;
-} catch(exception& ex) {
+} catch(const exception& ex) {
     cout << ex.what() << '\n';
 }
