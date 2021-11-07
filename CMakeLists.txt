@@ -114,3 +114,12 @@ add_executable(
         3_semester/heap/main.cpp
         3_semester/heap/Heap.h
 )
+
+add_executable(
+        linkedList
+        3_semester/linked_list/main.cpp
+        3_semester/linked_list/Node.h
+        3_semester/linked_list/Iterator.h
+        3_semester/linked_list/LinkedList.h
+        3_semester/linked_list/SorterLinkedList.h
+)
