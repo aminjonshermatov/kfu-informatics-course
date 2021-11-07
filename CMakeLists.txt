@@ -123,3 +123,12 @@ add_executable(
         3_semester/linked_list/LinkedList.h
         3_semester/linked_list/SorterLinkedList.h
 )
+
+add_executable(
+        my_string
+        3_semester/my_string/main.cpp
+        3_semester/my_string/MyString.h
+        3_semester/my_string/MyString.cpp
+        3_semester/my_string/MyStringIdentifier.h
+        3_semester/my_string/MyStringIdentifier.cpp
+)
