@@ -14,8 +14,6 @@ public:
 
     explicit SorterLinkedList(LinkedList<T>&);
     SorterLinkedList(LinkedList<T>&&) noexcept;
-//    SorterLinkedList<T>& operator=(LinkedList<T>&);
-//    SorterLinkedList<T>& operator=(LinkedList<T>&&) noexcept;
 
     SorterLinkedList(SorterLinkedList<T>&);
     SorterLinkedList(SorterLinkedList<T>&&) noexcept ;
@@ -86,30 +84,6 @@ SorterLinkedList<T>::SorterLinkedList(LinkedList<T>&& rhs) noexcept {
         ++it;
     }
 }
-
-//template<typename T>
-//SorterLinkedList<T> &SorterLinkedList<T>::operator=(LinkedList<T>& rhs) {
-//    auto it = rhs.iterator();
-//
-//    while (!it.isNull()) {
-//        _add(*it);
-//        ++it;
-//    }
-//
-//    return *this;
-//}
-//
-//template<typename T>
-//SorterLinkedList<T>& SorterLinkedList<T>::operator=(LinkedList<T>&& rhs) {
-//    auto it = rhs.iterator();
-//
-//    while (!it.isNull()) {
-//        _add(*it);
-//        ++it;
-//    }
-//
-//    return *this;
-//}
 
 template<typename T>
 SorterLinkedList<T>::SorterLinkedList(SorterLinkedList<T>& rhs) {
