@@ -15,10 +15,10 @@ public:
     MyStringIdentifier(char);
     MyStringIdentifier(const MyStringIdentifier&);
 
-    MyStringIdentifier& insert(size_t, size_t, char);
-    void push_back(char);
-    MyStringIdentifier& operator+=(const MyString&);
-    MyStringIdentifier& operator+=(const string&);
+    MyStringIdentifier& insert(size_t, size_t, char) override;
+    void push_back(char) override;
+    MyStringIdentifier& operator+=(const MyString&) override;
+    MyStringIdentifier& operator+=(const string&) override;
 private:
     bool _isValid(const string&);
     bool _isValid(const MyString&);

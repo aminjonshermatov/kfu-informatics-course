@@ -38,8 +38,8 @@ public:
     virtual void push_back(char);
     void pop_back();
 
-    MyString& operator+=(const MyString&);
-    MyString& operator+=(const string&);
+    virtual MyString& operator+=(const MyString&);
+    virtual MyString& operator+=(const string&);
 
     int compare(MyString&) const;
     int compare(string&) const;
