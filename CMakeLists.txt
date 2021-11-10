@@ -132,3 +132,13 @@ add_executable(
         3_semester/my_string/MyStringIdentifier.h
         3_semester/my_string/MyStringIdentifier.cpp
 )
+
+add_executable(
+        shapes
+        3_semester/shapes/main.cpp
+        3_semester/shapes/utils.h
+        3_semester/shapes/Shape.h
+        3_semester/shapes/Triangle.h
+        3_semester/shapes/Rectangle.h
+        3_semester/shapes/Circle.h
+)
