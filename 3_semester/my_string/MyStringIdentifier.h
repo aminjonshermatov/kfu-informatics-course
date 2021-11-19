@@ -27,7 +27,7 @@ private:
     inline bool isAlphabet(char);
     inline bool isNumber(char);
     const size_t _BLACK_LIST_SIZE = 11;
-    vector<char> _identifierBlackList = {'!', '?', '+', '-', '*', '/', '@', '#', '^', '(', ')'};
+    unordered_set<char> _identifierBlackList = {'!', '?', '+', '-', '*', '/', '@', '#', '^', '(', ')'};
 };
 
 

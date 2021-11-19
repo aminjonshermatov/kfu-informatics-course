@@ -27,9 +27,7 @@ MyStringIdentifier::MyStringIdentifier(string&& str) {
 }
 
 MyStringIdentifier::MyStringIdentifier(char ch) {
-    if (isNumber(ch)
-       || std::count(_identifierBlackList.begin(), _identifierBlackList.end(), ch) != 0
-    ) throw invalid_argument("");
+    if (isNumber(ch) || _identifierBlackList.count(ch) != 0) throw invalid_argument("");
 
     this->_capacity = 3;
     this->_size = 1;
@@ -39,7 +37,7 @@ MyStringIdentifier::MyStringIdentifier(char ch) {
 
 MyStringIdentifier::MyStringIdentifier(const MyStringIdentifier& msi) {
     this->_size = msi.size();
-    this->_capacity = max(this->_size, 3U);
+    this->_capacity = max(this->_size, size_t{3});
     this->_str = new char[this->_capacity];
 
     for (size_t i = 0; i < this->_size; ++i) {
@@ -136,7 +134,7 @@ void MyStringIdentifier::push_back(char ch) {
 }
 
 bool MyStringIdentifier::_isValid(char ch) {
-    return std::count(_identifierBlackList.begin(), _identifierBlackList.end(), ch) == 0;
+    return _identifierBlackList.count(ch) == 0;
 }
 
 MyStringIdentifier &MyStringIdentifier::operator+=(const MyString& my_str) {
