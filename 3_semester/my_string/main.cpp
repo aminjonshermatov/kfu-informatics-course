@@ -61,13 +61,9 @@ void TestStringIdentifier() {
     cout << "valid:\t" << msi2 << '\n';
 }
 
-void TestAll() {
-    TestMyString();
-    TestStringIdentifier();
-}
-
 int main() try {
-    TestAll();
+//    TestMyString();
+    TestStringIdentifier();
 } catch (exception& ex) {
     cerr << "Exception occurred:\t" << ex.what() << '\n';
 }

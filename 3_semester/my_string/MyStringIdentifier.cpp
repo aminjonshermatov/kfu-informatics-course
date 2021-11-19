@@ -60,8 +60,8 @@ bool MyStringIdentifier::_isValid(const string& str) {
     /**
      * Commas or blank spaces cannot be specified within an identifier.
      */
-    for (int i = 0; i < str.size(); ++i) {
-        if (str[i] == ' ' || str[i] == ',') return false;
+    for (const char i : str) {
+        if (i == ' ' || i == ',') return false;
     }
 
     /**
@@ -72,12 +72,7 @@ bool MyStringIdentifier::_isValid(const string& str) {
     /**
      * It should not contain any of: ['!', '?', '+', '-', '*', '/', '@', '#', '^', '(', ')']
      */
-    for (int i = 0; i < str.size(); ++i) {
-        if (!_isValid(str[i])) {
-            return false;
-        }
-    }
-    return true;
+    return all_of(str.begin(), str.end(), [&](char ch) -> bool { return _isValid(ch); });
 }
 
 bool MyStringIdentifier::_isValid(const MyString& my_str) {
@@ -124,12 +119,12 @@ bool MyStringIdentifier::isNumber(char ch) {
 }
 
 MyStringIdentifier &MyStringIdentifier::insert(size_t idx, size_t count, char ch) {
-    if (idx == 0 && isNumber(ch) || !_isValid(ch)) throw invalid_argument("");
+    if (idx == 0 && isNumber(ch) || !_isValid(ch)) throw invalid_argument(to_string(ch));
     return dynamic_cast<MyStringIdentifier&>(MyString::insert(idx, count, ch));
 }
 
 void MyStringIdentifier::push_back(char ch) {
-    if (!_isValid(ch) || (this->_size == 0 && isNumber(ch))) throw invalid_argument("");
+    if (!_isValid(ch) || (this->_size == 0 && isNumber(ch))) throw invalid_argument(string{ch});
     MyString::push_back(ch);
 }
 
@@ -143,6 +138,6 @@ MyStringIdentifier &MyStringIdentifier::operator+=(const MyString& my_str) {
 }
 
 MyStringIdentifier &MyStringIdentifier::operator+=(const string& str) {
-    if (!_isValid(str)) throw invalid_argument("");
+    if (!_isValid(str)) throw invalid_argument(str);
     return dynamic_cast<MyStringIdentifier &>(MyString::operator+=(str));
 }

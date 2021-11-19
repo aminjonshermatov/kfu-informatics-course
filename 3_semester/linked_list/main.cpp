@@ -59,11 +59,7 @@ void TestSortedLinkedList() {
     cout << sll;
 }
 
-void TestAll() {
-    TestLinkedList();
-    TestSortedLinkedList();
-}
-
 int main() {
-    TestAll();
+    TestLinkedList();
+//    TestSortedLinkedList();
 }
