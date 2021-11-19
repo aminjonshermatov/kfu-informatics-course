@@ -18,7 +18,7 @@ public:
     };
 
     double getArea() const override {
-        return _a * _b;
+        return static_cast<double>(_a * _b);
     }
 private:
     size_t _a, _b;
@@ -32,7 +32,7 @@ public:
     }
 
     double getArea() const override {
-        return _a * _a;
+        return static_cast<double>(_a * _a);
     }
 
 private:

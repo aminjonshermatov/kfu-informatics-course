@@ -59,7 +59,9 @@ void TestSortedLinkedList() {
     cout << sll;
 }
 
-int main() {
+int main() try {
     TestLinkedList();
 //    TestSortedLinkedList();
+} catch (exception& ex) {
+    cerr << "Exception occurred:\t" << ex.what() << '\n';
 }

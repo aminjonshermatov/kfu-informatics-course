@@ -11,8 +11,9 @@ using std::setprecision;
 using std::fixed;
 using std::vector;
 using std::max_element;
+using std::cerr;
 
-int main() {
+int main() try {
     vector<Shape*> shapes;
 
     ScaleneTriangle st(6, 7, 9);
@@ -62,4 +63,6 @@ int main() {
     });
 
     cout << "Shape with max area is " << (*shapeWithMaxArea)->getType() << "(area: " << (*shapeWithMaxArea)->getArea() << ")\n";
+} catch(exception& ex) {
+    cerr << "Exception occurred:\t" << ex.what() << '\n';
 }

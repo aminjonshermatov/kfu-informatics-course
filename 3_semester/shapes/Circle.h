@@ -16,7 +16,7 @@ public:
     }
 
     double getArea() const override {
-        return PI * _r * _r;
+        return PI * static_cast<double>(_r * _r);
     }
 
     static constexpr double PI = 3.141592653589793238462643383279502884197;

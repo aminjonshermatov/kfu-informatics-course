@@ -19,8 +19,8 @@ public:
     };
 
     double getArea() const override {
-        double p = (_a + _b + _c) / 2.0;
-        return sqrt(p * (p - _a) * (p - _b) * (p - _c));
+        double p = static_cast<double>(_a + _b + _c) / 2.0;
+        return sqrt(p * (p - static_cast<double>(_a)) * (p - static_cast<double>(_b)) * (p - static_cast<double>(_c)));
     };
 private:
     size_t _a, _b, _c;
