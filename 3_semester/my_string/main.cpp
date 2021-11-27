@@ -62,8 +62,8 @@ void TestStringIdentifier() {
 }
 
 int main() try {
-//    TestMyString();
-    TestStringIdentifier();
+    TestMyString();
+//    TestStringIdentifier();
 } catch (exception& ex) {
     cerr << "Exception occurred:\t" << ex.what() << '\n';
 }

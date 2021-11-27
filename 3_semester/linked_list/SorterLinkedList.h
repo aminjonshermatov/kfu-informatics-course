@@ -20,10 +20,10 @@ public:
     SorterLinkedList<T>& operator=(SorterLinkedList<T>&);
     SorterLinkedList<T>& operator=(SorterLinkedList<T>&&) noexcept ;
 
-    void add_after(const T&);
-    void add_after(T&&);
-    void add_before(const T&);
-    void add_before(T&&);
+    void add_after(const T&) override;
+    void add_after(T&&) override;
+    void add_before(const T&) override;
+    void add_before(T&&) override;
 private:
     void _add(const T&);
     void _add(T&&);
