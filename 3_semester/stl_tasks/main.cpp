@@ -174,7 +174,7 @@ void TestSynonyms() {
 }
 
 int main() {
-    //TestBusRoutes();
+    TestBusRoutes();
     //TestPeoplesQueue();
-    TestSynonyms();
+    //TestSynonyms();
 }

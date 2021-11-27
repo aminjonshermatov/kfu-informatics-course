@@ -33,7 +33,7 @@ public:
     PeoplesQueue() = default;
 
     void come(int k) {
-        while (k--) peoplesWorry.push_back(false);
+        peoplesWorry.insert(peoplesWorry.end(), k, false);
     }
 
     void leave(int k) {
