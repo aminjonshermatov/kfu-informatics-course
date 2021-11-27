@@ -74,7 +74,7 @@ int main() try {
                 cout << (*instruments[stoi(match[2]) - 1][stoi(match[3]) - 1]);
             }
         } else {
-            cout << "Unknown command" << '\n'
+            cout << "Unknown command: " << command << '\n'
                  << commands.str();
         }
     }
