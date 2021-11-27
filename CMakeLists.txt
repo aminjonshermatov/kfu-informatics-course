@@ -85,7 +85,7 @@ add_executable(
         3_semester/big_int/main.cpp
         3_semester/big_int/BigInt.h
         3_semester/big_int/BigInt.cpp
-)
+        3_semester/stl_tasks/main.cpp 3_semester/stl_tasks/bus_routes.h)
 
 add_executable(
         matrix
@@ -147,4 +147,20 @@ add_executable(
         music_shop
         3_semester/music_shop/main.cpp
         3_semester/music_shop/Instrument.h
-        3_semester/music_shop/Piano.h 3_semester/music_shop/Drum.h 3_semester/music_shop/Violin.h 3_semester/music_shop/Trumpet.h 3_semester/music_shop/Clarinet.h 3_semester/music_shop/Xylophone.h 3_semester/music_shop/Guitar.h 3_semester/music_shop/Accordion.h 3_semester/music_shop/Saxophone.h 3_semester/music_shop/Instrument.cpp)
+        3_semester/music_shop/Piano.h
+        3_semester/music_shop/Drum.h
+        3_semester/music_shop/Violin.h
+        3_semester/music_shop/Trumpet.h
+        3_semester/music_shop/Clarinet.h
+        3_semester/music_shop/Xylophone.h
+        3_semester/music_shop/Guitar.h
+        3_semester/music_shop/Accordion.h
+        3_semester/music_shop/Saxophone.h
+        3_semester/music_shop/Instrument.cpp
+)
+
+add_executable(
+        stl_tasks
+        3_semester/stl_tasks/main.cpp
+        3_semester/stl_tasks/bus_routes.h
+)
