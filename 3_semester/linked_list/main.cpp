@@ -61,7 +61,7 @@ void TestSortedLinkedList() {
 
 int main() try {
     TestLinkedList();
-//    TestSortedLinkedList();
+    TestSortedLinkedList();
 } catch (exception& ex) {
     cerr << "Exception occurred:\t" << ex.what() << '\n';
 }
