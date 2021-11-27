@@ -32,13 +32,13 @@ class BusRoutes {
 public:
     BusRoutes() = default;
 
-    void addBus(string& busName, vector<string>& _stops) {
+    void addBus(const string& busName, const vector<string>& _stops) {
         buses[busName] = _stops;
 
         for (const auto& stop : _stops) stops[stop].push_back(busName);
     }
 
-    void printBusesForStop(string& stop) const {
+    void printBusesForStop(const string& stop) const {
         if (stops.count(stop) == 0) {
             cout << "No stop";
         } else {
@@ -47,7 +47,7 @@ public:
         cout << '\n';
     }
 
-    void printStopsForBus(string& bus) const {
+    void printStopsForBus(const string& bus) const {
         if (buses.count(bus) == 0) {
             cout << "No bus";
         } else {

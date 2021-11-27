@@ -30,17 +30,18 @@ class Synonyms {
 public:
     Synonyms() = default;
 
-    void add(string& word1, string& word2) {
+    void add(const string& word1, const string& word2) {
         store[word1].insert(word2);
         store[word2].insert(word1);
     }
 
-    size_t synonymCount(string& word) {
-        return store[word].size();
+    size_t synonymCount(const string& word) const {
+        if (store.count(word) > 0) return store.at(word).size();
+        return 0;
     }
 
-    bool check(string& word1, string& word2) {
-        return store[word1].count(word2) > 0;
+    bool check(const string& word1, const string& word2) const {
+        return store.count(word1) > 0 && store.at(word1).count(word2) > 0;
     }
 
 private:
