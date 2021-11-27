@@ -164,4 +164,5 @@ add_executable(
         3_semester/stl_tasks/main.cpp
         3_semester/stl_tasks/bus_routes.h
         3_semester/stl_tasks/poples_queue.h
+        3_semester/stl_tasks/synonyms.h
 )

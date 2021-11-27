@@ -3,6 +3,7 @@
 //
 #include "bus_routes.h"
 #include "poples_queue.h"
+#include "synonyms.h"
 
 void TestBusRoutes() {
     /*
@@ -61,7 +62,7 @@ void TestBusRoutes() {
                 br.printAllBuses();
                 break;
             default:
-                cout << "Unknown command: " << command;
+                cout << "Unknown command: " << command << '\n';
         }
     }
 }
@@ -116,10 +117,64 @@ void TestPeoplesQueue() {
             case WORRY_COUNT:
                 pq.printWorryCount();
                 break;
+            default:
+                cout << "Unknown command: " << pqc << '\n';
+        }
+    }
+}
+
+void TestSynonyms() {
+    /*
+     * Input data
+    8
+    ADD program code
+    COUNT cipher
+    ADD code cipher
+    COUNT code
+    COUNT program
+    CHECK code program
+    CHECK program cipher
+    CHECK cpp java
+    */
+    Synonyms s;
+
+    int q;
+    cin >> q;
+
+    while (q--) {
+        SynonymsCommands sc;
+        cin >> sc;
+
+        switch (sc) {
+            case ADD: {
+                string word1, word2;
+                cin >> word1 >> word2;
+
+                s.add(word1, word2);
+                break;
+            }
+            case COUNT: {
+                string word;
+                cin >> word;
+
+                cout << s.synonymCount(word) << '\n';
+                break;
+            }
+            case CHECK: {
+                string word1, word2;
+                cin >> word1 >> word2;
+
+                cout << (s.check(word1, word2) ? "YES" : "NO") << '\n';
+                break;
+            }
+            default:
+                cout << "Unknown command: " << sc << '\n';
         }
     }
 }
 
 int main() {
-    TestPeoplesQueue();
+    //TestBusRoutes();
+    //TestPeoplesQueue();
+    TestSynonyms();
 }
