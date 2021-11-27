@@ -20,10 +20,8 @@
 #include "Drum.h"
 #include "Xylophone.h"
 
-int main() {
-    const unsigned int SIZE = 3;
-
-    array<array<Instrument*, SIZE>, SIZE> instruments{
+int main() try {
+    array<array<Instrument*, 3>, 3> instruments{
             {
                     {
                             new Trumpet(100, "TrumpetSound"),
@@ -53,8 +51,8 @@ int main() {
     stringstream instrumentList;
     instrumentList << "Instruments:" << '\n';
     for (const auto& line : instruments) {
-        for (const auto& ins : line) {
-            instrumentList << '\t' << setw(8) << left << ins->getName();
+        for (const auto& instrument : line) {
+            instrumentList << '\t' << setw(8) << left << instrument->getName();
         }
         instrumentList << '\n';
     }
@@ -80,4 +78,6 @@ int main() {
                  << commands.str();
         }
     }
+} catch (exception const& ex) {
+    cerr << ex.what();
 }
