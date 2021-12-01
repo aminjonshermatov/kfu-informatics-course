@@ -4,4 +4,4 @@
 
 #include "Instrument.h"
 
-Instrument::~Instrument() = default;;
+Instrument::~Instrument() = default;

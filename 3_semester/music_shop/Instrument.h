@@ -33,17 +33,17 @@ public:
 
     friend ostream& operator<<(ostream& out, const Instrument& ins) {
         return out << '\t' << "Name: " << ins.getName() << '\n'
-            << '\t' << "Price: " << ins.getPrice() << '$' << '\n'
-            << '\t' << "Sound: " << ins.getSound() << '\n';
+                   << '\t' << "Price: " << ins.getPrice() << '$' << '\n'
+                   << '\t' << "Sound: " << ins.getSound() << '\n';
     }
 
     virtual ~Instrument() = 0;
 
 protected:
-    string name;
-    float price;
-    string sound;
-    string uuid;
+    string name{};
+    float price{};
+    string sound{};
+    string uuid{};
 };
 
 

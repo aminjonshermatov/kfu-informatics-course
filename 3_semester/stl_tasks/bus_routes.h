@@ -71,7 +71,7 @@ public:
         if (buses.empty()) {
             cout << "No buses" << '\n';
         } else {
-            for (const auto& [bus, _stops] : buses) {
+            for (const auto &[bus, _stops] : buses) {
                 cout << "Bus " << bus << ": ";
 
                 for (const auto& stop : _stops) cout << stop << ' ';

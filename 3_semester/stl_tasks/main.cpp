@@ -1,6 +1,9 @@
 //
 // Created by aminjonshermatov on 11/27/2021.
 //
+
+#define __LOCAL__
+
 #include "bus_routes.h"
 #include "poples_queue.h"
 #include "synonyms.h"
@@ -174,6 +177,11 @@ void TestSynonyms() {
 }
 
 int main() {
+#ifdef __LOCAL__
+    freopen("../3_semester/stl_tasks/input.txt", "r", stdin);
+    freopen("../3_semester/stl_tasks/output.txt", "w", stdout);
+#endif
+
     TestBusRoutes();
     //TestPeoplesQueue();
     //TestSynonyms();

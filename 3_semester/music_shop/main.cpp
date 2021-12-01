@@ -57,6 +57,7 @@ int main() try {
         instrumentList << '\n';
     }
 
+    // greeting
     cout << "Hi friend. Welcome to the musical instruments shop." << '\n';
     cout << commands.str();
     while (true) {
