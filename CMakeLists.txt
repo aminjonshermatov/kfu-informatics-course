@@ -166,3 +166,10 @@ add_executable(
         3_semester/stl_tasks/poples_queue.h
         3_semester/stl_tasks/synonyms.h
 )
+
+add_executable(
+        array_listIterator
+        3_semester/array_list_Iterator/main.cpp
+        3_semester/array_list_Iterator/ArrayList.h
+        3_semester/array_list_Iterator/Iterator.h
+)
