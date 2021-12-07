@@ -173,3 +173,9 @@ add_executable(
         3_semester/array_list_Iterator/ArrayList.h
         3_semester/array_list_Iterator/Iterator.h
 )
+
+add_executable(
+        semester_tasks_2
+        3_semester/semester_task_2/main.cpp
+        3_semester/semester_task_2/Polynomial.h
+)
