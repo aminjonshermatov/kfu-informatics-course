@@ -184,12 +184,8 @@ public:
             if (polynomial.coefficient_[i] == 0) {
                 if (isFirst && i == 0) out << "0";
             } else {
-                if (!isFirst) {
-                    if (polynomial.coefficient_[i] > 0) out << '+';
-                }
-                else {
-                    isFirst = false;
-                }
+                if (!isFirst && polynomial.coefficient_[i] > 0) out << '+';
+                isFirst = false;
 
                 if (abs(polynomial.coefficient_[i]) == 1 && i != 0) {
                     if (polynomial.coefficient_[i] < 0) out << '-';
