@@ -204,6 +204,18 @@ public:
         return out;
     }
 
+    T operator()(const T& x) const {
+        T xPow = T{1},
+          res = T{0};
+
+        for (size_t i{0}; i <= n_; ++i) {
+            res += coefficient_[i] * xPow;
+            xPow *= x;
+        }
+
+        return res;
+    }
+
 private:
     void grow_(size_t newSize) {
         auto *newCoefficient = new T[newSize];
