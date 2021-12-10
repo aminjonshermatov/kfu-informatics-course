@@ -179,4 +179,6 @@ add_executable(
         3_semester/semester_task_2/main.cpp
         3_semester/semester_task_2/src/Polynomial.h
         3_semester/semester_task_2/test/TestPolynomial.h
+        3_semester/semester_task_2/src/Exponent.h
+        3_semester/semester_task_2/test/TestExponent.h
 )

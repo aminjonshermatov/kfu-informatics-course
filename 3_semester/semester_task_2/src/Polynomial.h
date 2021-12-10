@@ -41,10 +41,10 @@ public:
     }
 
     ~Polynomial() {
-        delete[] coefficient_;
+        // delete[] coefficient_;
     }
 
-    Polynomial<T> operator+(const Polynomial<T>& polynomial) {
+    Polynomial<T> operator+(const Polynomial<T>& polynomial) const {
         size_t maxPolynomial{max(n_, polynomial.n_)};
 
         Polynomial<T> result(-1);
@@ -61,7 +61,7 @@ public:
         return result;
     }
 
-    Polynomial<T> operator-(const Polynomial<T>& polynomial) {
+    Polynomial<T> operator-(const Polynomial<T>& polynomial) const {
         size_t maxPolynomial{max(n_, polynomial.n_)};
 
         Polynomial<T> result(-1);
@@ -78,7 +78,7 @@ public:
         return result;
     }
 
-    Polynomial<T> operator*(const Polynomial<T>& polynomial) {
+    Polynomial<T> operator*(const Polynomial<T>& polynomial) const {
         size_t maxPolynomial{n_ + polynomial.n_};
 
         Polynomial<T> result(-1);
@@ -96,7 +96,7 @@ public:
         return result;
     }
 
-    Polynomial<T> operator+=(const Polynomial<T>& polynomial) {
+    Polynomial<T>& operator+=(const Polynomial<T>& polynomial) {
         size_t maxPolynomial{max(n_, polynomial.n_)};
 
         if (n_ < maxPolynomial) grow_(maxPolynomial);
@@ -108,7 +108,7 @@ public:
         return *this;
     }
 
-    Polynomial<T> operator-=(const Polynomial<T>& polynomial) {
+    Polynomial<T>& operator-=(const Polynomial<T>& polynomial) {
         size_t maxPolynomial{max(n_, polynomial.n_)};
 
         if (n_ < maxPolynomial) grow_(maxPolynomial);
@@ -120,7 +120,7 @@ public:
         return *this;
     }
 
-    Polynomial<T> operator*=(const Polynomial<T>& polynomial) {
+    Polynomial<T>& operator*=(const Polynomial<T>& polynomial) {
         size_t maxPolynomial{n_ + polynomial.n_};
 
         Polynomial<T> temp(-1);
@@ -153,7 +153,7 @@ public:
         return *this;
     }
 
-    bool operator==(const Polynomial<T>& polynomial) {
+    bool operator==(const Polynomial<T>& polynomial) const {
         if (this == &polynomial) return true;
 
         if (n_ != polynomial.n_) return false;
@@ -165,7 +165,7 @@ public:
         return true;
     }
 
-    bool operator!=(const Polynomial<T>& polynomial) {
+    bool operator!=(const Polynomial<T>& polynomial) const {
         if (this == &polynomial) return false;
 
         if (n_ != polynomial.n_) return true;
@@ -216,9 +216,18 @@ public:
         return res;
     }
 
+    inline int getMaxNonZeroPow_() const {
+        int idx{static_cast<int>(n_)};
+        for (; idx >= 0; --idx) {
+            if (coefficient_[idx] != 0) break;
+        }
+
+        return idx;
+    }
+
 private:
     void grow_(size_t newSize) {
-        auto *newCoefficient = new T[newSize];
+        auto *newCoefficient = new T[newSize + 1];
 
         for (size_t i{0}; i <= newSize; ++i) {
             newCoefficient[i] = 0;

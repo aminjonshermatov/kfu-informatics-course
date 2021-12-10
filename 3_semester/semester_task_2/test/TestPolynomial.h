@@ -5,6 +5,10 @@
 #ifndef INFORMATICS_TESTPOLYNOMIAL_H
 #define INFORMATICS_TESTPOLYNOMIAL_H
 
+#include "bits/stdc++.h"
+
+using namespace std;
+
 void TestPolynomial() {
     {
         // (10)
@@ -13,7 +17,7 @@ void TestPolynomial() {
         Polynomial<> polynomial2({2,3,4});
 
         {
-            // (2x^2+3x+14)
+            // (10) + (2x^2+3x+4) = (2x^2+3x+14)
             assert(((polynomial1 + polynomial2) == Polynomial<>{2, 3, 14}));
 
             assert((polynomial1 == Polynomial<>{10}));
