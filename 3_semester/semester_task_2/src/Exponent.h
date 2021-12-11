@@ -14,7 +14,7 @@ public:
     explicit Exponent(T c)
     : s_{polynomial_t_{c}} {}
 
-    Exponent(initializer_list<T> coeff)
+    explicit Exponent(vector<T> coeff)
     : s_{polynomial_t_{coeff}} {}
 
     Exponent(const Exponent<T>& exponent)
@@ -81,8 +81,12 @@ public:
         return pow<double>(E, powRes);
     }
 
-    template<class U>
-    friend ostream& operator<<(ostream& out, const Exponent<U>& exponent) {
-        return cout << "e^(" << exponent.s_ << ')';
+    friend ostream& operator<<(ostream& out, const Exponent<T>& exponent) {
+        int idx = exponent.s_.lastNonZeroIdx_();
+
+        if (idx == -1) return out << 1;
+        if (idx == 0 && exponent.s_[idx] == 1) return out << "e";
+        if (idx == 0 && exponent.s_[idx] == -1) return out << "e^(-1)";
+        return out << "e^(" << exponent.s_ << ')';
     }
 };

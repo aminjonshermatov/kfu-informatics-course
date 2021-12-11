@@ -23,7 +23,7 @@ public:
         coefficient_[0] = c;
     }
 
-    Polynomial(initializer_list<T> coeff) {
+    explicit Polynomial(vector<T> coeff) {
         if (coeff.size() < 1) throw invalid_argument("Array of coefficients must be non-zero.");
 
         n_ = coeff.size() - 1;
@@ -177,8 +177,7 @@ public:
         return false;
     }
 
-    template<class U>
-    friend ostream& operator<<(ostream& out, const Polynomial<U>& polynomial) {
+    friend ostream& operator<<(ostream& out, const Polynomial<T>& polynomial) {
         bool isFirst = true;
         for (int i{static_cast<int>(polynomial.n_)}; i >= 0; --i) {
             if (polynomial.coefficient_[i] == 0) {
@@ -216,13 +215,18 @@ public:
         return res;
     }
 
-    inline int getMaxNonZeroPow_() const {
-        int idx{static_cast<int>(n_)};
-        for (; idx >= 0; --idx) {
-            if (coefficient_[idx] != 0) break;
+    inline int lastNonZeroIdx_() const {
+        int i;
+
+        for (i = n_; i >= 0; --i) {
+            if (coefficient_[i] != T{0}) break;
         }
 
-        return idx;
+        return i;
+    }
+
+    int operator[](int idx) const {
+        return coefficient_[idx];
     }
 
 private:
