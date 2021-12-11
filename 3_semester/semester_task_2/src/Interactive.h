@@ -72,25 +72,25 @@ class InterActive {
 public:
     InterActive() {
         commands_ << "Commands:" << '\n'
-                 << '\t' << R"(Enter '\new {varName} {exp|pol} {template} {...parameters}' - create/store variable.)" << '\n'
-                 << '\t' << '\t' << R"(- {varName} - unique key name of variable.)" << '\n'
-                 << '\t' << '\t' << R"(- {exp|pol} - indicates type of variable Exponent either Polynomial/)" << '\n'
-                 << '\t' << '\t' << R"(- {template} - template type of {int|double|float|long}.)" << '\n'
-                 << '\t' << '\t' << R"(- {...parameters} - constructor parameters.)" << '\n'
-                 << '\t' << R"(Enter '\expression {varName1} {operation} {varName2}' - to do some computation.)" << '\n'
-                 << '\t' << '\t' << R"(- {varName1} - left hand side of expression. Note varName1 must be created before use.)" << '\n'
-                 << '\t' << '\t' << R"(- {operation})" << '\n'
-                 << '\t' << '\t' << '\t' << R"(- for Exponent it can be {'*', '/', '*=', '/=', '==', '!='}.)" << '\n'
-                 << '\t' << '\t' << '\t' << R"(- for Polynomial it can be {'+', '-', '*', '+=', '-=', '*=', '==', '!='}.)" << '\n'
-                 << '\t' << '\t' << R"(- {varName2} - right hand side of expression. Note varName2 must be created before use.)" << '\n'
-                 << '\t' << R"(Enter '\inverse {expVarName}' - to inverse exponent variable.)" << '\n'
-                 << '\t' << '\t' << R"(- {expVarName} - name of variable that before created.)" << '\n'
-                 << '\t' << R"(Enter '\calc {expVarName}({point})' - calculate expression value at given point.)" << '\n'
-                 << '\t' << '\t' << R"(- {expVarName} - name of variable that before created.)" << '\n'
-                 << '\t' << '\t' << R"(- {point} - point at which the value will calculated.)" << '\n'
-                 << '\t' << R"(Enter '\print {expVarName}' to print variable.)" << '\n'
-                 << '\t' << '\t' << R"(- {expVarName} - name of variable that before created.)" << '\n'
-                 << '\t' << "Enter '\\exit' - to exit from program." << '\n';
+                  << '\t' << R"(Enter '\new {varName} {exp|pol} {template} {...parameters}' - create/store variable.)" << '\n'
+                  << '\t' << '\t' << R"(- {varName} - unique key name of variable.)" << '\n'
+                  << '\t' << '\t' << R"(- {exp|pol} - indicates type of variable Exponent either Polynomial/)" << '\n'
+                  << '\t' << '\t' << R"(- {template} - template type of {int|double|float|long}.)" << '\n'
+                  << '\t' << '\t' << R"(- {...parameters} - constructor parameters.)" << '\n'
+                  << '\t' << R"(Enter '\expression {varName1} {operation} {varName2}' - to do some computation.)" << '\n'
+                  << '\t' << '\t' << R"(- {varName1} - left hand side of expression. Note varName1 must be created before use.)" << '\n'
+                  << '\t' << '\t' << R"(- {operation})" << '\n'
+                  << '\t' << '\t' << '\t' << R"(- for Exponent it can be {'*', '/', '*=', '/=', '==', '!='}.)" << '\n'
+                  << '\t' << '\t' << '\t' << R"(- for Polynomial it can be {'+', '-', '*', '+=', '-=', '*=', '==', '!='}.)" << '\n'
+                  << '\t' << '\t' << R"(- {varName2} - right hand side of expression. Note varName2 must be created before use.)" << '\n'
+                  << '\t' << R"(Enter '\inverse {expVarName}' - to inverse exponent variable.)" << '\n'
+                  << '\t' << '\t' << R"(- {expVarName} - name of variable that before created.)" << '\n'
+                  << '\t' << R"(Enter '\calc {expVarName}({point})' - calculate expression value at given point.)" << '\n'
+                  << '\t' << '\t' << R"(- {expVarName} - name of variable that before created.)" << '\n'
+                  << '\t' << '\t' << R"(- {point} - point at which the value will calculated.)" << '\n'
+                  << '\t' << R"(Enter '\print {expVarName}' to print variable.)" << '\n'
+                  << '\t' << '\t' << R"(- {expVarName} - name of variable that before created.)" << '\n'
+                  << '\t' << "Enter '\\exit' - to exit from program." << '\n';
     }
 
     void run() {
@@ -103,20 +103,20 @@ public:
 
             smatch match;
             if (regex_search(line, match, newReg_)) {
-                string varName = match[1];
-                string classType = match[2];
-                string templateType = match[3];
+                string varName = match.str(1);
+                string classType = match.str(2);
+                string templateType = match.str(3);
 
                 if (classType == "exp") {
-                    if (templateType == "int") createNew<int>(varName, read_list_<int>(match.str(4)), ClassType::EXPONENT);
-                    if (templateType == "double") createNew<double>(varName, read_list_<double>(match.str(4)), ClassType::EXPONENT);
-                    if (templateType == "float") createNew<float>(varName, read_list_<float>(match.str(4)), ClassType::EXPONENT);
-                    if (templateType == "long") createNew<long>(varName, read_list_<long>(match.str(4)), ClassType::EXPONENT);
+                    if (templateType == "int")      createNew<int>(varName, read_list_<int>(match.str(4)), ClassType::EXPONENT);
+                    if (templateType == "double")   createNew<double>(varName, read_list_<double>(match.str(4)), ClassType::EXPONENT);
+                    if (templateType == "float")    createNew<float>(varName, read_list_<float>(match.str(4)), ClassType::EXPONENT);
+                    if (templateType == "long")     createNew<long>(varName, read_list_<long>(match.str(4)), ClassType::EXPONENT);
                 } else {
-                    if (templateType == "int") createNew<int>(varName, read_list_<int>(match.str(4)), ClassType::POLYNOMIAL);
-                    if (templateType == "double") createNew<double>(varName, read_list_<double>(match.str(4)), ClassType::POLYNOMIAL);
-                    if (templateType == "float") createNew<float>(varName, read_list_<float>(match.str(4)), ClassType::POLYNOMIAL);
-                    if (templateType == "long") createNew<long>(varName, read_list_<long>(match.str(4)), ClassType::POLYNOMIAL);
+                    if (templateType == "int")      createNew<int>(varName, read_list_<int>(match.str(4)), ClassType::POLYNOMIAL);
+                    if (templateType == "double")   createNew<double>(varName, read_list_<double>(match.str(4)), ClassType::POLYNOMIAL);
+                    if (templateType == "float")    createNew<float>(varName, read_list_<float>(match.str(4)), ClassType::POLYNOMIAL);
+                    if (templateType == "long")     createNew<long>(varName, read_list_<long>(match.str(4)), ClassType::POLYNOMIAL);
                 }
 
                 cout << varName << " successfully created" << '\n';
@@ -384,9 +384,9 @@ public:
                         using T = decay_t<decltype(arg)>;
 
                         if constexpr (is_same_v<T, Exponent<int>*>
-                                    || is_same_v<T, Exponent<double>*>
-                                    || is_same_v<T, Exponent<float>*>
-                                    || is_same_v<T, Exponent<long>*>) {
+                                   || is_same_v<T, Exponent<double>*>
+                                   || is_same_v<T, Exponent<float>*>
+                                   || is_same_v<T, Exponent<long>*>) {
                             cout << arg->inverse() << '\n';
                         } else {
                             cout << "Invalid variable type polynomial cannot be inversed" << '\n';
@@ -404,11 +404,11 @@ public:
 
                         if constexpr (is_same_v<T, Exponent<int>*> || is_same_v<T, Polynomial<int>*>) {
                             cout << (*arg)(stoi(match.str(2))) << '\n';
-                        } else if (is_same_v<T, Exponent<double>*> || is_same_v<T, Polynomial<double>*>) {
+                        } else if constexpr (is_same_v<T, Exponent<double>*> || is_same_v<T, Polynomial<double>*>) {
                             cout << (*arg)(stod(match.str(2))) << '\n';
-                        } else if (is_same_v<T, Exponent<float>*> || is_same_v<T, Polynomial<float>*>) {
+                        } else if constexpr (is_same_v<T, Exponent<float>*> || is_same_v<T, Polynomial<float>*>) {
                             cout << (*arg)(stof(match.str(2))) << '\n';
-                        } else if (is_same_v<T, Exponent<long>*> || is_same_v<T, Polynomial<long>*>) {
+                        } else if constexpr (is_same_v<T, Exponent<long>*> || is_same_v<T, Polynomial<long>*>) {
                             cout << (*arg)(stol(match.str(2))) << '\n';
                         } else {
                             cout << "Invalid variable type" << '\n';
@@ -420,7 +420,9 @@ public:
                     cout << "Before you haven't created variable with name " << match.str(1) << '\n';
                     continue;
                 } else {
-                    visit([](auto&& arg){ cout << *arg << '\n'; }, storage_[match.str(1)]);
+                    visit([](auto&& arg){
+                        cout << *arg << '\n';
+                    }, storage_[match.str(1)]);
                     continue;
                 }
             } else if (regex_search(line, match, exitReg_)) {
