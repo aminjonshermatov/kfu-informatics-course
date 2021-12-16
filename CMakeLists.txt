@@ -100,7 +100,6 @@ add_executable(
         3_semester/maze/Stack.h
         3_semester/maze/Maze.h
         3_semester/maze/Maze.cpp
-        3_semester/maze/shared.h
 )
 
 add_executable(

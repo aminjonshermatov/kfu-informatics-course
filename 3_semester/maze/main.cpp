@@ -8,13 +8,13 @@ int main() try {
     freopen("../3_semester/maze/input.txt", "r", stdin);
     freopen("../3_semester/maze/output.txt", "w", stdout);
 
-    auto* maze = new Maze(std::cin);
+    auto maze = Maze(std::cin);
 
-    maze->setStartPoint(0, 0);
-    maze->showMap();
-    maze->findPath();
-    maze->showSol();
+    maze.setStartPoint(0, 0);
+    maze.showMap();
+    maze.findPath();
+    maze.showSol();
     return 0;
 } catch(std::runtime_error& re) {
-    std::cout << "Exception occurred:\t" << re.what() << "\n";
+    std::cout << "Exception occurred:\t" << re.what() << '\n';
 }

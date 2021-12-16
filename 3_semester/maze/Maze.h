@@ -5,7 +5,7 @@
 #ifndef INFORMATICS_MAZE_H
 #define INFORMATICS_MAZE_H
 
-#include "shared.h"
+#include "bits/stdc++.h"
 #include "Stack.h"
 
 class Maze {
@@ -27,7 +27,7 @@ private:
     size_t _mapH, _mapW, _s_x, _s_y, _f_x, _f_y;
     bool** _visited;
 
-    Stack<pll>* _sol;
+    Stack<std::pair<int, int>>* _sol;
 };
 
 

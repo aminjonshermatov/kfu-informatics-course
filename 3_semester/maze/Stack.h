@@ -5,7 +5,7 @@
 #ifndef INFORMATICS_STACK_H
 #define INFORMATICS_STACK_H
 
-#include "shared.h"
+#include "bits/stdc++.h"
 
 class Maze;
 
@@ -43,82 +43,85 @@ private:
 };
 
 template <typename T>
-Stack<T>::Node::Node(T val) : Node(val, nullptr) {}
+Stack<T>::Node::Node(T val)
+: Node(val, nullptr) {}
 
 template <typename T>
-Stack<T>::Node::Node(T val, Node* n) : value(val), next(n) {}
+Stack<T>::Node::Node(T val, Node* n)
+: value{val}
+, next{n} {}
 
 template <typename T>
 bool Stack<T>::Node::hasNext() {
-    return this->next != nullptr;
+    return next != nullptr;
 }
 
 template <typename T>
 T Stack<T>::Node::getValue() {
-    return this->value;
+    return value;
 }
 
 template <typename T>
-Stack<T>::Stack() : _size(0), _top(nullptr) {}
+Stack<T>::Stack()
+: _size{0}
+, _top{nullptr} {}
 
 template <typename T>
-Stack<T>::Stack(T val) : _size(0), _top(nullptr) {
-    this->push(val);
+Stack<T>::Stack(T val)
+: _size{0}
+, _top{nullptr} {
+    push(val);
 }
 
 template <typename T>
 Stack<T>::~Stack<T>() {
-    this->clear();
+    clear();
 }
 
 template <typename T>
 void Stack<T>::push(T val) {
-    if (this->_size == 0) {
-        this->_top = new Node(val);
+    if (_size == 0) {
+        _top = new Node(val);
     } else {
-        this->_top = new Node(val, this->_top);
+        _top = new Node(val, _top);
     }
 
-    ++this->_size;
+    ++_size;
 }
 
 template <typename T>
 T Stack<T>::top() const {
-    if (this->_size == 0) {
-        throw std::runtime_error("Stack is empty");
-    }
+    if (_size == 0) throw std::runtime_error("Stack is empty");
 
-    return this->_top->getValue();
+    return _top->getValue();
 }
 
 template <typename T>
 T Stack<T>::pop() {
-    if (this->_size == 0) {
-        throw std::runtime_error("Stack is empty");
-    }
+    if (_size == 0) throw std::runtime_error("Stack is empty");
 
-    auto* temp = this->_top;
+    auto* temp = _top;
     T res = temp->getValue();
 
-    this->_top = this->_top->next;
+    _top = _top->next;
 
     delete temp;
-    --this->_size;
+    --_size;
 
     return res;
 }
 
 template <typename T>
 bool Stack<T>::isEmpty() {
-    return this->_size == 0;
+    return _size == 0;
 }
 
 template <typename T>
 void Stack<T>::clear() {
-    if (this->_size > 0) {
-        while (this->_top != nullptr) {
-            auto* temp = this->_top;
-            this->_top = this->_top->next;
+    if (_size > 0) {
+        while (_top != nullptr) {
+            auto* temp = _top;
+            _top = _top->next;
             delete temp;
         }
     }
@@ -129,11 +132,11 @@ std::ostream& operator<<(std::ostream& os, const Stack<T>& s) {
     auto* temp = s._top;
 
     while (temp != nullptr) {
-        os << "(" << temp->getValue().first << ", " << temp->getValue().second << ") ";
+        os << '(' << temp->getValue().first << ", " << temp->getValue().second << ") ";
         temp = temp->next;
     }
 
-    return os << "\n";
+    return os << '\n';
 }
 
 #endif //INFORMATICS_STACK_H
