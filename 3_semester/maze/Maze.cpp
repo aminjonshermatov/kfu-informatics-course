@@ -31,13 +31,13 @@ Maze::Maze(std::istream& is)
 }
 
 Maze::Maze(char ** map, size_t h, size_t w)
-    : _mapH{h}
-    , _mapW{w}
-    , _s_x{0}
-    , _s_y{0}
-    , _f_x{w - 1}
-    , _f_y{h - 1}
-    , _sol{new Stack<std::pair<int, int>>()} {
+: _mapH{h}
+, _mapW{w}
+, _s_x{0}
+, _s_y{0}
+, _f_x{w - 1}
+, _f_y{h - 1}
+, _sol{new Stack<std::pair<int, int>>()} {
     _map = new char*[_mapH];
     _visited = new bool*[_mapH];
 
