@@ -71,6 +71,8 @@ T Stack<T>::pop() {
         this->_size--;
         return result;
     }
+
+    return T{};
 }
 
 template<class T>
@@ -78,7 +80,7 @@ T Stack<T>::top() {
     if (this->getSize() > 0)
         return this->_tail->getData();
 
-    return NULL;
+    return T{};
 }
 
 template<class T>

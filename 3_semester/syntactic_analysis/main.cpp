@@ -11,14 +11,12 @@ int main() try {
 #if (IS_INPUT_FROM_FILE || IS_LOG_TO_FILE)
     const str baseUrl = "../3_semester/syntactic_analysis";
 #endif
-
+    Logger* logger;
 #if IS_LOG_TO_FILE
-    auto* logger = new Logger(new std::ofstream(baseUrl + "/log.txt"));
+    logger = new Logger(new std::ofstream(baseUrl + "/log.txt"));
 #else
-    auto* logger = new Logger(&std::cout);
+    logger = new Logger(&std::cout);
 #endif
-
-
 
     auto* sa = new SyntacticAnalyzer<int>(1, logger);
 

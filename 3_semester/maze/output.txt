@@ -1,13 +1,6 @@
 Map:
      0 1 1 1 
      0 0 1 0 
-     1 0 1 0 
+     1 1 1 0 
      1 0 0 0 
-
-Start point:	(0, 0)
-Finish point:	(3, 3)
-Solution:
-     * 1 1 1 
-     * * 1 0 
-     1 * 1 0 
-     1 * * * 
+Exception occurred:	Maze hasn't path to finish

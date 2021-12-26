@@ -27,21 +27,21 @@ private:
 
 template<class T>
 List<T>::List(T data)
-        : _data(data),
-          _prev(nullptr),
-          _next(nullptr) { }
+: _data(data)
+, _prev(nullptr)
+, _next(nullptr) { }
 
 template<class T>
 List<T>::List(T data, List<T>* prev)
-        : _data(data),
-          _prev(prev),
-          _next(nullptr) { }
+: _data(data)
+, _prev(prev)
+, _next(nullptr) { }
 
 template<class T>
 List<T>::List(T data, List<T>* prev, List<T>* next)
-        : _data(data),
-          _prev(prev),
-          _next(next) { }
+: _data(data)
+, _prev(prev)
+, _next(next) { }
 
 template<class T>
 void List<T>::setData(T data) {

@@ -9,7 +9,7 @@
 
 class Logger {
 public:
-    Logger(std::ostream*);
+    explicit Logger(std::ostream*);
 
     enum LogType { WARNING, ERROR };
 
@@ -24,7 +24,7 @@ public:
 private:
     std::ostream* _out;
 
-    inline str getLabel(LogType);
+    static inline str getLabel(LogType);
 };
 
 

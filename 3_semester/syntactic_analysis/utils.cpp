@@ -16,7 +16,7 @@ ui utils::fromCharToInt(const char &ch) {
     if (!utils::isNumber(ch))
         throw excep("Couldn't convert non-int char to int");
 
-    return (int)ch - 48;
+    return ch - '0';
 }
 
 ui utils::stoi(const str& s) {

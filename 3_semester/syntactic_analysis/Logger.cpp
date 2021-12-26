@@ -5,20 +5,20 @@
 #include "Logger.h"
 
 Logger::Logger(std::ostream *out)
-    : _out(out) { }
+: _out(out) { }
 
 Logger Logger::operator()(Logger::LogType logType) {
-    *this->_out << "[" << this->getLabel(logType) << "]:\t";
+    *this->_out << "[" << Logger::getLabel(logType) << "]:\t";
     return *this;
 }
 
 Logger Logger::operator()(Logger::LogType logType, int line) {
-    *this->_out << "[" << this->getLabel(logType) << "] line " << line << ":\t";
+    *this->_out << "[" << Logger::getLabel(logType) << "] line " << line << ":\t";
     return *this;
 }
 
 Logger Logger::operator()(Logger::LogType logType, int line, int charAt) {
-    *this->_out << "[" << this->getLabel(logType) << "] line " << line << ", character at " << charAt << ":\t";
+    *this->_out << "[" << Logger::getLabel(logType) << "] line " << line << ", character at " << charAt << ":\t";
     return *this;
 }
 

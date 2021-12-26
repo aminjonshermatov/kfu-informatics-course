@@ -13,7 +13,7 @@
 template<class T>
 class SyntacticAnalyzer {
 public:
-    SyntacticAnalyzer(int identifierLen);
+    explicit SyntacticAnalyzer(int identifierLen);
     SyntacticAnalyzer(int identifierLen, Logger* logger);
     SyntacticAnalyzer(int identifierLen, Logger* logger, const uMapChI& customPriority);
     ~SyntacticAnalyzer();
@@ -33,25 +33,25 @@ private:
     void computeLast();
     void computeStack();
     void computeStack(char ch);
-    str removeWhiteSpaces(std::istream* in);
+    str removeWhiteSpaces(std::istream*);
     void clearData();
 };
 
 
 template<class T>
 SyntacticAnalyzer<T>::SyntacticAnalyzer(int identifierLen)
-        : _identifierLen(identifierLen),
-        _logger(new Logger(&std::cout)) { }
+: _identifierLen(identifierLen)
+, _logger(new Logger(&std::cout)) { }
 
 template<class T>
 SyntacticAnalyzer<T>::SyntacticAnalyzer(int identifierLen, Logger *logger)
-        : _identifierLen(identifierLen),
-        _logger(logger) { }
+: _identifierLen(identifierLen)
+, _logger(logger) { }
 
 template<class T>
 SyntacticAnalyzer<T>::SyntacticAnalyzer(int identifierLen, Logger* logger, const uMapChI& customPriority)
-        : _identifierLen(identifierLen),
-        _logger(new Logger(&std::cout)) {
+: _identifierLen(identifierLen)
+, _logger(new Logger(&std::cout)) {
     SyntacticAnalyzer<T>::operationsPriority = customPriority;
 }
 
@@ -77,7 +77,7 @@ uMapVar<T> SyntacticAnalyzer<T>::analyse(std::istream* in) {
 
     str removedWs = this->removeWhiteSpaces(in);
 
-    (*this->_logger) << "\nGiven expression:\t" << removedWs << "\n";
+    (*this->_logger) << '\n' << "Given expression:" << '\t' << removedWs << '\n';
 
     for (int i = 0; i < removedWs.size(); ++i) {
         charAt++;
@@ -86,15 +86,13 @@ uMapVar<T> SyntacticAnalyzer<T>::analyse(std::istream* in) {
         if (isBeforeAssigning) {
             if (utils::isString(ch)) {
                 if (cur.size() == this->_identifierLen)
-                    (*this->_logger)(Logger::ERROR, line, charAt) << "Identifier length is great than limit expected " << this->_identifierLen << "\n";
+                    (*this->_logger)(Logger::ERROR, line, charAt) << "Identifier length is great than limit expected " << this->_identifierLen << '\n';
 
                 cur.push_back(ch);
-            }
-            else if (utils::isNumber(ch)) {
+            } else if (utils::isNumber(ch)) {
                 cur.push_back(ch);
-                (*this->_logger)(Logger::ERROR, line, charAt) << "Identifier should not contain number\n";
-            }
-            else if (i + 1 < removedWs.size() && removedWs[i] == ':' && removedWs[i + 1] == '=') {
+                (*this->_logger)(Logger::ERROR, line, charAt) << "Identifier should not contain number" << '\n';
+            } else if (i + 1 < removedWs.size() && removedWs[i] == ':' && removedWs[i + 1] == '=') {
                 if (!cur.empty()) {
                     this->_vars.insert({cur, NULL});
                     this->_lastInsertedKeyVar = cur;
@@ -103,9 +101,9 @@ uMapVar<T> SyntacticAnalyzer<T>::analyse(std::istream* in) {
                     ++i;
                     ++charAt;
                 } else
-                    (*this->_logger)(Logger::ERROR, line, charAt) << "Identifier must be non-empty string\n";
+                    (*this->_logger)(Logger::ERROR, line, charAt) << "Identifier must be non-empty string" << '\n';
             } else
-                (*this->_logger)(Logger::ERROR, line, charAt) << "Unexpected character '" << ch << "' before equal symbol\n";
+                (*this->_logger)(Logger::ERROR, line, charAt) << "Unexpected character '" << ch << "' before equal symbol" << '\n';
         } else {
             if (utils::isArithOperation(ch)) {
                 if (!cur.empty()) {
@@ -115,12 +113,10 @@ uMapVar<T> SyntacticAnalyzer<T>::analyse(std::istream* in) {
                         curNumberSign = 1;
                     }
                     else {
-                        auto find = this->_vars.find(cur);
-
-                        if (find == this->_vars.end())
-                            (*this->_logger)(Logger::ERROR, line, charAt) << "Undefined identifier\n";
+                        if (this->_vars.count(cur) == 0)
+                            (*this->_logger)(Logger::ERROR, line, charAt) << "Undefined identifier" << '\n';
                         else {
-                            this->_valueStack.push_back(curNumberSign * find->second);
+                            this->_valueStack.push_back(curNumberSign * this->_vars[cur]);
                             cur.clear();
                             curNumberSign = 1;
                         }
@@ -131,7 +127,7 @@ uMapVar<T> SyntacticAnalyzer<T>::analyse(std::istream* in) {
                     if (utils::isNumberSign(ch))
                         curNumberSign = ch == '+' ? 1 : -1;
                     else
-                        (*this->_logger)(Logger::WARNING, line, charAt) << "Unexpected character " << ch << "\n";
+                        (*this->_logger)(Logger::WARNING, line, charAt) << "Unexpected character " << ch << '\n';
                 } else {
                     this->computeStack(ch);
                     this->_operationsStack.push_back(ch);
@@ -150,12 +146,10 @@ uMapVar<T> SyntacticAnalyzer<T>::analyse(std::istream* in) {
                         curNumberSign = 1;
                     }
                     else {
-                        auto find = this->_vars.find(cur);
-
-                        if (find == this->_vars.end())
-                            (*this->_logger)(Logger::ERROR, line, charAt) << "Undefined identifier\n";
+                        if (this->_vars.count(cur) == 0)
+                            (*this->_logger)(Logger::ERROR, line, charAt) << "Undefined identifier" << '\n';
                         else {
-                            this->_valueStack.push_back(curNumberSign * find->second);
+                            this->_valueStack.push_back(curNumberSign * this->_vars[cur]);
                             cur.clear();
                             curNumberSign = 1;
                         }
@@ -168,7 +162,7 @@ uMapVar<T> SyntacticAnalyzer<T>::analyse(std::istream* in) {
                 if (this->_operationsStack.top() == '(')
                     this->_operationsStack.pop();
                 else
-                    (*this->_logger)(Logger::ERROR, line, charAt) << "Occurred close bracket without open\n";
+                    (*this->_logger)(Logger::ERROR, line, charAt) << "Occurred close bracket without open" << '\n';
             }
 
             if (ch == ';' || ch == '\n') {
@@ -182,7 +176,7 @@ uMapVar<T> SyntacticAnalyzer<T>::analyse(std::istream* in) {
                         auto find = this->_vars.find(cur);
 
                         if (find == this->_vars.end())
-                            (*this->_logger)(Logger::ERROR, line, charAt) << "Undefined identifier\n";
+                            (*this->_logger)(Logger::ERROR, line, charAt) << "Undefined identifier" << '\n';
                         else {
                             this->_valueStack.push_back(curNumberSign * this->_vars[cur]);
                             cur.clear();
