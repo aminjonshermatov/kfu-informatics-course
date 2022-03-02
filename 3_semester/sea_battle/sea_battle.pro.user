@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 6.0.0, 2021-12-29T01:03:41. -->
+<!-- Written by QtCreator 6.0.0, 2022-01-05T23:44:18. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -240,8 +240,9 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:D:/projects/qt_course/sea_battle/sea_battle.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">D:/projects/qt_course/sea_battle/sea_battle.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">sea_battle2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:D:/kfu/informatics/3_semester/sea_battle/sea_battle.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">D:/kfu/informatics/3_semester/sea_battle/sea_battle.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>

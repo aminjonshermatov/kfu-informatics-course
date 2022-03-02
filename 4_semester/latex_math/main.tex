@@ -1,0 +1,284 @@
+\documentclass{article}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{geometry}
+\usepackage{sectsty}
+\usepackage{setspace}
+\usepackage{indentfirst}
+\usepackage{unicode-math}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\R}{\mathbb{R}}
+
+\geometry{
+    a4paper,
+    total={170mm,257mm},
+    left=20mm,
+    top=20mm,
+}
+
+\setlength{\parindent}{4em}
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.1}
+
+\sectionfont{\fontsize{25}{15}\selectfont}
+\subsectionfont{\fontsize{18}{10}\selectfont}
+
+\begin{document}
+
+    \onehalfspacing
+
+    \section*{\centering{Множества. Комбинаторика.}}
+    \subsection*{Множества}
+
+    \fontsize{13}{10}\selectfont Буквами \textit{\textbf{N, Z, Q, R, C}} обозначают соответственно множества натуральных, целых, рациональных, действительных и комплексных чисел
+
+    Если \textit{\textbf{x}} -- элемент множества \textit{\textbf{A}}, то пишут $\textbf{\textit{x}} \in \textbf{\textit{A}}$, а если \textit{\textbf{x}} не является элементом множества \textit{\textbf{A}}, то пишут $\textbf{\textit{x}} \notin \textbf{\textit{A}}$
+
+    Если каждый элемент множества \textit{\textbf{A}} является элементом множества \textit{\textbf{B}}, то пишут $\textit{\textbf{A}} \subset \textit{\textbf{B}}$ или $\textit{\textbf{B}} \supset \textit{\textbf{A}}$ и говорят, что множество \textit{\textbf{A}} является подмножеством множества \textit{\textbf{B}}. В этом случае говорят также, что \textit{\textbf{A}} содержится в \textit{\textbf{B}} или что \textit{\textbf{B}} содержит \textit{\textbf{A}}.
+
+    Если $\textit{\textbf{A}} \subset \textit{\textbf{B}}$ и $\textit{\textbf{B}} \subset \textit{\textbf{A}}$, то $\textit{\textbf{A}} = \textit{\textbf{B}}$.
+
+    Для удобства вводится понятие пустого множества (его обозначают $\O$), которое по определению не содержит элементов и содержится в любом множестве.
+
+    \subsection*{Операции над множествами}
+
+    \fontsize{13}{10}\selectfont Множество, состоящее из всех тех и только тех элементов, которые принадлежат хотя бы одному из множеств \textit{\textbf{A}} и \textit{\textbf{B}}, называется
+    объединением множеств \textit{\textbf{A}} и \textit{\textbf{B}} и обозначается $\textbf{\textit{A}} \cup \textbf{\textit{B}}$ или $\textbf{\textit{A}} + \textbf{\textit{B}}$
+
+    Множество, состоящее из всех тех и только тех элементов, которые принадлежат как множеству \textit{\textbf{A}}, так и множеству \textit{\textbf{B}}, называется пересечением множеств \textit{\textbf{A}} и \textit{\textbf{B}} и обозначается $\textbf{\textit{A}} \cap \textbf{\textit{B}}$ или $\textbf{\textit{A}}\textbf{\textit{B}}$. Если $\textbf{\textit{A}} \cap \textbf{\textit{B}} = \O$, то говорят, что множества \textit{\textbf{A}} и \textit{\textbf{B}} не пересекаются.
+
+    Множество, состоящее из всех элементов множества \textit{\textbf{A}}, не принадлежащих множеству \textit{\textbf{B}}, называется разностью множеств \textit{\textbf{A}} и \textit{\textbf{B}} и обозначается $\textbf{\textit{A}} \setminus \textbf{\textit{B}}$.
+
+    Если $\textit{\textbf{A}} \subset \textit{\textbf{B}}$, то разность $\textbf{\textit{B}} \setminus \textbf{\textit{A}}$ называют дополнением множества \textit{\textbf{A}} до множества \textit{\textbf{B}} и обозначают $\textbf{\textit{A}}_B^\prime$.
+    В тех случаях, когда рассматриваются только подмножества некоторого основного множества \textit{\textbf{U}}, дополнение множества \textit{\textbf{M}} до множества \textit{\textbf{U}} называют просто дополнением \textit{\textbf{M}} и вместо $\textbf{\textit{M}}_U^\prime$ пишут просто $\textbf{\textit{A}}^\prime$,
+
+    Непосредственно из определения дополнения множества следуют равенства (\ref{eqs_1}):
+    \begin{equation}
+        \label{eqs_1}
+        \textbf{\textit{M}} \cup \textbf{\textit{M}}^\prime = \textbf{\textit{U}}, \textbf{\textit{M}} \cap \textbf{\textit{M}}^\prime = \O, (\textbf{\textit{M}}^\prime)^\prime = \textbf{\textit{M}},
+    \end{equation}
+
+    Для любых подмножеств \textit{\textbf{A}} и \textit{\textbf{B}} множества \textit{\textbf{U}} справедливы
+    также следующие равенства, которые называют законами двойственности или законами де Моргана (\ref{eqs_2}):
+
+    \begin{equation}
+        \label{eqs_2}
+        (\textit{\textbf{A}} \cup \textit{\textbf{B}})^\prime = \textit{\textbf{A}}^\prime \cap \textit{\textbf{B}}^\prime, (\textit{\textbf{A}} \cap \textit{\textbf{B}})^\prime = \textit{\textbf{A}}^\prime \cup \textit{\textbf{B}}^\prime
+    \end{equation}
+    т. е. дополнение объединения двух множеств равно пересечению их
+    дополнений, а дополнение пересечения двух множеств равно объединению их дополнений.
+
+    \subsection*{Эквивалентные и неэквивалентные множества}
+
+    \fontsize{13}{10}\selectfont Говорят, что между множествами \textit{\textbf{A}} и \textit{\textbf{B}} установлено взаимно однозначное соответствие, если каждому элементу множеста \textit{\textbf{A}} сопоставлен один и только один элемент множества \textit{\textbf{B}}, так что различным элементам множества \textit{\textbf{A}} сопоставлены различные элементы
+    множества \textit{\textbf{B}} и каждый элемент множества \textit{\textbf{B}} оказывается сопоставленным некоторому элементу множества \textit{\textbf{A}}.
+
+    Множества, между которыми можно установить взаимно однозначное соответствие, называются эквивалентными. Если множества \textit{\textbf{A}} и \textit{\textbf{B}} эквивалентны, то пишут  $\textit{\textbf{A}} \sim \textit{\textbf{B}}$; если они не эквивалентны, то пишут $\textit{\textbf{A}} \not\sim \textit{\textbf{B}}$.
+
+    Если $\textit{\textbf{A}} \sim \textit{\textbf{B}}$, то говорят, что множества \textit{\textbf{A}} и \textit{\textbf{B}} имеют одинаковую мощность.
+
+    Множество $\textbf{\textit{A}} \neq \O$ называется конечным, если существует такое число $\textbf{\textit{n}} \in \textbf{\textit{N}}$ (\ref{eqs_3})
+    \begin{equation}
+        \label{eqs_3}
+        \textbf{\textit{A}} \sim \{1,2,3,...,n\}.
+    \end{equation}
+
+    В этом случае говорят, что множество \textit{\textbf{A}} содержит \textit{\textbf{n}} элементов или что множество \textit{\textbf{A}} имеет мощность \textit{\textbf{n}}.
+
+    Пустое множество $\O$ также считается конечным, его мощность принимается равной нулю
+
+    Множество, не являющееся конечным, называется бесконечным
+
+    Множество \textit{\textbf{A}} называется счетным, если $\textit{\textbf{A}} \sim \textit{\textbf{N}}$ . Говорят, что
+    счетное множество имеет счетную мощность. Если множество конечно или счетно, то его называют не более чем счетным.
+
+    Множество называется несчетным, если оно имеет мощность, большую, чем мощность множества \textit{\textbf{N}}.
+
+    \texttt{Теоремы Кантора.}
+    \begin{enumerate}
+        \item Множество всех рациональных чисел счет.
+        \item Множество всех действительных чисел несчет.
+    \end{enumerate}
+
+    Множество \textit{\textbf{A}} называется множеством мощности континуума, если $\textbf{\textit{A}} \sim \textbf{\textit{R}}$.
+
+    \subsection*{Система множеств.}
+
+    \fontsize{13}{10}\selectfont Пусть дано множество \textbf{\textit{S} = \{\textbf{\textit{s}}\}}, называемое множеством индексов, и каждому индексу \textbf{\textit{s}} сопоставлено множество  \textbf{\textit{$A_s$}}. Множество \{$A_s$\},  элементами которого являются множества \textbf{\textit{$A_s$}}, $s \in S$ называют системой или семейством множеств. Понятия объединения и пересечения двух множеств обобщаются на случай произвольной конечной или бесконечной системы множеств следующим образом.
+
+    Объединением системы множеств $A_s$, $s \in S$, называется множество всех элементов, принадлежащих хотя бы одному из множеств системы.
+
+    Пересечением системы множеств $A_s$, $s \in S$, называется множество всех элементов, содержащихся в каждом множестве системы.
+
+    Объединение и пересечение системы множеств $A_s$, $s \in S$, обозначают соответственно (\ref{eqs_4})
+
+    \begin{equation}
+        \label{eqs_4}
+        \bigcup_{s \in S} A_s,  \bigcap_{s \in S} A_s.
+    \end{equation}
+
+    В частных случаях, когда система множеств конечна или счетна, пишут (\ref{eqs_5})
+
+    \begin{equation}
+        \label{eqs_5}
+        \bigcup_{s \in S}^{n} A_s,  \bigcap_{s \in S}^{n} A_s, \textit{n} \in \textit{N}, \bigcup_{s \in S}^{\infty} A_s,  \bigcap_{s \in S}^{\infty} A_s
+    \end{equation}
+
+    \subsection*{Упорядоченные множества.}
+
+    \fontsize{13}{10}\selectfont Множество называется упорядоченным, если для любых двух его элементов \textit{a} и \textit{b} установлено отношение порядка $\textit{a} \leq \textit{b}$ или $\textit{b} \leq \textit{a}$ \textit{a} не превосходит \textit{b} или \textit{b} не превосходит \textit{a}, обладающее свойствами:
+
+    \begin{enumerate}
+        \item рефлексивности: $\textit{a} \leq \textit{a}$, т.е. любой элемент не превосходит
+        самого себя;
+        \item антисимметричности: если $\textit{a} \leq \textit{b}$ и $\textit{b} \leq \textit{a}$, то элементы \textit{a} и \textit{b} равны;
+        \item транзитивности: если $\textit{a} \leq \textit{b}$, $\textit{b} \leq \textit{c}$, то $\textit{a} \leq \textit{c}$.
+    \end{enumerate}
+
+    \subsection*{Размещения и перестановки.}
+
+    \fontsize{13}{10}\selectfont Пусть имеется множество, содержащее \textit{n} элементов. Каждое его упорядоченное подмножество, состоящее из \textit{k} элементов, называется размещением из п элементов по \textit{k} элементов.
+
+    Число размещений из \textit{n} элементов по \textit{k} элементов обозначается $A_n^k$ И вычисляется по формуле (\ref{eqs_6})
+
+    \begin{equation}
+        \label{eqs_6}
+        A_n^k=n(n-1)(n-2)\ldots(n-(k-1))
+    \end{equation}
+
+    Размещения из \textit{n} элементов по \textit{n} элементов называются перестановками из \textit{n} элементов. Число перестановок из \textit{n} элементов обозначается $P_n$ и вычисляется по формуле (\ref{eqs_7})
+
+    \begin{equation}
+        \label{eqs_7}
+        P_n=1\cdot2\cdot\ldots\cdot n= n!.
+    \end{equation}
+
+    \subsection*{Сочетания.}
+
+    Пусть имеется множество, состоящее из \textit{n} элементов. Каждое его подмножество, содержащее \textit{k} элементов, называется сочетанием из \textit{n}  элементов по \textit{k} элементов.
+
+    Число всех сочетаний из \textit{n} элементов по \textit{k} элементов обозначается символом $C_n^k$ и вычисляется по формуле (\ref{eqs_8})
+
+    \begin{equation}
+        \label{eqs_8}
+        C_n^k=\frac{n!}{k!(n-k)!},
+    \end{equation}
+    или по формуле (\ref{eqs_9})
+    \begin{equation}
+        \label{eqs_9}
+        C_n^k=\frac{n(n-1)(n-2)\ldots(n-k+1)}{k!}.
+    \end{equation}
+
+    Справедливы равенства (\ref{eqs_10}):
+    \begin{equation}
+        \label{eqs_10}
+        C_n^k=C_n^{k-1}, C_{n+1}^{k+1}=C_n^{k+1}+C_n^k, k < n.
+    \end{equation}
+
+    \subsection*{ПРИМЕРЫ С РЕШЕНИЯМИ.}
+    \textbf{Пример 1.} \textit{Доказать закон двойственности $(A \cap B)^\prime=A^\prime \cup B^\prime$.}
+
+    \fontsize{13}{10}\selectfont $\blacktriangle$ Пусть $x \in (A \cap B)^\prime$; тогда $x \not\in A \cap B$ и, следовательно, $x \not\in A$ или $x \not\in B$, т.е. $x \in A^\prime$ или $x \in B^\prime$, а это означает, что $x \in A^\prime \cup B^\prime$.
+    Таким образом, доказано включение (\ref{eqs_11}):
+    \begin{equation}
+        \label{eqs_11}
+        (A \cap B)^\prime \subset A^\prime \cap B^\prime.
+    \end{equation}
+
+    Пусть $x \in A^\prime \cup B^\prime$; тогда $x \in A^\prime$, или $x \in B^\prime$ и, следовательно, $x \not\in A$ или $x \not\in B$, т.е. $x \not\in A \cap B$,  а это означает, что $x \in (A \cap B)^\prime$. Таким образом, доказано включение (\ref{eqs_12}):
+    \begin{equation}
+        \label{eqs_12}
+        A^\prime \cup B^\prime \subset (A \cap B)^\prime
+    \end{equation}
+
+    Из включений $(A \cap B)^\prime \subset A^\prime \cup B^\prime$ и $A^\prime \cup B^\prime \subset (A \cap B)^\prime$ следует, что множества $(A \cap B)^\prime$ и $A^\prime \cup B^\prime$ состоят из одних и тех же элементов, т.е. равны. $\blacktriangle$
+
+    \textbf{Пример 2.} \textit{Группа студентов изучает семь учебных дисциплин. Сколькими способами можно составить расписание занятий на понедельник, если на этот день недели запланированы занятия по четырем дисциплинам?}
+
+    \fontsize{13}{10}\selectfont $\blacktriangle$ Различных способов составления расписания столько, сколько существует четырехэлементных упорядоченных подмножеств у семиэлементного множества, т.е. равно числу размещений из семи элементов по четыре элемента. По формуле (\ref{eqs_6}), полагая в ней \textit{n = 7}, \textit{k = 4}, находим
+    \begin{equation*}
+        A_4^7=7\cdot6\cdot5\cdot4=840.\blacktriangle
+    \end{equation*}
+
+    \textbf{Пример 3.} \textit{Сколько шестизначных чисел, кратных пяти, можно составить из цифр 1, 2, 3, 4, 5, 6 при условии, что в числе цифры не повторяются?}
+
+    \fontsize{13}{10}\selectfont $\blacktriangle$ Для того чтобы число, составленное из заданных цифр, делилось на 5, необходимо и достаточно, чтобы цифра 5 стояла на последнем месте. Остальные пять цифр могут стоять на оставшихся пяти местах в любом порядке. Следовательно, искомое число шестизначных чисел, кратных пяти, равно числу перестановок из пяти элементов, т.е. $5!=5\cdot4\cdot3\cdot2\cdot1=120\blacktriangle$
+
+    \textbf{Пример 4.} \textit{В чемпионате страны по футболу (высшая лига) участвуют 18 команд, причем каждые две команды встречаются между собой 2 раза. Сколько матчей играется в течение сезона?}
+
+    \fontsize{13}{10}\selectfont $\blacktriangle$ В первом круге состоится столько матчей, сколько существует двухэлементных подмножеств у множества, содержащего 18 элементов, т.е. их число равно $C_18^2$. По формуле (10) находим \begin{equation*}
+                                                                                                                                                                                                                                          C_{18}^2=\frac{18\cdot17}{2}=153.
+    \end{equation*}
+    Во втором круге играется столько же матчей, поэтому в течение сезона состоится 306 встреч. $\blacktriangle$
+
+    \subsection*{ЗАДАЧИ.}
+
+    \begin{enumerate}
+        \item  Даны множества \textit{А, В, С}. С помощью операций объединения и пересечения записать множество, состоящее из элементов, принадлежащих:
+        \begin{enumerate}
+            \item всем трем множествам;
+            \item хотя бы одному множеству;
+            \item по крайней мере двум из этих множеств;
+        \end{enumerate}
+
+        \item Доказать, что равенства:
+        \begin{enumerate}
+            \item $A \cup B$ = B;
+            \item $A \cap B$ = A;
+        \end{enumerate}
+        верны тогда и только тогда, когда $A \subset B$.
+
+        \item Доказать, что равенство $A\backslash (B \backslash C) = (A \backslash B) \cup C$ верно тогда и только тогда, когда $A \supset C$.
+
+        \item Доказать равенство:
+        \begin{enumerate}
+            \item $A \backslash (A \backslash B) = A \cap B$;
+            \item $(A \backslash B) \cup (B \backslash A) = (A \cup B) \backslash (A \cap B)$;
+            \item $(A \backslash B) \backslash C = A \backslash (B \cup C);$
+            \item $(A \backslash B) \cap C = (A \cap C) \backslash (B \cap C)$;
+        \end{enumerate}
+
+        \item Доказать, что включение $A \backslash B \subset C$ верно тогда и только тогда, когда $A \subset B \cup C$.
+
+        \item Доказать, что:
+        \begin{enumerate}
+            \item $A \cup (B \backslash C) \supset (A \cap B) \backslash C$;
+            \item $(A \cup C) \backslash B \subset (A \backslash B) \subset C$;
+        \end{enumerate}
+
+        \item Определить, в каком отношении $(X \subset Y, X \supset Y, X = Y)$  находятся множества \textit{X} и \textit{Y}, если:
+        \begin{enumerate}
+            \item $X = A \cup (B \backslash C), Y = (A \cup B) \backslash (A \cup C)$;
+            \item $X = (A \cap B) \backslash C, Y = (A \backslash C) \cap (B \backslash C)$;
+            \item $X = A \backslash (B \cup C), Y = (A \backslash B) \cup (A \backslash C)$;
+        \end{enumerate}
+
+        \item Пусть \textit{A} и \textit{B} -- произвольные подмножества множества \textit{U}. Доказать равенство:
+        \begin{enumerate}
+            \item $(A \backslash B)^\prime = A^\prime \cup B$;
+            \item $(A \cap B^\prime) \cup (A^\prime \cap B) = A \cup B$;
+            \item $(A \cup B) \cap (A^\prime \cup B^\prime) = A \cup B$;
+        \end{enumerate}
+
+        \item Пусть $A \subset U$, $B \subset U$. Найти множество $X \subset U$, удовлетворяющее уравнению
+        \begin{equation*}
+        (X \cup A)^\prime \cup (X^\prime \cup A^\prime) = B.
+        \end{equation*}
+
+        \item Найти подмножества \textit{A} и \textit{B} множества \textit{U}, если известно, что для любого множества $X \subset U$ верно равенство:
+        \begin{equation*}
+            X \cap A = X \cup B.
+        \end{equation*}
+
+        \item Пусть $A_s \subset U$, $s \in S$. Доказать:
+        \begin{enumerate}
+            \item $(\bigcup\limits_{s \in S} A_s)^\prime = \bigcap\limits_{s \in S} A_s^\prime$
+            \item $(\bigcap\limits_{s \in S} A_s)^\prime = \bigcup\limits_{s \in S} A_s^\prime$
+        \end{enumerate}
+
+    \end{enumerate}
+
+\end{document}
