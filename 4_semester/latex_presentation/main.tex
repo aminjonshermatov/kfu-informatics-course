@@ -1,0 +1,95 @@
+%! Author = admin
+%! Date = 3/3/2022
+
+\documentclass{beamer}
+\usetheme{default}
+
+\usepackage{xcolor}
+\usepackage{blindtext}
+\usepackage{lipsum}
+
+\newcount\loopcounter
+\def\dummysentences#1{%
+    \loopcounter = #1
+    \loop
+    {Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
+    \advance\loopcounter by -1
+    \ifnum\loopcounter > 0
+    \repeat%
+}
+
+\begin{document}
+
+    \title{Presentation Template}
+    \author{Aminjon Shermatov}
+
+    \begin{frame}
+        \titlepage
+    \end{frame}
+
+    \begin{frame}{Contents}
+        \doublespacing
+        \tableofcontents
+        \singlespacing
+    \end{frame}
+
+    \section{Introduction}
+
+    \subsection{Part 1}
+    \begin{frame}{First Part}
+        \textit{\color{cyan}{First part of introduction}}
+        \begin{itemize}
+            \item Example 1
+            \item Example 2
+        \end{itemize}
+    \end{frame}
+
+    \subsection{Part 2}
+    \begin{frame}{Second Part}
+        \textbf{\color{blue}{Second part of introduction}}
+        \begin{enumerate}
+            \item Example 3
+            \item Example 4
+        \end{enumerate}
+    \end{frame}
+
+
+    \section{Agenda}
+
+    \subsection{Agenda}
+    \begin{frame}{Agenda}
+        \begin{itemize}
+            \item Understand the problem
+            \item Consider constraints
+            \item Find algorithm
+            \item Run algorithm with test cases
+            \item Implement algorithm in any programming language
+        \end{itemize}
+    \end{frame}
+
+    \section{Main Part}
+
+    \subsection{Main Part}
+    \begin{frame}{Main part}
+        \textit{\color{olive}{\dummysentences{2}}}
+        \begin{itemize}
+            \item[!] Main part 1
+            \item[!] Main part 2
+            \item[!] Main part 3
+            \item[!] Main part 4
+        \end{itemize}
+    \end{frame}
+
+    \section{Conclusion}
+
+    \subsection{Conclusion}
+    \begin{frame}{Conclusion}
+        Well, that is all I have for today. \\
+        \textit{\dummysentences{4}...}
+
+        \\ \vspace{60px}
+        \centering{\textbf{\textit{Thanks for participate}}}
+
+    \end{frame}
+
+\end{document}
