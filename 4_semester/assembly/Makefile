@@ -1,4 +1,4 @@
-file := input
+file := multiple_initialization
 
 all: linkage
 
