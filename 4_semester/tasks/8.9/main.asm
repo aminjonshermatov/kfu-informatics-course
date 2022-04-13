@@ -23,9 +23,9 @@ readCh:
 
 	cmp [buf], byte ' '
 	je print
-	mov eax, buf
+	mov eax, [buf]
 	sub eax, 48
-	mov ebx, num
+	mov ebx, [num]
 	shr ebx, 2
 	add ebx, eax
 	mov [num], ebx
