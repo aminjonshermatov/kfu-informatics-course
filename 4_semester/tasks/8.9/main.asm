@@ -4,7 +4,6 @@ STDIN		equ 0
 STDOUT		equ 1
 
 section .data
-	t db 5
 	num dd 0
 
 section .bss
@@ -34,9 +33,6 @@ print:
 	; print `{buf}`
 	mov eax, 4
 	mov ebx, 1
-;	mov [num], dword 3
-;	mov dword [ecx], num
-;	add dword [ecx], 48
 	mov ecx, num
 	add dword [ecx], 48
 	mov edx, 1
