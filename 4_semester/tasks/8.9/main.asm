@@ -23,9 +23,12 @@ readCh:
 
 	cmp [buf], byte ' '
 	je print
-	sub byte [buf], 48
-	shr dword [num], 2
-	add [num], dword buf
+	mov eax, buf
+	sub eax, 48
+	mov ebx, num
+	shr ebx, 2
+	add ebx, eax
+	mov [num], ebx
 	jmp readCh
 print:
 	; print `{buf}`
