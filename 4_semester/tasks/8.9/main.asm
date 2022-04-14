@@ -36,8 +36,8 @@ readCh:
 ;	split number into chars
 split:
 	add [counter], dword 1
-	mov rax, [num]
-	mov rbx, [divisor]
+	mov rax, num
+	mov rbx, divisor
 	div rbx
 	push rdx	;remainder
 	mov [num], rax
