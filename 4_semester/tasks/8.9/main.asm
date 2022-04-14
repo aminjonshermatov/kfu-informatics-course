@@ -1,9 +1,3 @@
-SYS_READ	equ 3
-SYS_WRITE	equ 1
-STDIN		equ 0
-STDOUT		equ 1
-
-
 section .data
 	num dq 0
 	counter dd 0
@@ -17,8 +11,8 @@ section .text
 _start:
 readCh:
 	; input data
-	mov rax, 0 	;sys_read
-	mov rdi, 0	;stdin
+	mov rax, 0		;sys_read
+	mov rdi, 0		;stdin
 	mov rsi, buf
 	mov rdx, 1
 	syscall
@@ -46,8 +40,7 @@ split:
 	jne split
 
 print:
-	; print `{buf}`
-	mov rax, 1		; sys_write
+	mov rax, 1
 	mov rdi, 1		; stdout
 	pop rsi			; address to print
 	add rsi, '0'
@@ -57,6 +50,6 @@ print:
 	cmp dword [counter], 0
 	jne print
 exit:
-	mov rax, 0x02000001
-	xor rdi, rdi
+	mov rax, 60
+	mov rdi, 0
 	syscall
