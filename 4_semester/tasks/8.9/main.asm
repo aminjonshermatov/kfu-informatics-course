@@ -2,7 +2,6 @@ section .data
 	num dq 0
 	counter dd 0
 	divisor dq 10
-	msg db "hello, world", 10
 
 section .bss
 	buf resb 1
