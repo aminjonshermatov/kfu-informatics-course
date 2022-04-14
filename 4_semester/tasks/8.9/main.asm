@@ -52,8 +52,8 @@ print:
 	add rcx, qword 48
 	mov rdx, 1
 	int 80h
-	sub dword [counter], 1
-	cmp dword [counter], 0
+	sub qword [counter], 1
+	cmp qword [counter], 0
 	jne print
 
 exit:
