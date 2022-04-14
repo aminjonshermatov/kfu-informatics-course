@@ -3,8 +3,11 @@ SYS_WRITE	equ 4
 STDIN		equ 0
 STDOUT		equ 1
 
+
 section .data
 	num dd 0
+	counter dd 0
+	divisor dd 10
 
 section .bss
 	buf resb 1
@@ -14,31 +17,46 @@ section .text
 _start:
 readCh:
 	; input data
-	mov eax, SYS_READ
-	mov ebx, STDIN
-	mov ecx, buf
-	mov edx, 1
+	mov rax, SYS_READ
+	mov rbx, STDIN
+	mov rcx, buf
+	mov rdx, 1
 	int 80h
 
 	cmp [buf], byte ' '
-	je print
-	mov eax, [buf]
-	sub eax, 48
-	mov ebx, [num]
-	shr ebx, 2
-	add ebx, eax
-	mov [num], ebx
+	je split
+	mov rax, [buf]
+	sub rax, 48
+	mov rbx, [num]
+	shr rbx, 2
+	add rbx, rax
+	mov [num], rbx
 	jmp readCh
+
+;	split number into chars
+split:
+	add [counter], dword 1
+	mov rax, [num]
+	mov rbx, [divisor]
+	div rbx
+	push rdx	;remainder
+	mov [num], rax
+	cmp rax, 0
+	jne split
+
 print:
 	; print `{buf}`
-	mov eax, 4
-	mov ebx, 1
-	mov ecx, num
-	add dword [ecx], 48
-	mov edx, 1
+	mov rax, SYS_WRITE
+	mov rbx, STDOUT
+	pop rcx
+	add rcx, qword 48
+	mov rdx, 1
 	int 80h
+	sub dword [counter], 1
+	cmp dword [counter], 0
+	jne print
 
 exit:
-	mov eax, 1
-	mov ebx, 0
+	mov rax, 1
+	mov rbx, 0
 	int 80h
