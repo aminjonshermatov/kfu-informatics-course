@@ -1,5 +1,5 @@
 SYS_READ	equ 3
-SYS_WRITE	equ 4
+SYS_WRITE	equ 1
 STDIN		equ 0
 STDOUT		equ 1
 
@@ -17,16 +17,16 @@ section .text
 _start:
 readCh:
 	; input data
-	mov rax, SYS_READ
-	mov rbx, STDIN
-	mov rcx, buf
+	mov rax, 0 	;sys_read
+	mov rdi, 0	;stdin
+	mov rsi, buf
 	mov rdx, 1
-	int 80h
+	syscall
 
 	cmp [buf], byte ' '
 	je split
 	mov rax, [buf]
-	sub rax, 48
+	sub rax, '0'
 	mov rbx, [num]
 	shr rbx, 2
 	add rbx, rax
@@ -47,17 +47,16 @@ split:
 
 print:
 	; print `{buf}`
-	mov rax, SYS_WRITE
-	mov rbx, STDOUT
-	pop rcx
-	add rcx, qword 48
+	mov rax, 1		; sys_write
+	mov rdi, 1		; stdout
+	pop rsi			; address to print
+	add rsi, '0'
 	mov rdx, 1
-	int 80h
-	sub qword [counter], 1
-	cmp qword [counter], 0
+	syscall
+	sub dword [counter], 1
+	cmp dword [counter], 0
 	jne print
-
 exit:
-	mov rax, 1
-	mov rbx, 0
-	int 80h
+	mov rax, 0x02000001
+	xor rdi, rdi
+	syscall
