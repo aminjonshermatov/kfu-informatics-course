@@ -22,7 +22,7 @@ readCh:
 	mov rax, [buf]
 	sub rax, '0'
 	mov rbx, [num]
-	shr rbx, 2
+	shl rbx, 2
 	add rbx, rax
 	mov [num], rbx
 	jmp readCh
