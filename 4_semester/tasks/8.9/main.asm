@@ -5,9 +5,9 @@ STDOUT		equ 1
 
 
 section .data
-	num dd 0
+	num dq 0
 	counter dd 0
-	divisor dd 10
+	divisor dq 10
 
 section .bss
 	buf resb 1
@@ -36,9 +36,9 @@ readCh:
 ;	split number into chars
 split:
 	add [counter], dword 1
-	mov rax, num
-	mov rbx, divisor
-	div rbx
+	mov rax, [num]
+	mov rbx, [divisor]
+	idiv rbx
 	push rdx	;remainder
 	mov [num], rax
 	cmp rax, 0
