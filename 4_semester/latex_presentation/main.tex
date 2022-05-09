@@ -1,26 +1,19 @@
-%! Author = admin
-%! Date = 3/3/2022
-
 \documentclass{beamer}
 \usetheme{default}
 
 \usepackage{xcolor}
 \usepackage{blindtext}
+\usepackage{indentfirst}
 \usepackage{lipsum}
-
-\newcount\loopcounter
-\def\dummysentences#1{%
-    \loopcounter = #1
-    \loop
-    {Lorem ipsum dolor sit amet, consectetur adipiscing elit.}
-    \advance\loopcounter by -1
-    \ifnum\loopcounter > 0
-    \repeat%
-}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
 
 \begin{document}
+    \onehalfspacing
+    \setlength{\parskip}{\baselineskip}%
+    \setlength{\parindent}{0.8pt}%
 
-    \title{Presentation Template}
+    \title{Множества. Комбинаторика.}
     \author{Aminjon Shermatov}
 
     \begin{frame}
@@ -33,63 +26,130 @@
         \singlespacing
     \end{frame}
 
-    \section{Introduction}
+    \section{Множества}
 
-    \subsection{Part 1}
-    \begin{frame}{First Part}
-        \textit{\color{cyan}{First part of introduction}}
-        \begin{itemize}
-            \item Example 1
-            \item Example 2
-        \end{itemize}
+    \subsection{Определение}
+    \begin{frame}{Определение}
+        \fontsize{10}{8}\selectfont Буквами \textit{\textbf{N, Z, Q, R, C}} обозначают соответственно множества натуральных, целых, рациональных, действительных и комплексных чисел
+
+        Если \textit{\textbf{x}} -- элемент множества \textit{\textbf{A}}, то пишут $\textbf{\textit{x}} \in \textbf{\textit{A}}$, а если \textit{\textbf{x}} не является элементом множества \textit{\textbf{A}}, то пишут $\textbf{\textit{x}} \notin \textbf{\textit{A}}$
+
+        Если каждый элемент множества \textit{\textbf{A}} является элементом множества \textit{\textbf{B}}, то пишут $\textit{\textbf{A}} \subset \textit{\textbf{B}}$ или $\textit{\textbf{B}} \supset \textit{\textbf{A}}$ и говорят, что множество \textit{\textbf{A}} является подмножеством множества \textit{\textbf{B}}. В этом случае говорят также, что \textit{\textbf{A}} содержится в \textit{\textbf{B}} или что \textit{\textbf{B}} содержит \textit{\textbf{A}}.
+
+        Если $\textit{\textbf{A}} \subset \textit{\textbf{B}}$ и $\textit{\textbf{B}} \subset \textit{\textbf{A}}$, то $\textit{\textbf{A}} = \textit{\textbf{B}}$.
+
+        Для удобства вводится понятие пустого множества (его обозначают $\O$), которое по определению не содержит элементов и содержится в любом множестве.
     \end{frame}
 
-    \subsection{Part 2}
-    \begin{frame}{Second Part}
-        \textbf{\color{blue}{Second part of introduction}}
+    \subsection{Операции над множествами}
+    \begin{frame}{Операции над множествами}
+        \fontsize{10}{8}\selectfont Множество, состоящее из всех тех и только тех элементов, которые принадлежат хотя бы одному из множеств \textit{\textbf{A}} и \textit{\textbf{B}}, называется
+        объединением множеств \textit{\textbf{A}} и \textit{\textbf{B}} и обозначается $\textbf{\textit{A}} \cup \textbf{\textit{B}}$ или $\textbf{\textit{A}} + \textbf{\textit{B}}$
+
+        Множество, состоящее из всех тех и только тех элементов, которые принадлежат как множеству \textit{\textbf{A}}, так и множеству \textit{\textbf{B}}, называется пересечением множеств \textit{\textbf{A}} и \textit{\textbf{B}} и обозначается $\textbf{\textit{A}} \cap \textbf{\textit{B}}$ или $\textbf{\textit{A}}\textbf{\textit{B}}$. Если $\textbf{\textit{A}} \cap \textbf{\textit{B}} = \O$, то говорят, что множества \textit{\textbf{A}} и \textit{\textbf{B}} не пересекаются.
+
+        Множество, состоящее из всех элементов множества \textit{\textbf{A}}, не принадлежащих множеству \textit{\textbf{B}}, называется разностью множеств \textit{\textbf{A}} и \textit{\textbf{B}} и обозначается $\textbf{\textit{A}} \setminus \textbf{\textit{B}}$.
+
+        Если $\textit{\textbf{A}} \subset \textit{\textbf{B}}$, то разность $\textbf{\textit{B}} \setminus \textbf{\textit{A}}$ называют дополнением множества \textit{\textbf{A}} до множества \textit{\textbf{B}} и обозначают $\textbf{\textit{A}}_B^\prime$.
+        В тех случаях, когда рассматриваются только подмножества некоторого основного множества \textit{\textbf{U}}, дополнение множества \textit{\textbf{M}} до множества \textit{\textbf{U}} называют просто дополнением \textit{\textbf{M}} и вместо $\textbf{\textit{M}}_U^\prime$ пишут просто $\textbf{\textit{A}}^\prime$,
+
+        Непосредственно из определения дополнения множества следуют равенства (\ref{eqs_1}):
+        \begin{equation}
+            \label{eqs_1}
+            \textbf{\textit{M}} \cup \textbf{\textit{M}}^\prime = \textbf{\textit{U}}, \textbf{\textit{M}} \cap \textbf{\textit{M}}^\prime = \O, (\textbf{\textit{M}}^\prime)^\prime = \textbf{\textit{M}},
+        \end{equation}
+
+    \end{frame}
+
+    \subsection{Эквивалентные и неэквивалентные множества}
+    \begin{frame}{Эквивалентные и неэквивалентные множества}
+        \fontsize{10}{8}\selectfont Множество, состоящее из всех тех и только тех элементов, которые принадлежат хотя бы одному из множеств \textit{\textbf{A}} и \textit{\textbf{B}}, называется
+        объединением множеств \textit{\textbf{A}} и \textit{\textbf{B}} и обозначается $\textbf{\textit{A}} \cup \textbf{\textit{B}}$ или $\textbf{\textit{A}} + \textbf{\textit{B}}$
+
+        Множество, состоящее из всех тех и только тех элементов, которые принадлежат как множеству \textit{\textbf{A}}, так и множеству \textit{\textbf{B}}, называется пересечением множеств \textit{\textbf{A}} и \textit{\textbf{B}} и обозначается $\textbf{\textit{A}} \cap \textbf{\textit{B}}$ или $\textbf{\textit{A}}\textbf{\textit{B}}$. Если $\textbf{\textit{A}} \cap \textbf{\textit{B}} = \O$, то говорят, что множества \textit{\textbf{A}} и \textit{\textbf{B}} не пересекаются.
+
+        Множество, состоящее из всех элементов множества \textit{\textbf{A}}, не принадлежащих множеству \textit{\textbf{B}}, называется разностью множеств \textit{\textbf{A}} и \textit{\textbf{B}} и обозначается $\textbf{\textit{A}} \setminus \textbf{\textit{B}}$.
+
+        Если $\textit{\textbf{A}} \subset \textit{\textbf{B}}$, то разность $\textbf{\textit{B}} \setminus \textbf{\textit{A}}$ называют дополнением множества \textit{\textbf{A}} до множества \textit{\textbf{B}} и обозначают $\textbf{\textit{A}}_B^\prime$.
+        В тех случаях, когда рассматриваются только подмножества некоторого основного множества \textit{\textbf{U}}, дополнение множества \textit{\textbf{M}} до множества \textit{\textbf{U}} называют просто дополнением \textit{\textbf{M}} и вместо $\textbf{\textit{M}}_U^\prime$ пишут просто $\textbf{\textit{A}}^\prime$,
+
+        Непосредственно из определения дополнения множества следуют равенства (\ref{eqs_1}):
+        \begin{equation}
+            \label{eqs_1}
+            \textbf{\textit{M}} \cup \textbf{\textit{M}}^\prime = \textbf{\textit{U}}, \textbf{\textit{M}} \cap \textbf{\textit{M}}^\prime = \O, (\textbf{\textit{M}}^\prime)^\prime = \textbf{\textit{M}},
+        \end{equation}
+    \end{frame}
+
+    \subsection{Система множеств.}
+    \begin{frame}{Система множеств.}
+        \fontsize{10}{8}\selectfont Пусть дано множество \textbf{\textit{S} = \{\textbf{\textit{s}}\}}, называемое множеством индексов, и каждому индексу \textbf{\textit{s}} сопоставлено множество  \textbf{\textit{$A_s$}}. Множество \{$A_s$\},  элементами которого являются множества \textbf{\textit{$A_s$}}, $s \in S$ называют системой или семейством множеств. Понятия объединения и пересечения двух множеств обобщаются на случай произвольной конечной или бесконечной системы множеств следующим образом.
+
+        Объединением системы множеств $A_s$, $s \in S$, называется множество всех элементов, принадлежащих хотя бы одному из множеств системы.
+
+        Пересечением системы множеств $A_s$, $s \in S$, называется множество всех элементов, содержащихся в каждом множестве системы.
+
+        Объединение и пересечение системы множеств $A_s$, $s \in S$, обозначают соответственно (\ref{eqs_4})
+
+        \begin{equation}
+            \label{eqs_4}
+            \bigcup_{s \in S} A_s,  \bigcap_{s \in S} A_s.
+        \end{equation}
+    \end{frame}
+
+    \section{Комбинаторика}
+
+    \subsection{Упорядоченные множества}
+    \begin{frame}{Упорядоченные множества}
+        \fontsize{10}{8}\selectfont Множество называется упорядоченным, если для любых двух его элементов \textit{a} и \textit{b} установлено отношение порядка $\textit{a} \leq \textit{b}$ или $\textit{b} \leq \textit{a}$ \textit{a} не превосходит \textit{b} или \textit{b} не превосходит \textit{a}, обладающее свойствами:
+
         \begin{enumerate}
-            \item Example 3
-            \item Example 4
+            \item рефлексивности: $\textit{a} \leq \textit{a}$, т.е. любой элемент не превосходит
+            самого себя;
+            \item антисимметричности: если $\textit{a} \leq \textit{b}$ и $\textit{b} \leq \textit{a}$, то элементы \textit{a} и \textit{b} равны;
+            \item транзитивности: если $\textit{a} \leq \textit{b}$, $\textit{b} \leq \textit{c}$, то $\textit{a} \leq \textit{c}$.
         \end{enumerate}
     \end{frame}
 
+    \subsection{Размещения и перестановки}
+    \begin{frame}{Размещения и перестановки}
+        \fontsize{10}{8}\selectfont Пусть имеется множество, содержащее \textit{n} элементов. Каждое его упорядоченное подмножество, состоящее из \textit{k} элементов, называется размещением из п элементов по \textit{k} элементов.
 
-    \section{Agenda}
+        Число размещений из \textit{n} элементов по \textit{k} элементов обозначается $A_n^k$ И вычисляется по формуле (\ref{eqs_6})
 
-    \subsection{Agenda}
-    \begin{frame}{Agenda}
-        \begin{itemize}
-            \item Understand the problem
-            \item Consider constraints
-            \item Find algorithm
-            \item Run algorithm with test cases
-            \item Implement algorithm in any programming language
-        \end{itemize}
+        \begin{equation}
+            \label{eqs_6}
+            A_n^k=n(n-1)(n-2)\ldots(n-(k-1))
+        \end{equation}
+
+        Размещения из \textit{n} элементов по \textit{n} элементов называются перестановками из \textit{n} элементов. Число перестановок из \textit{n} элементов обозначается $P_n$ и вычисляется по формуле (\ref{eqs_7})
+
+        \begin{equation}
+            \label{eqs_7}
+            P_n=1\cdot2\cdot\ldots\cdot n= n!.
+        \end{equation}
     \end{frame}
 
-    \section{Main Part}
+    \subsection{Сочетания}
+    \begin{frame}{Сочетания}
+        \fontsize{10}{8}\selectfont Пусть имеется множество, состоящее из \textit{n} элементов. Каждое его подмножество, содержащее \textit{k} элементов, называется сочетанием из \textit{n}  элементов по \textit{k} элементов.
 
-    \subsection{Main Part}
-    \begin{frame}{Main part}
-        \textit{\color{olive}{\dummysentences{2}}}
-        \begin{itemize}
-            \item[!] Main part 1
-            \item[!] Main part 2
-            \item[!] Main part 3
-            \item[!] Main part 4
-        \end{itemize}
-    \end{frame}
+        Число всех сочетаний из \textit{n} элементов по \textit{k} элементов обозначается символом $C_n^k$ и вычисляется по формуле (\ref{eqs_8})
 
-    \section{Conclusion}
+        \begin{equation}
+            \label{eqs_8}
+            C_n^k=\frac{n!}{k!(n-k)!},
+        \end{equation}
+        или по формуле (\ref{eqs_9})
+        \begin{equation}
+            \label{eqs_9}
+            C_n^k=\frac{n(n-1)(n-2)\ldots(n-k+1)}{k!}.
+        \end{equation}
 
-    \subsection{Conclusion}
-    \begin{frame}{Conclusion}
-        Well, that is all I have for today. \\
-        \textit{\dummysentences{4}...}
-
-        \\ \vspace{60px}
-        \centering{\textbf{\textit{Thanks for participate}}}
-
+        Справедливы равенства (\ref{eqs_10}):
+        \begin{equation}
+            \label{eqs_10}
+            C_n^k=C_n^{k-1}, C_{n+1}^{k+1}=C_n^{k+1}+C_n^k, k < n.
+        \end{equation}
     \end{frame}
 
 \end{document}
