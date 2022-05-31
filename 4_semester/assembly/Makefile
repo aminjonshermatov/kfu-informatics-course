@@ -1,4 +1,4 @@
-file := arr_sum
+file := memory_management
 
 all: linkage
 
